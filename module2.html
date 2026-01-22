@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: HTML5 - CS381</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css">
+
+    <!-- Highlight.js for code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Theme Override -->
+    <link rel="stylesheet" href="css/theme.css">
+
+    <style>
+        /* Fixed home navigation */
+        .home-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        .home-nav a {
+            background: #f8fafc;
+            color: #64748b;
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .home-nav a:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6em;
+            margin: 0.5em 0;
+        }
+        .feature-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: center;
+        }
+        .feature-card i {
+            font-size: 1.5em;
+            color: #2563eb;
+            margin-bottom: 0.3em;
+            display: block;
+        }
+        .feature-card h4 {
+            margin: 0.3em 0;
+            font-size: 0.8em;
+        }
+        .feature-card p {
+            font-size: 0.65em;
+            color: #64748b;
+            margin: 0;
+        }
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            margin: 1em 0;
+        }
+        .bad-example {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 12px;
+            padding: 1em;
+        }
+        .good-example {
+            background: #f0fdf4;
+            border: 2px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 1em;
+        }
+        .semantic-map {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 0.5em;
+            max-width: 700px;
+            margin: 1em auto;
+            font-size: 0.8em;
+        }
+        .semantic-box {
+            background: #e0e7ff;
+            border: 2px solid #818cf8;
+            border-radius: 8px;
+            padding: 0.8em;
+            text-align: center;
+            font-weight: 600;
+            color: #3730a3;
+        }
+        .semantic-box.header { grid-column: 1 / -1; background: #dbeafe; border-color: #60a5fa; color: #1e40af; }
+        .semantic-box.nav { grid-column: 1 / -1; background: #fef3c7; border-color: #fbbf24; color: #92400e; }
+        .semantic-box.main { background: #dcfce7; border-color: #4ade80; color: #166534; }
+        .semantic-box.aside { background: #f3e8ff; border-color: #c084fc; color: #6b21a8; }
+        .semantic-box.footer { grid-column: 1 / -1; background: #fee2e2; border-color: #f87171; color: #991b1b; }
+        .thinking-card {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+            border-left: 5px solid #2563eb;
+            padding: 1.5em;
+            border-radius: 0 12px 12px 0;
+            margin: 1em 0;
+            text-align: left;
+        }
+        .thinking-card h4 {
+            color: #2563eb;
+            margin: 0 0 0.5em 0;
+        }
+        .limitation-card {
+            background: #fef2f2;
+            border-left: 5px solid #dc2626;
+            padding: 1em;
+            border-radius: 0 12px 12px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .solution-card {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 1em;
+            border-radius: 0 12px 12px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .form-anatomy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
+            max-width: 500px;
+            margin: 0.5em auto;
+            text-align: left;
+        }
+        .form-part {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 0.5em 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+        }
+        .form-part i {
+            color: #2563eb;
+            font-size: 1.1em;
+        }
+        .form-part .label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.9em;
+        }
+        .form-part .desc {
+            font-size: 0.7em;
+            color: #64748b;
+        }
+        .input-types {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8em;
+            margin: 1em 0;
+        }
+        .input-type {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1em;
+            text-align: center;
+            font-size: 0.85em;
+        }
+        .input-type code {
+            display: block;
+            margin-top: 0.5em;
+            font-size: 0.8em;
+        }
+        .api-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.2em;
+            text-align: center;
+        }
+        .api-card i {
+            font-size: 1.8em;
+            margin-bottom: 0.3em;
+            display: block;
+        }
+        .api-card h4 {
+            margin: 0.3em 0;
+            font-size: 0.85em;
+        }
+        .api-card p {
+            font-size: 0.7em;
+            color: #64748b;
+            margin: 0;
+        }
+        .template-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5em;
+            margin: 1em 0;
+        }
+        .template-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.2em;
+        }
+        .template-box h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            margin: 0 0 0.8em 0;
+            font-size: 1em;
+        }
+        .why-matters {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8em;
+            margin: 0.5em 0;
+        }
+        .why-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: left;
+        }
+        .why-card i {
+            font-size: 1.4em;
+            margin-bottom: 0.3em;
+            display: block;
+        }
+        .why-card h4 {
+            margin: 0.2em 0;
+            font-size: 0.9em;
+        }
+        .why-card p {
+            font-size: 0.7em;
+            color: #64748b;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="home-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </nav>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1 style="font-size: 2.8em;">CS381</h1>
+                <h2 style="border: none; color: #64748b; font-weight: 400;">Web Application Development</h2>
+                <div style="margin: 2em 0; padding: 1.5em; background: #f8fafc; border-radius: 12px; border-left: 5px solid #E34F26;">
+                    <h3 style="margin: 0; color: #1e293b;"><i class="fab fa-html5" style="color: #E34F26;"></i> Module 2: HTML5</h3>
+                </div>
+                <p style="color: #64748b; margin-top: 2em;">
+                    <strong style="color: #1e293b;">Muhammad Rafiq</strong><br>
+                    <small>Computer Science and Engineering Department, Yanbu Industrial College</small>
+                </p>
+            </section>
+
+            <!-- Why HTML Matters -->
+            <section>
+                <h2><i class="fas fa-lightbulb" style="color: #f59e0b;"></i> Why HTML Matters</h2>
+                <p style="font-size: 0.9em; color: #64748b; margin-bottom: 0.3em;">HTML is not just markup—it's the <strong>foundation of the web</strong></p>
+                <div class="why-matters">
+                    <div class="why-card fragment">
+                        <i class="fas fa-universal-access" style="color: #2563eb;"></i>
+                        <h4>Accessibility</h4>
+                        <p>Screen readers and assistive technologies rely on proper HTML structure</p>
+                    </div>
+                    <div class="why-card fragment">
+                        <i class="fas fa-search" style="color: #16a34a;"></i>
+                        <h4>SEO</h4>
+                        <p>Search engines understand your content through semantic HTML</p>
+                    </div>
+                    <div class="why-card fragment">
+                        <i class="fas fa-tools" style="color: #7c3aed;"></i>
+                        <h4>Maintainability</h4>
+                        <p>Well-structured HTML is easier to style, debug, and update</p>
+                    </div>
+                    <div class="why-card fragment">
+                        <i class="fas fa-mobile-alt" style="color: #f59e0b;"></i>
+                        <h4>Cross-Platform</h4>
+                        <p>Proper HTML works on any device, browser, or screen size</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section>
+                <h2><i class="fas fa-bullseye" style="color: #2563eb;"></i> Learning Objectives</h2>
+                <div class="feature-grid">
+                    <div class="feature-card fragment">
+                        <i class="fas fa-sitemap"></i>
+                        <h4>Semantic Thinking</h4>
+                        <p>Choose elements by meaning</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-edit"></i>
+                        <h4>Form Design</h4>
+                        <p>User-centered input</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Validation</h4>
+                        <p>Built-in data checking</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-universal-access"></i>
+                        <h4>Accessibility</h4>
+                        <p>Inclusive design</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-plug"></i>
+                        <h4>HTML5 APIs</h4>
+                        <p>Modern capabilities</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-copy"></i>
+                        <h4>Templating</h4>
+                        <p>Reusable structures</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Semantic HTML -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-sitemap" style="color: #2563eb;"></i> Semantic HTML</h2>
+                <p>Choosing elements by <strong>meaning</strong>, not appearance</p>
+                <div class="thinking-card">
+                    <h4><i class="fas fa-brain"></i> Key Question</h4>
+                    <p>"What <em>is</em> this content?" — not "How should it <em>look</em>?"</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Problem: "Div Soup"</h2>
+                <div class="comparison-box">
+                    <div class="bad-example">
+                        <h4 style="color: #dc2626;"><i class="fas fa-times-circle"></i> Non-Semantic</h4>
+                        <pre style="font-size: 0.7em;"><code class="html">&lt;div class="header"&gt;
+  &lt;div class="nav"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="main"&gt;
+  &lt;div class="article"&gt;
+    &lt;div class="section"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="sidebar"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footer"&gt;...&lt;/div&gt;</code></pre>
+                        <p style="font-size: 0.75em; color: #991b1b;">No meaning to browsers or screen readers</p>
+                    </div>
+                    <div class="good-example">
+                        <h4 style="color: #16a34a;"><i class="fas fa-check-circle"></i> Semantic</h4>
+                        <pre style="font-size: 0.7em;"><code class="html">&lt;header&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;section&gt;...&lt;/section&gt;
+  &lt;/article&gt;
+  &lt;aside&gt;...&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+                        <p style="font-size: 0.75em; color: #166534;">Clear structure, accessible, SEO-friendly</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Page Structure Blueprint</h2>
+                <div class="semantic-map">
+                    <div class="semantic-box header"><i class="fas fa-heading"></i> &lt;header&gt;</div>
+                    <div class="semantic-box nav"><i class="fas fa-compass"></i> &lt;nav&gt;</div>
+                    <div class="semantic-box aside"><i class="fas fa-columns"></i><br>&lt;aside&gt;</div>
+                    <div class="semantic-box main"><i class="fas fa-file-alt"></i> &lt;main&gt;<br><small>&lt;article&gt; &lt;section&gt;</small></div>
+                    <div class="semantic-box aside"><i class="fas fa-columns"></i><br>&lt;aside&gt;</div>
+                    <div class="semantic-box footer"><i class="fas fa-shoe-prints"></i> &lt;footer&gt;</div>
+                </div>
+                <p style="font-size: 0.85em; color: #64748b;">Each element tells browsers and assistive tech <strong>what the content IS</strong></p>
+            </section>
+
+            <section>
+                <h2>Semantic Elements by Purpose</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; text-align: left;">
+                    <div>
+                        <h4 style="color: #2563eb;"><i class="fas fa-layer-group"></i> Structure</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li><code>&lt;header&gt;</code> - Introductory content</li>
+                            <li><code>&lt;nav&gt;</code> - Navigation links</li>
+                            <li><code>&lt;main&gt;</code> - Primary content</li>
+                            <li><code>&lt;footer&gt;</code> - Closing content</li>
+                        </ul>
+                        <h4 style="color: #16a34a; margin-top: 1em;"><i class="fas fa-newspaper"></i> Content</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li><code>&lt;article&gt;</code> - Self-contained content</li>
+                            <li><code>&lt;section&gt;</code> - Thematic grouping</li>
+                            <li><code>&lt;aside&gt;</code> - Related but separate</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #7c3aed;"><i class="fas fa-image"></i> Media</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li><code>&lt;figure&gt;</code> - Illustrations, diagrams</li>
+                            <li><code>&lt;figcaption&gt;</code> - Caption for figure</li>
+                        </ul>
+                        <h4 style="color: #f59e0b; margin-top: 1em;"><i class="fas fa-text-height"></i> Text</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li><code>&lt;mark&gt;</code> - Highlighted text</li>
+                            <li><code>&lt;time&gt;</code> - Dates and times</li>
+                            <li><code>&lt;details&gt;</code> - Expandable content</li>
+                            <li><code>&lt;summary&gt;</code> - Details heading</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-brain" style="color: #7c3aed;"></i> Thinking Exercise</h2>
+                <p>How would you structure this page?</p>
+                <div style="background: #f8fafc; border-radius: 12px; padding: 1.5em; text-align: left; font-size: 0.9em;">
+                    <p><strong>Blog Post Page:</strong></p>
+                    <ul>
+                        <li>Site logo and main navigation</li>
+                        <li>Blog post with title, date, author, content</li>
+                        <li>Author bio sidebar</li>
+                        <li>Related posts section</li>
+                        <li>Copyright and social links</li>
+                    </ul>
+                </div>
+                <div class="fragment thinking-card" style="margin-top: 1em;">
+                    <p><strong>Think:</strong> Which semantic element fits each part? Why?</p>
+                </div>
+            </section>
+
+            <!-- Section: Forms -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-edit" style="color: #2563eb;"></i> HTML Forms</h2>
+                <p>The gateway to <strong>user interaction</strong></p>
+                <div class="thinking-card">
+                    <h4><i class="fas fa-users"></i> User-Centered Design</h4>
+                    <p>Good forms reduce friction, guide users, and prevent errors</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Anatomy of a Form</h2>
+                <div class="form-anatomy">
+                    <div class="form-part fragment">
+                        <i class="fas fa-tag"></i>
+                        <div>
+                            <span class="label">&lt;label&gt;</span>
+                            <span class="desc">— Describes the input (accessibility!)</span>
+                        </div>
+                    </div>
+                    <div class="form-part fragment">
+                        <i class="fas fa-keyboard"></i>
+                        <div>
+                            <span class="label">&lt;input&gt;</span>
+                            <span class="desc">— Captures user data (many types)</span>
+                        </div>
+                    </div>
+                    <div class="form-part fragment">
+                        <i class="fas fa-list"></i>
+                        <div>
+                            <span class="label">&lt;select&gt;</span>
+                            <span class="desc">— Dropdown choices</span>
+                        </div>
+                    </div>
+                    <div class="form-part fragment">
+                        <i class="fas fa-align-left"></i>
+                        <div>
+                            <span class="label">&lt;textarea&gt;</span>
+                            <span class="desc">— Multi-line text</span>
+                        </div>
+                    </div>
+                    <div class="form-part fragment">
+                        <i class="fas fa-paper-plane"></i>
+                        <div>
+                            <span class="label">&lt;button&gt;</span>
+                            <span class="desc">— Submit or action</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Input Types - Choose Wisely</h2>
+                <p style="font-size: 0.9em; color: #64748b;">The right type = better UX, mobile keyboards, built-in validation</p>
+                <div class="input-types">
+                    <div class="input-type">
+                        <i class="fas fa-font" style="color: #2563eb;"></i><br>Text
+                        <code>type="text"</code>
+                    </div>
+                    <div class="input-type">
+                        <i class="fas fa-envelope" style="color: #16a34a;"></i><br>Email
+                        <code>type="email"</code>
+                    </div>
+                    <div class="input-type">
+                        <i class="fas fa-lock" style="color: #dc2626;"></i><br>Password
+                        <code>type="password"</code>
+                    </div>
+                    <div class="input-type">
+                        <i class="fas fa-hashtag" style="color: #7c3aed;"></i><br>Number
+                        <code>type="number"</code>
+                    </div>
+                    <div class="input-type">
+                        <i class="fas fa-phone" style="color: #0891b2;"></i><br>Phone
+                        <code>type="tel"</code>
+                    </div>
+                    <div class="input-type">
+                        <i class="fas fa-calendar" style="color: #f59e0b;"></i><br>Date
+                        <code>type="date"</code>
+                    </div>
+                    <div class="input-type">
+                        <i class="fas fa-link" style="color: #db2777;"></i><br>URL
+                        <code>type="url"</code>
+                    </div>
+                    <div class="input-type">
+                        <i class="fas fa-search" style="color: #64748b;"></i><br>Search
+                        <code>type="search"</code>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Built-in Validation</h2>
+                <p>Let HTML do the work—no JavaScript needed!</p>
+                <pre><code class="html">&lt;form&gt;
+  &lt;!-- Required field --&gt;
+  &lt;input type="text" required&gt;
+
+  &lt;!-- Email format --&gt;
+  &lt;input type="email" required&gt;
+
+  &lt;!-- Number range --&gt;
+  &lt;input type="number" min="1" max="100"&gt;
+
+  &lt;!-- Text length --&gt;
+  &lt;input type="text" minlength="3" maxlength="50"&gt;
+
+  &lt;!-- Pattern matching --&gt;
+  &lt;input type="text" pattern="[A-Za-z]{3,}"
+         title="At least 3 letters"&gt;
+&lt;/form&gt;</code></pre>
+                <div class="fragment" style="margin-top: 1em; padding: 0.8em; background: #eff6ff; border-radius: 8px; font-size: 0.85em;">
+                    <i class="fas fa-info-circle" style="color: #2563eb;"></i> Browser shows error messages automatically!
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-brain" style="color: #7c3aed;"></i> Form Design Thinking</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em;">
+                    <div class="thinking-card">
+                        <h4><i class="fas fa-question-circle"></i> Ask Yourself</h4>
+                        <ul style="font-size: 0.85em; margin: 0; padding-left: 1.2em;">
+                            <li>What's the minimum data I need?</li>
+                            <li>What input type makes sense?</li>
+                            <li>Can I provide helpful defaults?</li>
+                            <li>What errors might users make?</li>
+                        </ul>
+                    </div>
+                    <div class="thinking-card">
+                        <h4><i class="fas fa-check"></i> Best Practices</h4>
+                        <ul style="font-size: 0.85em; margin: 0; padding-left: 1.2em;">
+                            <li>Always use <code>&lt;label&gt;</code></li>
+                            <li>Group related fields with <code>&lt;fieldset&gt;</code></li>
+                            <li>Use placeholder as hint, not label</li>
+                            <li>Provide clear error messages</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Accessibility -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-universal-access" style="color: #2563eb;"></i> Accessibility (a11y)</h2>
+                <p>Designing for <strong>everyone</strong></p>
+                <div style="font-size: 0.9em; color: #64748b; margin-top: 1em;">
+                    Over 1 billion people worldwide have some form of disability
+                </div>
+            </section>
+
+            <section>
+                <h2>Who Benefits from Accessibility?</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-eye-slash" style="color: #2563eb;"></i>
+                        <h4>Visual</h4>
+                        <p>Blind, low vision, color blind</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-deaf" style="color: #16a34a;"></i>
+                        <h4>Hearing</h4>
+                        <p>Deaf, hard of hearing</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-hand-paper" style="color: #7c3aed;"></i>
+                        <h4>Motor</h4>
+                        <p>Limited mobility, tremors</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-brain" style="color: #f59e0b;"></i>
+                        <h4>Cognitive</h4>
+                        <p>Learning differences</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt" style="color: #0891b2;"></i>
+                        <h4>Situational</h4>
+                        <p>Bright sun, one hand busy</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-user-clock" style="color: #db2777;"></i>
+                        <h4>Temporary</h4>
+                        <p>Broken arm, tired eyes</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>ARIA - Enhancing HTML</h2>
+                <p><strong>Accessible Rich Internet Applications</strong></p>
+                <pre><code class="html">&lt;!-- Role: what is this element? --&gt;
+&lt;div role="navigation"&gt;...&lt;/div&gt;
+
+&lt;!-- Label: what does it say? --&gt;
+&lt;button aria-label="Close menu"&gt;
+  &lt;i class="fa fa-times"&gt;&lt;/i&gt;
+&lt;/button&gt;
+
+&lt;!-- State: what's happening? --&gt;
+&lt;button aria-expanded="false"&gt;Menu&lt;/button&gt;
+
+&lt;!-- Description: more context --&gt;
+&lt;input aria-describedby="help-text"&gt;
+&lt;p id="help-text"&gt;Enter your email&lt;/p&gt;</code></pre>
+                <div class="fragment" style="margin-top: 1em; padding: 0.8em; background: #fef3c7; border-radius: 8px; font-size: 0.85em;">
+                    <i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i> Use semantic HTML first—ARIA is for when HTML isn't enough
+                </div>
+            </section>
+
+            <section>
+                <h2>Quick Accessibility Wins</h2>
+                <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #2563eb; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">1</span>
+                        Add <code>alt</code> text to all images
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #7c3aed; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">2</span>
+                        Use proper heading hierarchy (h1 → h2 → h3)
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #db2777; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">3</span>
+                        Always associate <code>&lt;label&gt;</code> with inputs
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #f59e0b; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">4</span>
+                        Ensure sufficient color contrast
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #16a34a; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">5</span>
+                        Make all functionality keyboard accessible
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: HTML5 APIs -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-plug" style="color: #2563eb;"></i> HTML5 APIs</h2>
+                <p>Modern browser capabilities beyond markup</p>
+            </section>
+
+            <section>
+                <h2>What Can HTML5 Do?</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="api-card fragment">
+                        <i class="fas fa-database" style="color: #2563eb;"></i>
+                        <h4>Web Storage</h4>
+                        <p>localStorage & sessionStorage</p>
+                    </div>
+                    <div class="api-card fragment">
+                        <i class="fas fa-map-marker-alt" style="color: #dc2626;"></i>
+                        <h4>Geolocation</h4>
+                        <p>User's location</p>
+                    </div>
+                    <div class="api-card fragment">
+                        <i class="fas fa-hand-pointer" style="color: #16a34a;"></i>
+                        <h4>Drag & Drop</h4>
+                        <p>Native drag support</p>
+                    </div>
+                    <div class="api-card fragment">
+                        <i class="fas fa-paint-brush" style="color: #7c3aed;"></i>
+                        <h4>Canvas</h4>
+                        <p>2D graphics & games</p>
+                    </div>
+                    <div class="api-card fragment">
+                        <i class="fas fa-cogs" style="color: #f59e0b;"></i>
+                        <h4>Web Workers</h4>
+                        <p>Background processing</p>
+                    </div>
+                    <div class="api-card fragment">
+                        <i class="fas fa-video" style="color: #0891b2;"></i>
+                        <h4>Media</h4>
+                        <p>Video & audio control</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Web Storage Example</h2>
+                <pre><code class="javascript">// Save data (persists after browser close)
+localStorage.setItem('username', 'Ahmed');
+localStorage.setItem('theme', 'dark');
+
+// Retrieve data
+const user = localStorage.getItem('username');
+const theme = localStorage.getItem('theme');
+
+// Remove data
+localStorage.removeItem('username');
+
+// Clear all
+localStorage.clear();
+
+// Session storage (cleared when tab closes)
+sessionStorage.setItem('cartItems', '5');</code></pre>
+                <div style="margin-top: 1em; padding: 0.8em; background: #eff6ff; border-radius: 8px; font-size: 0.85em;">
+                    <strong>Use cases:</strong> Remember preferences, save form data, shopping cart
+                </div>
+            </section>
+
+            <!-- Section: HTML Templating -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-copy" style="color: #2563eb;"></i> HTML Templating</h2>
+                <p>Why we need <strong>reusable structures</strong></p>
+            </section>
+
+            <section>
+                <h2>The Problem with Plain HTML</h2>
+                <div class="limitation-card fragment">
+                    <h4 style="color: #dc2626; margin: 0 0 0.5em 0;"><i class="fas fa-times-circle"></i> Repetition</h4>
+                    <p style="margin: 0; font-size: 0.9em;">Same header/footer on 50 pages? Copy-paste nightmare.</p>
+                </div>
+                <div class="limitation-card fragment">
+                    <h4 style="color: #dc2626; margin: 0 0 0.5em 0;"><i class="fas fa-times-circle"></i> No Variables</h4>
+                    <p style="margin: 0; font-size: 0.9em;">Can't say "Hello, {username}" - HTML is static text.</p>
+                </div>
+                <div class="limitation-card fragment">
+                    <h4 style="color: #dc2626; margin: 0 0 0.5em 0;"><i class="fas fa-times-circle"></i> No Logic</h4>
+                    <p style="margin: 0; font-size: 0.9em;">Can't show/hide content based on conditions.</p>
+                </div>
+                <div class="limitation-card fragment">
+                    <h4 style="color: #dc2626; margin: 0 0 0.5em 0;"><i class="fas fa-times-circle"></i> No Loops</h4>
+                    <p style="margin: 0; font-size: 0.9em;">100 products? Write 100 &lt;div&gt;s manually.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Real-World Scenario</h2>
+                <div style="background: #f8fafc; border-radius: 12px; padding: 1.5em; text-align: left;">
+                    <p style="margin: 0 0 1em 0;"><strong>Imagine:</strong> Your site has 50 pages, all with the same navigation bar.</p>
+                    <p style="margin: 0 0 1em 0;">The client says: <em>"Add a new menu item."</em></p>
+                    <div class="comparison-box" style="margin-top: 1em;">
+                        <div>
+                            <h4 style="color: #dc2626;"><i class="fas fa-frown"></i> Plain HTML</h4>
+                            <p style="font-size: 0.85em;">Edit 50 files manually<br>Risk missing one<br>Time: hours</p>
+                        </div>
+                        <div>
+                            <h4 style="color: #16a34a;"><i class="fas fa-smile"></i> With Templates</h4>
+                            <p style="font-size: 0.85em;">Edit 1 file<br>Changes everywhere<br>Time: seconds</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Templating Solutions</h2>
+                <div class="template-comparison">
+                    <div class="template-box">
+                        <h4><i class="fab fa-php" style="color: #777BB3;"></i> Server-Side (PHP)</h4>
+                        <pre style="font-size: 0.7em;"><code class="php">&lt;?php include 'header.php'; ?&gt;
+
+&lt;h1&gt;Welcome, &lt;?= $username ?&gt;&lt;/h1&gt;
+
+&lt;?php foreach($products as $p): ?&gt;
+  &lt;div class="product"&gt;
+    &lt;h3&gt;&lt;?= $p['name'] ?&gt;&lt;/h3&gt;
+    &lt;p&gt;$&lt;?= $p['price'] ?&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;?php endforeach; ?&gt;
+
+&lt;?php include 'footer.php'; ?&gt;</code></pre>
+                    </div>
+                    <div class="template-box">
+                        <h4><i class="fab fa-js" style="color: #f7df1e;"></i> Client-Side (JS)</h4>
+                        <pre style="font-size: 0.7em;"><code class="javascript">// Template literal
+const card = (product) => `
+  &lt;div class="product"&gt;
+    &lt;h3&gt;${product.name}&lt;/h3&gt;
+    &lt;p&gt;$${product.price}&lt;/p&gt;
+  &lt;/div&gt;
+`;
+
+// Render all products
+products.map(card).join('');</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>The &lt;template&gt; Element</h2>
+                <p>HTML5's built-in templating feature</p>
+                <pre><code class="html">&lt;!-- Hidden template - not rendered --&gt;
+&lt;template id="card-template"&gt;
+  &lt;div class="card"&gt;
+    &lt;h3 class="title"&gt;&lt;/h3&gt;
+    &lt;p class="description"&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+// Clone and use the template
+const template = document.getElementById('card-template');
+const clone = template.content.cloneNode(true);
+
+clone.querySelector('.title').textContent = 'My Card';
+clone.querySelector('.description').textContent = 'Details...';
+
+document.body.appendChild(clone);
+&lt;/script&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Why Templating Matters</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="solution-card">
+                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-check-circle"></i> DRY Principle</h4>
+                        <p style="margin: 0; font-size: 0.85em;"><strong>D</strong>on't <strong>R</strong>epeat <strong>Y</strong>ourself - write once, use everywhere</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-check-circle"></i> Maintainability</h4>
+                        <p style="margin: 0; font-size: 0.85em;">One change updates all instances</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-check-circle"></i> Dynamic Content</h4>
+                        <p style="margin: 0; font-size: 0.85em;">Display data from databases/APIs</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-check-circle"></i> Consistency</h4>
+                        <p style="margin: 0; font-size: 0.85em;">Guaranteed uniform structure</p>
+                    </div>
+                </div>
+                <div class="fragment thinking-card" style="margin-top: 1em;">
+                    <p><strong>Coming in Module 5:</strong> PHP templating for server-side dynamic pages</p>
+                </div>
+            </section>
+
+            <!-- Practical Exercise -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-laptop-code" style="color: #2563eb;"></i> Practical Exercise</h2>
+                <div style="margin: 1.5em auto; padding: 1.5em 2em; background: white; border-radius: 12px; border: 2px solid #e2e8f0; max-width: 600px;">
+                    <h3 style="margin: 0; color: #1e293b;">Build a Semantic Contact Page</h3>
+                </div>
+            </section>
+
+            <section>
+                <h2>Task Requirements</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; text-align: left;">
+                    <div>
+                        <h4 style="color: #2563eb;"><i class="fas fa-sitemap"></i> Structure</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>Use semantic elements only</li>
+                            <li>Proper heading hierarchy</li>
+                            <li>Include header, nav, main, footer</li>
+                        </ul>
+                        <h4 style="color: #16a34a; margin-top: 1em;"><i class="fas fa-edit"></i> Form</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>Name, email, phone, message</li>
+                            <li>Appropriate input types</li>
+                            <li>HTML5 validation</li>
+                            <li>Labels for all inputs</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #7c3aed;"><i class="fas fa-universal-access"></i> Accessibility</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>All images have alt text</li>
+                            <li>Form has fieldset and legend</li>
+                            <li>ARIA labels where needed</li>
+                        </ul>
+                        <h4 style="color: #f59e0b; margin-top: 1em;"><i class="fas fa-check-double"></i> Validation</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>Name: required, min 2 chars</li>
+                            <li>Email: required, valid format</li>
+                            <li>Phone: optional, pattern</li>
+                            <li>Message: required, min 10 chars</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2><i class="fas fa-clipboard-list" style="color: #2563eb;"></i> Summary</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-sitemap" style="color: #2563eb;"></i>
+                        <h4>Semantic HTML</h4>
+                        <p>Meaning over appearance</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-edit" style="color: #16a34a;"></i>
+                        <h4>Forms</h4>
+                        <p>User interaction gateway</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-check-circle" style="color: #7c3aed;"></i>
+                        <h4>Validation</h4>
+                        <p>Built-in error prevention</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-universal-access" style="color: #f59e0b;"></i>
+                        <h4>Accessibility</h4>
+                        <p>Design for everyone</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-plug" style="color: #0891b2;"></i>
+                        <h4>HTML5 APIs</h4>
+                        <p>Modern capabilities</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-copy" style="color: #db2777;"></i>
+                        <h4>Templating</h4>
+                        <p>Reusable structures</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5em; padding: 1em; background: #eff6ff; border-radius: 12px;">
+                    <strong>Next Module:</strong> <i class="fab fa-css3-alt" style="color: #264de4;"></i> CSS - Styling, layouts, and responsive design
+                </p>
+            </section>
+
+            <!-- Questions -->
+            <section>
+                <h2><i class="fas fa-question-circle" style="color: #2563eb;"></i> Questions?</h2>
+                <p style="color: #64748b;">Module 2: HTML5</p>
+                <div style="margin: 2em 0;">
+                    <i class="fas fa-comments" style="font-size: 4em; color: #e2e8f0;"></i>
+                </div>
+                <p style="color: #64748b; font-size: 0.9em;">Thank you!</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'slide',
+            plugins: [RevealHighlight]
+        });
+    </script>
+</body>
+</html>

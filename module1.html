@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Foundations and Modern Web Development - CS381</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css">
+
+    <!-- Highlight.js for code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Theme Override -->
+    <link rel="stylesheet" href="css/theme.css">
+
+    <style>
+        .icon-box {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5em;
+            margin: 0.5em;
+            background: #f8fafc;
+            border-radius: 12px;
+            min-width: 120px;
+        }
+        .icon-box i {
+            font-size: 2.5em;
+            margin-bottom: 0.3em;
+            color: #2563eb;
+        }
+        .icon-box span {
+            font-size: 0.7em;
+            color: #64748b;
+        }
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin: 2em 0;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777, #f59e0b);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            text-align: center;
+            z-index: 1;
+            flex: 1;
+        }
+        .timeline-item .year {
+            background: #2563eb;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1em;
+        }
+        .timeline-item:nth-child(2) .year { background: #7c3aed; }
+        .timeline-item:nth-child(3) .year { background: #db2777; }
+        .timeline-item:nth-child(4) .year { background: #f59e0b; }
+        .timeline-item h4 {
+            margin: 0.5em 0;
+            font-size: 1em;
+        }
+        .timeline-item p {
+            font-size: 0.7em;
+            color: #64748b;
+        }
+        .diagram-box {
+            background: #f1f5f9;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1em 1.5em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .diagram-box i {
+            font-size: 1.5em;
+            color: #2563eb;
+        }
+        .arrow {
+            font-size: 2em;
+            color: #2563eb;
+            margin: 0 0.3em;
+        }
+        .server-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1em;
+            margin: 2em 0;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6em;
+            margin: 0.5em 0;
+        }
+        .feature-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: center;
+        }
+        .feature-card i {
+            font-size: 1.5em;
+            color: #2563eb;
+            margin-bottom: 0.3em;
+            display: block;
+        }
+        .feature-card h4 {
+            margin: 0.3em 0;
+            font-size: 0.8em;
+        }
+        .feature-card p {
+            font-size: 0.65em;
+            color: #64748b;
+            margin: 0;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .status-2xx { background: #dcfce7; color: #166534; }
+        .status-3xx { background: #fef3c7; color: #92400e; }
+        .status-4xx { background: #fee2e2; color: #991b1b; }
+        .status-5xx { background: #f3e8ff; color: #6b21a8; }
+        .git-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            margin: 2em 0;
+            flex-wrap: wrap;
+        }
+        .git-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 0.8em 1.2em;
+            text-align: center;
+        }
+        .git-box i {
+            display: block;
+            font-size: 1.5em;
+            margin-bottom: 0.3em;
+            color: #f97316;
+        }
+        .git-box span {
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+        }
+        .tool-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5em;
+            text-align: center;
+        }
+        .tool-card img {
+            height: 60px;
+            margin-bottom: 1em;
+        }
+        .checklist li {
+            list-style: none;
+            padding-left: 0;
+        }
+        .checklist li::before {
+            content: "✓";
+            color: #16a34a;
+            font-weight: bold;
+            margin-right: 0.5em;
+        }
+        /* Fixed home navigation */
+        .home-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        .home-nav a {
+            background: #f8fafc;
+            color: #64748b;
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .home-nav a:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="home-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </nav>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1 style="font-size: 2.8em;">CS381</h1>
+                <h2 style="border: none; color: #64748b; font-weight: 400;">Web Application Development</h2>
+                <div style="margin: 2em 0; padding: 1.5em; background: #f8fafc; border-radius: 12px; border-left: 5px solid #2563eb;">
+                    <h3 style="margin: 0; color: #1e293b;">Module 1: Foundations and Modern Web Development</h3>
+                </div>
+                <p style="color: #64748b; margin-top: 2em;">
+                    <strong style="color: #1e293b;">Muhammad Rafiq</strong><br>
+                    <small>Computer Science and Engineering Department, Yanbu Industrial College</small>
+                </p>
+            </section>
+
+            <!-- Course Roadmap -->
+            <section>
+                <h2><i class="fas fa-map" style="color: #2563eb;"></i> Course Roadmap</h2>
+                <img src="images/module_1/course_roadmap.jpg"
+                     alt="Course Roadmap" style="border-radius: 12px; max-height: 450px;">
+            </section>
+
+            <!-- Learning Objectives -->
+            <section>
+                <h2><i class="fas fa-bullseye" style="color: #2563eb;"></i> Learning Objectives</h2>
+                <div class="feature-grid">
+                    <div class="feature-card fragment">
+                        <i class="fas fa-history"></i>
+                        <h4>Web Evolution</h4>
+                        <p>Static to PWAs</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-globe"></i>
+                        <h4>How Web Works</h4>
+                        <p>HTTP, DNS, Servers</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-bug"></i>
+                        <h4>DevTools</h4>
+                        <p>Browser debugging</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fab fa-git-alt"></i>
+                        <h4>Git & GitHub</h4>
+                        <p>Version control</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-laptop-code"></i>
+                        <h4>Dev Environment</h4>
+                        <p>VS Code + Laragon</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-rocket"></i>
+                        <h4>Build Project</h4>
+                        <p>Multi-page website</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Evolution of Web -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-history" style="color: #2563eb;"></i> Evolution of Web Applications</h2>
+                <p>From static pages to modern web apps</p>
+                <img src="images/module_1/evoluation_of_web.jpg"
+                     alt="Evolution of Web" style="border-radius: 12px; margin-top: 1em; max-height: 350px;">
+            </section>
+
+            <section>
+                <h2>The Web Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-item fragment">
+                        <span class="year">1990s</span>
+                        <h4><i class="fas fa-file-code"></i> Static Sites</h4>
+                        <p>Plain HTML files<br>No databases</p>
+                    </div>
+                    <div class="timeline-item fragment">
+                        <span class="year">2000s</span>
+                        <h4><i class="fas fa-database"></i> Dynamic Apps</h4>
+                        <p>PHP, databases<br>Server rendering</p>
+                    </div>
+                    <div class="timeline-item fragment">
+                        <span class="year">2010s</span>
+                        <h4><i class="fab fa-react"></i> SPAs</h4>
+                        <p>React, Angular, Vue<br>Client rendering</p>
+                    </div>
+                    <div class="timeline-item fragment">
+                        <span class="year">2015+</span>
+                        <h4><i class="fas fa-mobile-alt"></i> PWAs</h4>
+                        <p>Offline, installable<br>App-like</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-file-code" style="color: #2563eb;"></i> Static Websites (1990s)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; text-align: left;">
+                    <div>
+                        <ul>
+                            <li><i class="fas fa-check" style="color: #16a34a;"></i> Plain HTML files</li>
+                            <li><i class="fas fa-check" style="color: #16a34a;"></i> No server processing</li>
+                            <li><i class="fas fa-check" style="color: #16a34a;"></i> Simple and fast</li>
+                            <li><i class="fas fa-times" style="color: #dc2626;"></i> Hard to update</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome!&lt;/h1&gt;
+    &lt;p&gt;This is static.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-database" style="color: #7c3aed;"></i> Dynamic Web Apps (2000s)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; text-align: left;">
+                    <div>
+                        <ul>
+                            <li><i class="fab fa-php" style="color: #777BB3;"></i> Server-side: PHP, ASP, JSP</li>
+                            <li><i class="fas fa-database" style="color: #336791;"></i> Database-driven content</li>
+                            <li><i class="fas fa-user-lock" style="color: #16a34a;"></i> User authentication</li>
+                            <li><i class="fas fa-edit" style="color: #f59e0b;"></i> CMS platforms</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <pre><code class="php">&lt;?php
+// Connect to database
+$users = $db->query(
+    "SELECT * FROM users"
+);
+
+// Dynamic output
+foreach($users as $user) {
+    echo "&lt;p&gt;" . $user['name'] . "&lt;/p&gt;";
+}
+?&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fab fa-react" style="color: #61DAFB;"></i> Single Page Applications (2010s)</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-desktop" style="color: #61DAFB;"></i>
+                        <h4>Client-side Rendering</h4>
+                        <p>JavaScript builds the UI</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sync-alt" style="color: #f59e0b;"></i>
+                        <h4>No Page Reloads</h4>
+                        <p>AJAX fetches data</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-boxes" style="color: #16a34a;"></i>
+                        <h4>Component Based</h4>
+                        <p>Reusable UI pieces</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-tachometer-alt" style="color: #dc2626;"></i>
+                        <h4>Fast Navigation</h4>
+                        <p>App-like experience</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1em;"><strong>Frameworks:</strong>
+                    <i class="fab fa-react" style="color: #61DAFB;"></i> React &nbsp;
+                    <i class="fab fa-angular" style="color: #DD0031;"></i> Angular &nbsp;
+                    <i class="fab fa-vuejs" style="color: #4FC08D;"></i> Vue
+                </p>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-mobile-alt" style="color: #f59e0b;"></i> Progressive Web Apps (2015+)</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-wifi-slash" style="color: #6366f1;"></i>
+                        <h4>Offline</h4>
+                        <p>Works without internet</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bell" style="color: #f59e0b;"></i>
+                        <h4>Push Notifications</h4>
+                        <p>Engage like native</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-download" style="color: #16a34a;"></i>
+                        <h4>Installable</h4>
+                        <p>Add to home screen</p>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5em; padding: 1em; background: #eff6ff; border-radius: 12px;">
+                    <strong><i class="fas fa-star" style="color: #f59e0b;"></i> Examples:</strong>
+                    Twitter Lite, Pinterest, Starbucks, Uber, Spotify
+                </div>
+            </section>
+
+            <!-- Section: How the Web Works -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-globe" style="color: #2563eb;"></i> How the Web Works</h2>
+                <p>Understanding HTTP, DNS, and Web Servers</p>
+                <img src="images/module_1/http_protocol_and_dns.jpg"
+                     alt="HTTP Protocol and DNS" style="border-radius: 12px; margin-top: 1em; max-height: 350px;">
+            </section>
+
+            <section>
+                <h2>Request-Response Cycle</h2>
+                <img src="images/module_1/client_vs_server.jpg"
+                     alt="Client vs Server" style="border-radius: 12px; max-height: 400px;">
+                <div class="fragment" style="margin-top: 1em; padding: 0.8em; background: #f0fdf4; border-radius: 12px; font-size: 0.9em;">
+                    <i class="fas fa-database" style="color: #16a34a;"></i> Server may query <strong>Database</strong> before responding
+                </div>
+            </section>
+
+            <section>
+                <h2>What Happens When You Visit a URL?</h2>
+                <div style="text-align: left; max-width: 800px; margin: 0 auto; font-size: 0.9em;">
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.4em 0; padding: 0.5em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #2563eb; color: white; padding: 0.3em 0.6em; border-radius: 50%; font-weight: bold; font-size: 0.85em;">1</span>
+                        <i class="fas fa-keyboard" style="color: #64748b;"></i>
+                        User types <code>www.example.com</code>
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.4em 0; padding: 0.5em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #7c3aed; color: white; padding: 0.3em 0.6em; border-radius: 50%; font-weight: bold; font-size: 0.85em;">2</span>
+                        <i class="fas fa-search" style="color: #64748b;"></i>
+                        <strong>DNS</strong> finds IP address (93.184.216.34)
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.4em 0; padding: 0.5em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #db2777; color: white; padding: 0.3em 0.6em; border-radius: 50%; font-weight: bold; font-size: 0.85em;">3</span>
+                        <i class="fas fa-handshake" style="color: #64748b;"></i>
+                        <strong>TCP</strong> connection (3-way handshake)
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.4em 0; padding: 0.5em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #f59e0b; color: white; padding: 0.3em 0.6em; border-radius: 50%; font-weight: bold; font-size: 0.85em;">4</span>
+                        <i class="fas fa-paper-plane" style="color: #64748b;"></i>
+                        Browser sends <strong>HTTP Request</strong>
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.4em 0; padding: 0.5em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #16a34a; color: white; padding: 0.3em 0.6em; border-radius: 50%; font-weight: bold; font-size: 0.85em;">5</span>
+                        <i class="fas fa-reply" style="color: #64748b;"></i>
+                        Server sends <strong>HTTP Response</strong>
+                    </div>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.4em 0; padding: 0.5em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #0891b2; color: white; padding: 0.3em 0.6em; border-radius: 50%; font-weight: bold; font-size: 0.85em;">6</span>
+                        <i class="fas fa-paint-brush" style="color: #64748b;"></i>
+                        Browser <strong>renders</strong> HTML, CSS, JS
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTTP Methods</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-download" style="color: #16a34a;"></i>
+                        <h4>GET</h4>
+                        <p>Retrieve data</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-upload" style="color: #2563eb;"></i>
+                        <h4>POST</h4>
+                        <p>Submit data</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-edit" style="color: #f59e0b;"></i>
+                        <h4>PUT</h4>
+                        <p>Update resource</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-trash" style="color: #dc2626;"></i>
+                        <h4>DELETE</h4>
+                        <p>Remove resource</p>
+                    </div>
+                </div>
+                <pre style="margin-top: 1em;"><code class="http">GET /api/users HTTP/1.1
+Host: www.example.com
+Accept: application/json
+Authorization: Bearer eyJhbGci...</code></pre>
+            </section>
+
+            <section>
+                <h2>HTTP Status Codes</h2>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5em;">
+                    <div>
+                        <h4><span class="status-badge status-2xx">2xx Success</span></h4>
+                        <ul style="font-size: 0.85em;">
+                            <li><code>200</code> OK</li>
+                            <li><code>201</code> Created</li>
+                            <li><code>204</code> No Content</li>
+                        </ul>
+                        <h4><span class="status-badge status-3xx">3xx Redirect</span></h4>
+                        <ul style="font-size: 0.85em;">
+                            <li><code>301</code> Moved Permanently</li>
+                            <li><code>302</code> Found</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4><span class="status-badge status-4xx">4xx Client Error</span></h4>
+                        <ul style="font-size: 0.85em;">
+                            <li><code>400</code> Bad Request</li>
+                            <li><code>401</code> Unauthorized</li>
+                            <li><code>404</code> Not Found</li>
+                        </ul>
+                        <h4><span class="status-badge status-5xx">5xx Server Error</span></h4>
+                        <ul style="font-size: 0.85em;">
+                            <li><code>500</code> Internal Server Error</li>
+                            <li><code>503</code> Service Unavailable</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-lock" style="color: #16a34a;"></i> HTTPS - Secure HTTP</h2>
+                <div class="server-diagram">
+                    <div class="diagram-box">
+                        <i class="fas fa-laptop"></i>
+                        <span>Browser</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <i class="fas fa-lock" style="font-size: 2em; color: #16a34a;"></i><br>
+                        <small>TLS/SSL Encrypted</small>
+                    </div>
+                    <div class="diagram-box">
+                        <i class="fas fa-server"></i>
+                        <span>Server</span>
+                    </div>
+                </div>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 1em;">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt" style="color: #16a34a;"></i>
+                        <h4>Encryption</h4>
+                        <p>Data protected</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-certificate" style="color: #f59e0b;"></i>
+                        <h4>Authentication</h4>
+                        <p>Verify identity</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-check-circle" style="color: #2563eb;"></i>
+                        <h4>Integrity</h4>
+                        <p>Detect tampering</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-book" style="color: #7c3aed;"></i> DNS - Domain Name System</h2>
+                <p>The "phonebook" of the internet</p>
+                <div class="server-diagram" style="margin: 2em 0;">
+                    <div class="diagram-box" style="background: #dbeafe;">
+                        <i class="fas fa-globe"></i>
+                        <span>google.com</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                    <div class="diagram-box" style="background: #fef3c7;">
+                        <i class="fas fa-server"></i>
+                        <span>DNS Server</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                    <div class="diagram-box" style="background: #dcfce7;">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>142.250.185.78</span>
+                    </div>
+                </div>
+                <div style="font-size: 0.8em; text-align: left; max-width: 600px; margin: 0 auto;">
+                    <p><code>A</code> - Maps domain to IPv4</p>
+                    <p><code>CNAME</code> - Alias to another domain</p>
+                    <p><code>MX</code> - Mail server records</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Web Servers</h2>
+                <div class="comparison-table">
+                    <div class="tool-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Apache_HTTP_server_logo_%282019-present%29.svg/200px-Apache_HTTP_server_logo_%282019-present%29.svg.png" alt="Apache">
+                        <h4>Apache</h4>
+                        <ul style="font-size: 0.75em; text-align: left;">
+                            <li>Most popular (~30%)</li>
+                            <li>.htaccess config</li>
+                            <li>mod_rewrite</li>
+                            <li>Used in Laragon</li>
+                        </ul>
+                    </div>
+                    <div class="tool-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/200px-Nginx_logo.svg.png" alt="Nginx">
+                        <h4>Nginx</h4>
+                        <ul style="font-size: 0.75em; text-align: left;">
+                            <li>High performance</li>
+                            <li>Great for static files</li>
+                            <li>Reverse proxy</li>
+                            <li>Event-driven</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Developer Tools -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-tools" style="color: #2563eb;"></i> Browser Developer Tools</h2>
+                <p>Your best friend for web development</p>
+                <img src="images/module_1/technical_tool_belt.jpg"
+                     alt="Technical Tool Belt" style="border-radius: 12px; margin-top: 1em; max-height: 350px;">
+            </section>
+
+            <section>
+                <h2>Opening DevTools</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr); margin: 2em 0;">
+                    <div class="feature-card">
+                        <i class="fab fa-windows" style="color: #0078D6;"></i>
+                        <h4>Windows / Linux</h4>
+                        <p><kbd>F12</kbd> or <kbd>Ctrl+Shift+I</kbd></p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-apple"></i>
+                        <h4>macOS</h4>
+                        <p><kbd>Cmd+Option+I</kbd></p>
+                    </div>
+                </div>
+                <p><i class="fas fa-mouse-pointer"></i> Or right-click any element → <strong>Inspect</strong></p>
+            </section>
+
+            <section>
+                <h2>DevTools Panels</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-code" style="color: #2563eb;"></i>
+                        <h4>Elements</h4>
+                        <p>Edit HTML/CSS</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-terminal" style="color: #16a34a;"></i>
+                        <h4>Console</h4>
+                        <p>JS errors & logs</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-network-wired" style="color: #f59e0b;"></i>
+                        <h4>Network</h4>
+                        <p>HTTP requests</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-file-code" style="color: #7c3aed;"></i>
+                        <h4>Sources</h4>
+                        <p>Debug with breakpoints</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-database" style="color: #db2777;"></i>
+                        <h4>Application</h4>
+                        <p>Storage & cookies</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-tachometer-alt" style="color: #0891b2;"></i>
+                        <h4>Performance</h4>
+                        <p>Speed analysis</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Console Methods</h2>
+                <pre><code class="javascript">// Basic logging
+console.log('Info message');
+console.warn('Warning!');
+console.error('Error!');
+
+// Log as table
+console.table([
+    {name: 'John', age: 25},
+    {name: 'Jane', age: 30}
+]);
+
+// Measure time
+console.time('operation');
+// ... code to measure
+console.timeEnd('operation');</code></pre>
+            </section>
+
+            <!-- Section: Git -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fab fa-git-alt" style="color: #F05032;"></i> Version Control with Git</h2>
+                <p>Track changes, collaborate, never lose code</p>
+                <img src="images/module_1/git_workflow.jpg"
+                     alt="Git Workflow" style="border-radius: 12px; margin-top: 1em; max-height: 350px;">
+            </section>
+
+            <section>
+                <h2>Why Version Control?</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="feature-card fragment">
+                        <i class="fas fa-history" style="color: #2563eb;"></i>
+                        <h4>History</h4>
+                        <p>Track every change</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-users" style="color: #16a34a;"></i>
+                        <h4>Collaborate</h4>
+                        <p>Work together</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-code-branch" style="color: #7c3aed;"></i>
+                        <h4>Branching</h4>
+                        <p>Work in isolation</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-cloud-upload-alt" style="color: #0891b2;"></i>
+                        <h4>Backup</h4>
+                        <p>Safe in cloud</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-undo" style="color: #f59e0b;"></i>
+                        <h4>Rollback</h4>
+                        <p>Undo mistakes</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-search" style="color: #db2777;"></i>
+                        <h4>Blame</h4>
+                        <p>Find who changed what</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Git Workflow</h2>
+                <div class="git-flow">
+                    <div class="git-box">
+                        <i class="fas fa-folder"></i>
+                        <span>Working<br>Directory</span>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div class="git-box" style="border-color: #16a34a;">
+                        <i class="fas fa-plus-square" style="color: #16a34a;"></i>
+                        <span>Staging<br>Area</span>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div class="git-box" style="border-color: #2563eb;">
+                        <i class="fas fa-database" style="color: #2563eb;"></i>
+                        <span>Local<br>Repository</span>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div class="git-box" style="border-color: #7c3aed;">
+                        <i class="fab fa-github" style="color: #7c3aed;"></i>
+                        <span>Remote<br>Repository</span>
+                    </div>
+                </div>
+                <div style="font-size: 0.8em; margin-top: 1em;">
+                    <code>git add</code> → <code>git commit</code> → <code>git push</code>
+                </div>
+            </section>
+
+            <section>
+                <h2>Essential Git Commands</h2>
+                <pre><code class="bash"># Initialize repository
+git init
+
+# Check status
+git status
+
+# Stage files
+git add .                    # All files
+git add filename.html        # Single file
+
+# Commit changes
+git commit -m "Add login feature"
+
+# View history
+git log --oneline</code></pre>
+            </section>
+
+            <section>
+                <h2>Working with Remotes</h2>
+                <pre><code class="bash"># Clone a repository
+git clone https://github.com/user/repo.git
+
+# Add remote
+git remote add origin https://github.com/user/repo.git
+
+# Push to remote
+git push -u origin main
+
+# Pull latest changes
+git pull origin main</code></pre>
+            </section>
+
+            <!-- Section: GitHub -->
+            <section>
+                <h2><i class="fab fa-github"></i> GitHub</h2>
+                <p>Cloud platform for Git repositories</p>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 1.5em;">
+                    <div class="feature-card">
+                        <i class="fas fa-code-branch" style="color: #2563eb;"></i>
+                        <h4>Pull Requests</h4>
+                        <p>Review code changes</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-exclamation-circle" style="color: #16a34a;"></i>
+                        <h4>Issues</h4>
+                        <p>Track bugs/features</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-play-circle" style="color: #f59e0b;"></i>
+                        <h4>Actions</h4>
+                        <p>CI/CD automation</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Good vs Bad Commit Messages</h2>
+                <div class="comparison-table">
+                    <div class="tool-card" style="border: 2px solid #fee2e2;">
+                        <h4 style="color: #dc2626;"><i class="fas fa-times-circle"></i> Bad</h4>
+                        <pre style="text-align: left; font-size: 0.8em;"><code>fix stuff
+update
+asdfasdf
+WIP
+changes
+.</code></pre>
+                    </div>
+                    <div class="tool-card" style="border: 2px solid #dcfce7;">
+                        <h4 style="color: #16a34a;"><i class="fas fa-check-circle"></i> Good</h4>
+                        <pre style="text-align: left; font-size: 0.8em;"><code>Add user authentication
+Fix login redirect bug
+Update password validation
+Refactor database queries
+Remove unused imports</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Dev Environment -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-laptop-code" style="color: #2563eb;"></i> Development Environment</h2>
+                <p>Tools you need to build web applications</p>
+                <img src="images/module_1/the_stack_tools.jpg"
+                     alt="The Stack Tools" style="border-radius: 12px; margin-top: 1em; max-height: 350px;">
+            </section>
+
+            <section>
+                <h2>VS Code</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; align-items: center;">
+                    <div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/150px-Visual_Studio_Code_1.35_icon.svg.png" alt="VS Code">
+                    </div>
+                    <div style="text-align: left;">
+                        <ul class="checklist">
+                            <li>Free & open source</li>
+                            <li>IntelliSense</li>
+                            <li>Integrated terminal</li>
+                            <li>Git integration</li>
+                            <li>Extensions ecosystem</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 1em; padding: 1em; background: #eff6ff; border-radius: 12px; font-size: 0.85em;">
+                    <strong>Essential Extensions:</strong> PHP Intelephense, Live Server, Prettier, GitLens
+                </div>
+            </section>
+
+            <section>
+                <h2>Laragon</h2>
+                <p>All-in-one development environment for Windows</p>
+                <div class="feature-grid" style="grid-template-columns: repeat(4, 1fr); margin: 1.5em 0;">
+                    <div class="feature-card">
+                        <i class="fas fa-server" style="color: #dc2626;"></i>
+                        <h4>Apache</h4>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-php" style="color: #777BB3;"></i>
+                        <h4>PHP 8.x</h4>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-database" style="color: #336791;"></i>
+                        <h4>MySQL</h4>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-node-js" style="color: #339933;"></i>
+                        <h4>Node.js</h4>
+                    </div>
+                </div>
+                <pre><code class="text">D:\laragon\www\
+├── project1\  → http://project1.test
+├── project2\  → http://project2.test
+└── cs381\     → http://cs381.test</code></pre>
+            </section>
+
+            <!-- Practical -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-laptop-code" style="color: #2563eb;"></i> Practical Exercise</h2>
+                <div style="margin: 1.5em auto; padding: 1.5em 2em; background: white; border-radius: 12px; border: 2px solid #e2e8f0; max-width: 600px;">
+                    <h3 style="margin: 0; color: #1e293b;">Build a Multi-Page Static Website</h3>
+                </div>
+                <img src="images/module_1/modern_web_stacks.jpg"
+                     alt="Modern Web Stacks" style="border-radius: 12px; max-height: 280px;">
+            </section>
+
+            <section>
+                <h2>Task Overview</h2>
+                <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                    <div style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #2563eb; color: white; padding: 0.4em 0.7em; border-radius: 50%; font-size: 0.85em;">1</span>
+                        Set up VS Code with extensions
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #7c3aed; color: white; padding: 0.4em 0.7em; border-radius: 50%; font-size: 0.85em;">2</span>
+                        Create project in <code>D:\laragon\www\</code>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #db2777; color: white; padding: 0.4em 0.7em; border-radius: 50%; font-size: 0.85em;">3</span>
+                        Initialize Git & create GitHub repo
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #f59e0b; color: white; padding: 0.4em 0.7em; border-radius: 50%; font-size: 0.85em;">4</span>
+                        Build 3 pages: Home, About, Contact
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #16a34a; color: white; padding: 0.4em 0.7em; border-radius: 50%; font-size: 0.85em;">5</span>
+                        Style with CSS (Flexbox/Grid)
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
+                        <span style="background: #0891b2; color: white; padding: 0.4em 0.7em; border-radius: 50%; font-size: 0.85em;">6</span>
+                        Make responsive & push to GitHub
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Deliverables</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt" style="color: #2563eb;"></i>
+                        <h4>3 Pages</h4>
+                        <p>Home, About, Contact</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-code" style="color: #16a34a;"></i>
+                        <h4>Semantic HTML5</h4>
+                        <p>Proper structure</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-paint-brush" style="color: #7c3aed;"></i>
+                        <h4>CSS Flexbox/Grid</h4>
+                        <p>Modern layouts</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt" style="color: #f59e0b;"></i>
+                        <h4>Responsive</h4>
+                        <p>Mobile friendly</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-github" style="color: #333;"></i>
+                        <h4>GitHub Repo</h4>
+                        <p>Version controlled</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-book" style="color: #0891b2;"></i>
+                        <h4>README.md</h4>
+                        <p>Documentation</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2><i class="fas fa-clipboard-list" style="color: #2563eb;"></i> Summary</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-history" style="color: #7c3aed;"></i>
+                        <h4>Web Evolution</h4>
+                        <p>Static → PWA</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-globe" style="color: #2563eb;"></i>
+                        <h4>HTTP/DNS</h4>
+                        <p>Request-Response</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-tools" style="color: #16a34a;"></i>
+                        <h4>DevTools</h4>
+                        <p>Debug like a pro</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-git-alt" style="color: #F05032;"></i>
+                        <h4>Git</h4>
+                        <p>Version control</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-github"></i>
+                        <h4>GitHub</h4>
+                        <p>Collaboration</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-laptop-code" style="color: #f59e0b;"></i>
+                        <h4>Laragon</h4>
+                        <p>Local dev env</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5em; padding: 1em; background: #eff6ff; border-radius: 12px;">
+                    <strong>Next Module:</strong> <i class="fab fa-html5" style="color: #E34F26;"></i> HTML5 - Semantic elements, forms, APIs
+                </p>
+            </section>
+
+            <!-- Questions -->
+            <section>
+                <h2><i class="fas fa-question-circle" style="color: #2563eb;"></i> Questions?</h2>
+                <p style="color: #64748b;">Module 1: Foundations and Modern Web Development</p>
+                <div style="margin: 2em 0;">
+                    <i class="fas fa-comments" style="font-size: 4em; color: #e2e8f0;"></i>
+                </div>
+                <p style="color: #64748b; font-size: 0.9em;">Thank you!</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'slide',
+            plugins: [RevealHighlight]
+        });
+    </script>
+</body>
+</html>

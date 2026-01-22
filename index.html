@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS381 - Web Application Development</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f1f5f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-alt);
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            background: var(--bg);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .instructor {
+            margin-top: 1rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+        }
+
+        .module-card.disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .module-card .module-number {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--bg-alt);
+        }
+
+        .module-card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .module-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .module-card .topics {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .badge.coming-soon {
+            background: var(--bg-alt);
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .keyboard-hint {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--bg);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .keyboard-hint strong {
+            color: var(--text);
+        }
+
+        .keyboard-hint kbd {
+            background: var(--bg-alt);
+            border: 1px solid #cbd5e1;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 0 0.2rem;
+            box-shadow: 0 2px 0 #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CS381 - Web Application Development</h1>
+            <p>Computer Science and Engineering Department, Yanbu Industrial College</p>
+            <p class="instructor">Instructor: Muhammad Rafiq</p>
+        </header>
+
+        <section class="modules">
+            <a href="module1.html" class="module-card">
+                <span class="module-number">01</span>
+                <h2>Foundations and Modern Web Development</h2>
+                <p>Web evolution, HTTP/HTTPS, browser DevTools, Git & GitHub, development environment setup</p>
+                <div class="topics">HTML5 | CSS3 | Git | Laragon</div>
+                <span class="badge">Available</span>
+            </a>
+
+            <a href="module2.html" class="module-card">
+                <span class="module-number">02</span>
+                <h2>HTML5</h2>
+                <p>Semantic elements, forms, validation, HTML5 APIs, accessibility, templates</p>
+                <div class="topics">Semantic HTML | Forms | ARIA | Templates</div>
+                <span class="badge">Available</span>
+            </a>
+
+            <div class="module-card disabled">
+                <span class="module-number">03</span>
+                <h2>CSS</h2>
+                <p>Box model, positioning, Flexbox, Grid, responsive design, animations, BEM</p>
+                <div class="topics">Flexbox | Grid | Media Queries | Animations</div>
+                <span class="badge coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="module-card disabled">
+                <span class="module-number">04</span>
+                <h2>JavaScript Fundamentals</h2>
+                <p>DOM manipulation, events, forms, storage, JSON, async programming, ES6+</p>
+                <div class="topics">DOM | Events | AJAX | ES6+</div>
+                <span class="badge coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="module-card disabled">
+                <span class="module-number">05</span>
+                <h2>PHP Fundamentals</h2>
+                <p>Syntax, forms, sessions, cookies, file handling, error handling</p>
+                <div class="topics">PHP | Sessions | File Handling</div>
+                <span class="badge coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="module-card disabled">
+                <span class="module-number">06</span>
+                <h2>MySQL Database and PHP Integration</h2>
+                <p>Database design, SQL CRUD, PDO, prepared statements, pagination</p>
+                <div class="topics">MySQL | PDO | SQL | Joins</div>
+                <span class="badge coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="module-card disabled">
+                <span class="module-number">07</span>
+                <h2>Authentication, Authorization & Security</h2>
+                <p>Password hashing, sessions, tokens, OWASP Top 10, secure coding</p>
+                <div class="topics">Auth | Security | OWASP | HTTPS</div>
+                <span class="badge coming-soon">Coming Soon</span>
+            </div>
+        </section>
+
+        <div class="keyboard-hint">
+            <strong>Navigation Tips:</strong> Use <kbd>←</kbd> <kbd>→</kbd> arrow keys to navigate slides,
+            <kbd>M</kbd> for menu, <kbd>F</kbd> for fullscreen, <kbd>Esc</kbd> for overview
+        </div>
+
+        <footer>
+            <p>Yanbu Industrial College - Royal Commission Yanbu Colleges and Institutes</p>
+            <p style="margin-top: 0.5rem;">Built with <a href="https://revealjs.com" target="_blank">reveal.js</a></p>
+        </footer>
+    </div>
+</body>
+</html>

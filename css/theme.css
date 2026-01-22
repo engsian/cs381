@@ -1,0 +1,398 @@
+/* CS381 Custom Theme - Light & High Contrast */
+
+:root {
+    --primary: #2563eb;        /* Blue */
+    --primary-dark: #1d4ed8;
+    --accent: #059669;         /* Green for success/highlights */
+    --warning: #d97706;        /* Orange */
+    --danger: #dc2626;         /* Red */
+    --bg: #ffffff;
+    --bg-alt: #f1f5f9;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --code-bg: #1e293b;
+    --code-text: #e2e8f0;
+}
+
+/* Reveal.js Overrides */
+.reveal-viewport {
+    background: var(--bg);
+    height: calc(100vh - 50px) !important;
+}
+
+.reveal {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 32px;
+    color: var(--text);
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text);
+    text-transform: none;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5em;
+}
+
+.reveal h1 {
+    font-size: 2.5em;
+    color: var(--primary);
+}
+
+.reveal h2 {
+    font-size: 1.8em;
+    color: var(--text);
+    border-bottom: 4px solid var(--primary);
+    padding-bottom: 0.3em;
+    margin-bottom: 0.8em;
+}
+
+.reveal h3 {
+    font-size: 1.3em;
+    color: var(--text);
+}
+
+.reveal p, .reveal li {
+    line-height: 1.7;
+    color: var(--text);
+}
+
+.reveal ul, .reveal ol {
+    display: block;
+    text-align: left;
+    margin-left: 1.5em;
+}
+
+.reveal li {
+    margin-bottom: 0.6em;
+}
+
+.reveal ul ul, .reveal ol ol {
+    margin-top: 0.4em;
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+/* Code styling */
+.reveal pre {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    font-size: 0.55em;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.reveal code {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    background: var(--bg-alt);
+    color: var(--primary-dark);
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-size: 0.85em;
+    border: 1px solid #e2e8f0;
+}
+
+.reveal pre code {
+    padding: 1.5em;
+    max-height: 500px;
+    background: var(--code-bg);
+    color: var(--code-text);
+    border: none;
+}
+
+/* Highlighted/emphasized text */
+.reveal strong, .reveal b {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.reveal em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 600;
+}
+
+/* Links */
+.reveal a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.reveal a:hover {
+    color: var(--primary-dark);
+}
+
+/* Slide number - fixed to actual screen bottom */
+.reveal .slide-number {
+    background: var(--primary);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 4px 0 0 0;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+/* Progress bar - fixed to actual screen bottom */
+.reveal .progress {
+    height: 6px;
+    color: var(--primary);
+    position: fixed;
+    bottom: 0;
+    top: auto !important;
+}
+
+/* Custom classes */
+.reveal .title-slide {
+    text-align: left;
+    padding-left: 2em;
+}
+
+.reveal .title-slide h1 {
+    font-size: 2.4em;
+    margin-bottom: 0.2em;
+    color: var(--text);
+}
+
+.reveal .title-slide .subtitle {
+    font-size: 1.4em;
+    color: var(--primary);
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+
+.reveal .title-slide .author {
+    font-size: 1.1em;
+    color: var(--text-muted);
+    margin-top: 2em;
+}
+
+.reveal .two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    text-align: left;
+}
+
+.reveal .highlight-box {
+    background: #eff6ff;
+    border-left: 5px solid var(--primary);
+    padding: 1em 1.5em;
+    margin: 1em 0;
+    border-radius: 0 8px 8px 0;
+    color: var(--text);
+}
+
+.reveal .warning-box {
+    background: #fffbeb;
+    border-left: 5px solid var(--warning);
+    padding: 1em 1.5em;
+    margin: 1em 0;
+    border-radius: 0 8px 8px 0;
+    color: var(--text);
+}
+
+.reveal .info-box {
+    background: #ecfdf5;
+    border-left: 5px solid var(--accent);
+    padding: 1em 1.5em;
+    margin: 1em 0;
+    border-radius: 0 8px 8px 0;
+    color: var(--text);
+}
+
+/* Table styling */
+.reveal table {
+    margin: 1em auto;
+    border-collapse: collapse;
+    font-size: 0.8em;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.reveal table th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    padding: 1em 1.2em;
+    text-align: left;
+}
+
+.reveal table td {
+    padding: 0.8em 1.2em;
+    border-bottom: 1px solid #e2e8f0;
+    color: var(--text);
+    background: #fff;
+}
+
+.reveal table tr:last-child td {
+    border-bottom: none;
+}
+
+.reveal table tr:hover td {
+    background: var(--bg-alt);
+}
+
+/* Fragment animations */
+.reveal .fragment.highlight-current-blue.current-fragment {
+    color: var(--primary);
+}
+
+/* Smaller text utility */
+.reveal .small {
+    font-size: 0.75em;
+}
+
+.reveal .smaller {
+    font-size: 0.65em;
+}
+
+/* Keyboard keys */
+.reveal kbd {
+    background: var(--bg-alt);
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 0.2em 0.6em;
+    font-family: monospace;
+    font-size: 0.85em;
+    color: var(--text);
+    box-shadow: 0 2px 0 #cbd5e1;
+}
+
+/* Menu plugin styling */
+.reveal .slide-menu-button {
+    left: 20px;
+    bottom: 20px;
+    color: var(--text);
+}
+
+.slide-menu {
+    background: #fff !important;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.15) !important;
+}
+
+.slide-menu .slide-menu-items {
+    background: #fff !important;
+}
+
+.slide-menu .slide-menu-item {
+    color: var(--text) !important;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.slide-menu .slide-menu-item.active,
+.slide-menu .slide-menu-item:hover {
+    background: var(--primary) !important;
+    color: #fff !important;
+}
+
+/* Image styling */
+.reveal img {
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.reveal .no-shadow img {
+    box-shadow: none;
+}
+
+/* Diagram/flow styling */
+.reveal .flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8em;
+    margin: 1.5em 0;
+    flex-wrap: wrap;
+}
+
+.reveal .flow-box {
+    background: var(--bg-alt);
+    border: 2px solid var(--primary);
+    padding: 0.8em 1.2em;
+    border-radius: 8px;
+    font-size: 0.85em;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.reveal .flow-arrow {
+    color: var(--primary);
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* List styling - clean bullets */
+.reveal ul {
+    list-style: none;
+}
+
+.reveal ul > li {
+    position: relative;
+    padding-left: 0.5em;
+}
+
+.reveal ul > li::before {
+    content: "●";
+    color: var(--primary);
+    font-size: 0.6em;
+    position: absolute;
+    left: -1em;
+    top: 0.55em;
+}
+
+.reveal ul ul > li::before {
+    content: "○";
+    color: var(--text-muted);
+}
+
+/* Ordered list */
+.reveal ol {
+    list-style: none;
+    counter-reset: item;
+}
+
+.reveal ol > li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 0.5em;
+}
+
+.reveal ol > li::before {
+    content: counter(item);
+    color: #fff;
+    background: var(--primary);
+    font-weight: 700;
+    font-size: 0.7em;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: -2em;
+    top: 0.2em;
+}
+
+/* Section headers - vertical slides indicator */
+.reveal .slides section section {
+    padding-top: 1em;
+}
+
+/* Controls - fixed to actual screen bottom */
+.reveal .controls {
+    color: var(--primary);
+    bottom: 20px !important;
+}
+
+/* Speaker notes indicator */
+.reveal .speaker-notes-paused {
+    color: var(--warning);
+}
