@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS381 - Web Application Development</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         :root {
             --primary: #2563eb;
@@ -11,7 +15,7 @@
             --text: #1e293b;
             --text-muted: #64748b;
             --bg: #ffffff;
-            --bg-alt: #f1f5f9;
+            --bg-alt: #f8fafc;
         }
 
         * {
@@ -27,107 +31,325 @@
             color: var(--text);
         }
 
+        /* Hero Header */
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .course-code {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .instructor {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            font-size: 0.95rem;
+        }
+
+        .hero .instructor i {
+            color: #60a5fa;
+        }
+
+        /* Tech Stack Icons */
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .tech-icon i {
+            font-size: 1.8rem;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .progress-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .progress-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-info h3 {
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 43%;
+            height: 100%;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Main Content */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        header {
-            text-align: center;
-            padding: 3rem 0;
-            background: var(--bg);
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
         }
 
-        header h1 {
-            font-size: 2.5rem;
+        .section-title h2 {
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 0.5rem;
         }
 
-        header p {
+        .section-title .count {
+            background: var(--bg-alt);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            font-size: 1.2rem;
         }
 
-        .instructor {
-            margin-top: 1rem;
-            color: var(--primary);
-            font-weight: 500;
-        }
-
+        /* Module Grid */
         .modules {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 1.5rem;
         }
 
         .module-card {
             background: var(--bg);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 1.5rem;
             text-decoration: none;
             color: var(--text);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 1px solid #e2e8f0;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-color, #2563eb), var(--card-color-end, #3b82f6));
         }
 
         .module-card:hover {
             transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            border-color: transparent;
         }
 
         .module-card.disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             pointer-events: none;
         }
 
-        .module-card .module-number {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--bg-alt);
+        .module-card.disabled::before {
+            background: #cbd5e1;
+        }
+
+        .module-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: white;
+            background: linear-gradient(135deg, var(--card-color, #2563eb), var(--card-color-end, #3b82f6));
+            flex-shrink: 0;
+        }
+
+        .module-meta {
+            flex: 1;
+        }
+
+        .module-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .module-card h2 {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--primary);
+            margin-top: 0.2rem;
+            color: var(--text);
+            line-height: 1.3;
         }
 
         .module-card p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
             line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
         }
 
-        .module-card .topics {
-            margin-top: 1rem;
-            font-size: 0.8rem;
+        .module-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .topics {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .topic-tag {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.6rem;
+            background: var(--bg-alt);
             color: var(--text-muted);
+            border-radius: 20px;
             font-weight: 500;
         }
 
         .badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: var(--primary);
-            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 0.8rem;
+            background: #dcfce7;
+            color: #166534;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-top: 1rem;
+        }
+
+        .badge i {
+            font-size: 0.7rem;
         }
 
         .badge.coming-soon {
@@ -135,32 +357,25 @@
             color: var(--text-muted);
         }
 
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        /* Module Colors */
+        .module-card:nth-child(1) { --card-color: #2563eb; --card-color-end: #3b82f6; }
+        .module-card:nth-child(2) { --card-color: #ea580c; --card-color-end: #f97316; }
+        .module-card:nth-child(3) { --card-color: #7c3aed; --card-color-end: #8b5cf6; }
+        .module-card:nth-child(4) { --card-color: #eab308; --card-color-end: #facc15; }
+        .module-card:nth-child(5) { --card-color: #6366f1; --card-color-end: #818cf8; }
+        .module-card:nth-child(6) { --card-color: #0891b2; --card-color-end: #06b6d4; }
+        .module-card:nth-child(7) { --card-color: #dc2626; --card-color-end: #ef4444; }
 
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
+        /* Keyboard Hints */
         .keyboard-hint {
             margin-top: 2rem;
             padding: 1.5rem;
             background: var(--bg);
             border-radius: 12px;
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
         }
 
         .keyboard-hint strong {
@@ -176,83 +391,296 @@
             margin: 0 0.2rem;
             box-shadow: 0 2px 0 #cbd5e1;
         }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .progress-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .modules {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-stack {
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>CS381 - Web Application Development</h1>
-            <p>Computer Science and Engineering Department, Yanbu Industrial College</p>
-            <p class="instructor">Instructor: Muhammad Rafiq</p>
-        </header>
+    <!-- Hero Header -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="course-code"><i class="fas fa-graduation-cap"></i> CS381</span>
+            <h1>Web Application Development</h1>
+            <p class="subtitle">Computer Science and Engineering Department, Yanbu Industrial College</p>
+
+            <div class="instructor">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Instructor: Muhammad Rafiq</span>
+            </div>
+
+            <div class="tech-stack">
+                <div class="tech-icon">
+                    <i class="fab fa-html5" style="color: #E34F26;"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="tech-icon">
+                    <i class="fab fa-css3-alt" style="color: #264de4;"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="tech-icon">
+                    <i class="fab fa-js" style="color: #f7df1e;"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="tech-icon">
+                    <i class="fab fa-php" style="color: #777BB3;"></i>
+                    <span>PHP</span>
+                </div>
+                <div class="tech-icon">
+                    <i class="fas fa-database" style="color: #00758F;"></i>
+                    <span>MySQL</span>
+                </div>
+                <div class="tech-icon">
+                    <i class="fas fa-shield-alt" style="color: #16a34a;"></i>
+                    <span>Security</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Section -->
+    <section class="progress-section">
+        <div class="progress-container">
+            <div class="progress-info">
+                <h3><i class="fas fa-chart-line" style="color: var(--primary); margin-right: 0.5rem;"></i> Course Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span class="progress-text">3 of 7 modules</span>
+            </div>
+            <div class="progress-stats">
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Available</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Coming Soon</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="section-title">
+            <h2><i class="fas fa-book-open" style="color: var(--primary);"></i> Course Modules</h2>
+            <span class="count">7 modules</span>
+        </div>
 
         <section class="modules">
             <a href="module1.html" class="module-card">
-                <span class="module-number">01</span>
-                <h2>Foundations and Modern Web Development</h2>
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="module-meta">
+                        <span class="module-number">Module 01</span>
+                        <h2>Foundations and Modern Web Development</h2>
+                    </div>
+                </div>
                 <p>Web evolution, HTTP/HTTPS, browser DevTools, Git & GitHub, development environment setup</p>
-                <div class="topics">HTML5 | CSS3 | Git | Laragon</div>
-                <span class="badge">Available</span>
+                <div class="module-footer">
+                    <div class="topics">
+                        <span class="topic-tag">HTTP</span>
+                        <span class="topic-tag">Git</span>
+                        <span class="topic-tag">DevTools</span>
+                    </div>
+                    <span class="badge"><i class="fas fa-check-circle"></i> Available</span>
+                </div>
             </a>
 
             <a href="module2.html" class="module-card">
-                <span class="module-number">02</span>
-                <h2>HTML5</h2>
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="module-meta">
+                        <span class="module-number">Module 02</span>
+                        <h2>HTML5</h2>
+                    </div>
+                </div>
                 <p>Semantic elements, forms, validation, HTML5 APIs, accessibility, templates</p>
-                <div class="topics">Semantic HTML | Forms | ARIA | Templates</div>
-                <span class="badge">Available</span>
+                <div class="module-footer">
+                    <div class="topics">
+                        <span class="topic-tag">Semantic</span>
+                        <span class="topic-tag">Forms</span>
+                        <span class="topic-tag">ARIA</span>
+                    </div>
+                    <span class="badge"><i class="fas fa-check-circle"></i> Available</span>
+                </div>
             </a>
 
             <a href="module3.html" class="module-card">
-                <span class="module-number">03</span>
-                <h2>CSS</h2>
-                <p>Box model, positioning, Flexbox, Grid, responsive design, animations, BEM</p>
-                <div class="topics">Flexbox | Grid | Media Queries | Animations</div>
-                <span class="badge">Available</span>
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <div class="module-meta">
+                        <span class="module-number">Module 03</span>
+                        <h2>CSS</h2>
+                    </div>
+                </div>
+                <p>Box model, Flexbox, Grid, responsive design, animations, BEM methodology</p>
+                <div class="module-footer">
+                    <div class="topics">
+                        <span class="topic-tag">Flexbox</span>
+                        <span class="topic-tag">Grid</span>
+                        <span class="topic-tag">Responsive</span>
+                    </div>
+                    <span class="badge"><i class="fas fa-check-circle"></i> Available</span>
+                </div>
             </a>
 
             <div class="module-card disabled">
-                <span class="module-number">04</span>
-                <h2>JavaScript Fundamentals</h2>
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <div class="module-meta">
+                        <span class="module-number">Module 04</span>
+                        <h2>JavaScript Fundamentals</h2>
+                    </div>
+                </div>
                 <p>DOM manipulation, events, forms, storage, JSON, async programming, ES6+</p>
-                <div class="topics">DOM | Events | AJAX | ES6+</div>
-                <span class="badge coming-soon">Coming Soon</span>
+                <div class="module-footer">
+                    <div class="topics">
+                        <span class="topic-tag">DOM</span>
+                        <span class="topic-tag">Events</span>
+                        <span class="topic-tag">ES6+</span>
+                    </div>
+                    <span class="badge coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                </div>
             </div>
 
             <div class="module-card disabled">
-                <span class="module-number">05</span>
-                <h2>PHP Fundamentals</h2>
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <div class="module-meta">
+                        <span class="module-number">Module 05</span>
+                        <h2>PHP Fundamentals</h2>
+                    </div>
+                </div>
                 <p>Syntax, forms, sessions, cookies, file handling, error handling</p>
-                <div class="topics">PHP | Sessions | File Handling</div>
-                <span class="badge coming-soon">Coming Soon</span>
+                <div class="module-footer">
+                    <div class="topics">
+                        <span class="topic-tag">PHP</span>
+                        <span class="topic-tag">Sessions</span>
+                        <span class="topic-tag">Forms</span>
+                    </div>
+                    <span class="badge coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                </div>
             </div>
 
             <div class="module-card disabled">
-                <span class="module-number">06</span>
-                <h2>MySQL Database and PHP Integration</h2>
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="module-meta">
+                        <span class="module-number">Module 06</span>
+                        <h2>MySQL Database and PHP Integration</h2>
+                    </div>
+                </div>
                 <p>Database design, SQL CRUD, PDO, prepared statements, pagination</p>
-                <div class="topics">MySQL | PDO | SQL | Joins</div>
-                <span class="badge coming-soon">Coming Soon</span>
+                <div class="module-footer">
+                    <div class="topics">
+                        <span class="topic-tag">MySQL</span>
+                        <span class="topic-tag">PDO</span>
+                        <span class="topic-tag">SQL</span>
+                    </div>
+                    <span class="badge coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                </div>
             </div>
 
             <div class="module-card disabled">
-                <span class="module-number">07</span>
-                <h2>Authentication, Authorization & Security</h2>
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="module-meta">
+                        <span class="module-number">Module 07</span>
+                        <h2>Authentication, Authorization & Security</h2>
+                    </div>
+                </div>
                 <p>Password hashing, sessions, tokens, OWASP Top 10, secure coding</p>
-                <div class="topics">Auth | Security | OWASP | HTTPS</div>
-                <span class="badge coming-soon">Coming Soon</span>
+                <div class="module-footer">
+                    <div class="topics">
+                        <span class="topic-tag">Auth</span>
+                        <span class="topic-tag">OWASP</span>
+                        <span class="topic-tag">Security</span>
+                    </div>
+                    <span class="badge coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                </div>
             </div>
         </section>
 
         <div class="keyboard-hint">
-            <strong>Navigation Tips:</strong> Use <kbd>←</kbd> <kbd>→</kbd> arrow keys to navigate slides,
-            <kbd>M</kbd> for menu, <kbd>F</kbd> for fullscreen, <kbd>Esc</kbd> for overview
+            <strong><i class="fas fa-keyboard"></i> Navigation Tips:</strong>
+            Use <kbd>←</kbd> <kbd>→</kbd> arrow keys to navigate slides,
+            <kbd>F</kbd> for fullscreen, <kbd>Esc</kbd> for overview
         </div>
+    </main>
 
-        <footer>
-            <p>Yanbu Industrial College - Royal Commission Yanbu Colleges and Institutes</p>
-            <p style="margin-top: 0.5rem;">Built with <a href="https://revealjs.com" target="_blank">reveal.js</a></p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://yic.edu.sa" target="_blank"><i class="fas fa-university"></i> YIC Website</a>
+            <a href="https://revealjs.com" target="_blank"><i class="fas fa-presentation"></i> Built with reveal.js</a>
+        </div>
+        <p>Yanbu Industrial College - Royal Commission Yanbu Colleges and Institutes</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">Second Semester 2024-2025</p>
+    </footer>
 </body>
 </html>
