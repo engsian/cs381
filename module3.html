@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: CSS - CS381</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css">
+
+    <!-- Highlight.js for code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Theme Override -->
+    <link rel="stylesheet" href="css/theme.css">
+
+    <style>
+        /* Fixed home navigation */
+        .home-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        .home-nav a {
+            background: #f8fafc;
+            color: #64748b;
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .home-nav a:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6em;
+            margin: 0.5em 0;
+        }
+        .feature-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: center;
+        }
+        .feature-card i {
+            font-size: 1.5em;
+            color: #2563eb;
+            margin-bottom: 0.3em;
+            display: block;
+        }
+        .feature-card h4 {
+            margin: 0.3em 0;
+            font-size: 0.8em;
+        }
+        .feature-card p {
+            font-size: 0.65em;
+            color: #64748b;
+            margin: 0;
+        }
+        .box-model {
+            width: 320px;
+            margin: 0.5em auto;
+            text-align: center;
+            font-size: 0.75em;
+        }
+        .box-margin {
+            background: #fef3c7;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .box-border {
+            background: #fcd34d;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .box-padding {
+            background: #bef264;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .box-content {
+            background: #93c5fd;
+            padding: 20px;
+            border-radius: 2px;
+            font-weight: bold;
+        }
+        .box-label {
+            font-size: 0.85em;
+            color: #64748b;
+            margin-bottom: 3px;
+        }
+        .selector-example {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: left;
+            margin: 0.3em 0;
+        }
+        .selector-example code {
+            color: #2563eb;
+            font-weight: 600;
+        }
+        .selector-example span {
+            color: #64748b;
+            font-size: 0.85em;
+        }
+        .specificity-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            margin: 0.4em 0;
+            font-size: 0.85em;
+        }
+        .specificity-bar .bar {
+            height: 20px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            border-radius: 4px;
+        }
+        .color-box {
+            display: inline-block;
+            width: 60px;
+            height: 40px;
+            border-radius: 6px;
+            margin: 0.3em;
+            vertical-align: middle;
+        }
+        .flex-demo {
+            display: flex;
+            gap: 8px;
+            padding: 10px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            margin: 0.5em 0;
+        }
+        .flex-item {
+            background: #2563eb;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8em;
+        }
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 10px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            margin: 0.5em 0;
+        }
+        .grid-item {
+            background: #7c3aed;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.75em;
+        }
+        .grid-item.span-2 {
+            grid-column: span 2;
+        }
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1em;
+            margin: 0.5em 0;
+        }
+        .thinking-card {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+            border-left: 4px solid #2563eb;
+            padding: 0.8em;
+            border-radius: 0 10px 10px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .thinking-card h4 {
+            color: #2563eb;
+            margin: 0 0 0.3em 0;
+            font-size: 0.9em;
+        }
+        .unit-table {
+            font-size: 0.75em;
+            width: 100%;
+        }
+        .unit-table td, .unit-table th {
+            padding: 0.4em 0.6em;
+        }
+        .responsive-demo {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            align-items: flex-end;
+            margin: 1em 0;
+        }
+        .device {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+        }
+        .device-screen {
+            background: #3b82f6;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.6em;
+            font-weight: 600;
+        }
+        .device-label {
+            color: #94a3b8;
+            font-size: 0.65em;
+            margin-top: 5px;
+        }
+        .bem-example {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1em;
+            text-align: left;
+            font-size: 0.8em;
+        }
+        .animation-demo {
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            border-radius: 8px;
+            margin: 0.5em auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="home-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </nav>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1 style="font-size: 2.8em;">CS381</h1>
+                <h2 style="border: none; color: #64748b; font-weight: 400;">Web Application Development</h2>
+                <div style="margin: 2em 0; padding: 1.5em; background: #f8fafc; border-radius: 12px; border-left: 5px solid #264de4;">
+                    <h3 style="margin: 0; color: #1e293b;"><i class="fab fa-css3-alt" style="color: #264de4;"></i> Module 3: CSS</h3>
+                </div>
+                <p style="color: #64748b; margin-top: 2em;">
+                    <strong style="color: #1e293b;">Muhammad Rafiq</strong><br>
+                    <small>Computer Science and Engineering Department, Yanbu Industrial College</small>
+                </p>
+            </section>
+
+            <!-- What is CSS -->
+            <section>
+                <h2><i class="fab fa-css3-alt" style="color: #264de4;"></i> What is CSS?</h2>
+                <p style="font-size: 0.85em; color: #64748b;"><strong>Cascading Style Sheets</strong> — the language that styles HTML</p>
+                <div class="comparison-box" style="margin-top: 0.8em;">
+                    <div style="text-align: center;">
+                        <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.3em;">Without CSS</p>
+                        <div style="background: white; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1em; text-align: left; font-family: Times, serif;">
+                            <h3 style="margin: 0; border: none; font-size: 1em;">Welcome</h3>
+                            <p style="margin: 0.5em 0 0 0; font-size: 0.8em;">Plain text content</p>
+                            <a href="#" style="color: blue;">A link</a>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.3em;">With CSS</p>
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; padding: 1em; text-align: left; color: white;">
+                            <h3 style="margin: 0; border: none; font-size: 1em; color: white;">Welcome</h3>
+                            <p style="margin: 0.5em 0 0 0; font-size: 0.8em; opacity: 0.9;">Styled content</p>
+                            <a href="#" style="color: #fbbf24;">A styled link</a>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size: 0.75em; color: #64748b; margin-top: 0.8em;"><strong>Separation of concerns:</strong> HTML = structure, CSS = presentation</p>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section>
+                <h2><i class="fas fa-bullseye" style="color: #2563eb;"></i> Learning Objectives</h2>
+                <div class="feature-grid">
+                    <div class="feature-card fragment">
+                        <i class="fas fa-crosshairs"></i>
+                        <h4>Selectors</h4>
+                        <p>Target elements precisely</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-box"></i>
+                        <h4>Box Model</h4>
+                        <p>Understand spacing</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-th-large"></i>
+                        <h4>Flexbox & Grid</h4>
+                        <p>Modern layouts</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Responsive</h4>
+                        <p>Adapt to screens</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-magic"></i>
+                        <h4>Animations</h4>
+                        <p>Add interactivity</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-sitemap"></i>
+                        <h4>BEM</h4>
+                        <p>Organize CSS</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CSS Syntax -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-code" style="color: #2563eb;"></i> CSS Syntax</h2>
+                <p style="font-size: 0.85em;">The building blocks of styling</p>
+            </section>
+
+            <section>
+                <h2>CSS Rule Structure</h2>
+                <pre style="font-size: 0.55em;"><code class="css">/* Selector targets HTML elements */
+selector {
+    property: value;    /* Declaration */
+    property: value;
+}
+
+/* Example */
+h1 {
+    color: #2563eb;
+    font-size: 2rem;
+    margin-bottom: 1em;
+}</code></pre>
+                <div style="display: flex; justify-content: center; gap: 2em; margin-top: 0.8em; font-size: 0.8em;">
+                    <div><strong style="color: #dc2626;">Selector</strong> — What to style</div>
+                    <div><strong style="color: #16a34a;">Property</strong> — What aspect</div>
+                    <div><strong style="color: #2563eb;">Value</strong> — How to style it</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Three Ways to Add CSS</h2>
+                <div style="font-size: 0.8em;">
+                    <div class="selector-example">
+                        <strong style="color: #16a34a;">1. External (Recommended)</strong>
+                        <pre style="margin: 0.3em 0; font-size: 0.85em;"><code class="html">&lt;link rel="stylesheet" href="styles.css"&gt;</code></pre>
+                        <span>Separate file, reusable, cacheable</span>
+                    </div>
+                    <div class="selector-example">
+                        <strong style="color: #f59e0b;">2. Internal</strong>
+                        <pre style="margin: 0.3em 0; font-size: 0.85em;"><code class="html">&lt;style&gt; h1 { color: blue; } &lt;/style&gt;</code></pre>
+                        <span>In &lt;head&gt;, page-specific</span>
+                    </div>
+                    <div class="selector-example">
+                        <strong style="color: #dc2626;">3. Inline (Avoid)</strong>
+                        <pre style="margin: 0.3em 0; font-size: 0.85em;"><code class="html">&lt;h1 style="color: blue;"&gt;Title&lt;/h1&gt;</code></pre>
+                        <span>Hard to maintain, highest specificity</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Selectors -->
+            <section>
+                <h2>CSS Selectors</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; font-size: 0.75em;">
+                    <div class="selector-example">
+                        <code>element</code> <span>— All of type</span>
+                        <pre style="margin: 0.2em 0;"><code class="css">p { color: gray; }</code></pre>
+                    </div>
+                    <div class="selector-example">
+                        <code>.class</code> <span>— By class name</span>
+                        <pre style="margin: 0.2em 0;"><code class="css">.btn { padding: 10px; }</code></pre>
+                    </div>
+                    <div class="selector-example">
+                        <code>#id</code> <span>— By ID (unique)</span>
+                        <pre style="margin: 0.2em 0;"><code class="css">#header { height: 60px; }</code></pre>
+                    </div>
+                    <div class="selector-example">
+                        <code>parent child</code> <span>— Descendant</span>
+                        <pre style="margin: 0.2em 0;"><code class="css">nav a { color: white; }</code></pre>
+                    </div>
+                    <div class="selector-example">
+                        <code>:pseudo-class</code> <span>— State</span>
+                        <pre style="margin: 0.2em 0;"><code class="css">a:hover { color: red; }</code></pre>
+                    </div>
+                    <div class="selector-example">
+                        <code>[attr]</code> <span>— By attribute</span>
+                        <pre style="margin: 0.2em 0;"><code class="css">[type="text"] { border: 1px; }</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Specificity — Which Style Wins?</h2>
+                <p style="font-size: 0.8em; color: #64748b;">When multiple rules target the same element</p>
+                <div style="max-width: 500px; margin: 0.5em auto; font-size: 0.85em;">
+                    <div class="specificity-bar">
+                        <code style="width: 120px;">element</code>
+                        <div class="bar" style="width: 50px; background: #94a3b8;"></div>
+                        <span>0-0-1</span>
+                    </div>
+                    <div class="specificity-bar">
+                        <code style="width: 120px;">.class</code>
+                        <div class="bar" style="width: 100px; background: #3b82f6;"></div>
+                        <span>0-1-0</span>
+                    </div>
+                    <div class="specificity-bar">
+                        <code style="width: 120px;">#id</code>
+                        <div class="bar" style="width: 150px; background: #8b5cf6;"></div>
+                        <span>1-0-0</span>
+                    </div>
+                    <div class="specificity-bar">
+                        <code style="width: 120px;">inline style</code>
+                        <div class="bar" style="width: 200px; background: #dc2626;"></div>
+                        <span>1-0-0-0</span>
+                    </div>
+                    <div class="specificity-bar">
+                        <code style="width: 120px;">!important</code>
+                        <div class="bar" style="width: 250px; background: #000;"></div>
+                        <span>Overrides all (avoid!)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Box Model -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-box" style="color: #2563eb;"></i> The Box Model</h2>
+                <p style="font-size: 0.85em;">Every element is a box — understanding spacing</p>
+            </section>
+
+            <section>
+                <h2>Box Model Layers</h2>
+                <div class="box-model">
+                    <div class="box-margin">
+                        <div class="box-label">margin</div>
+                        <div class="box-border">
+                            <div class="box-label">border</div>
+                            <div class="box-padding">
+                                <div class="box-label">padding</div>
+                                <div class="box-content">content</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5em; font-size: 0.7em; margin-top: 0.5em;">
+                    <div><span style="color: #f59e0b;">Margin</span><br>Outside spacing</div>
+                    <div><span style="color: #eab308;">Border</span><br>Edge line</div>
+                    <div><span style="color: #84cc16;">Padding</span><br>Inside spacing</div>
+                    <div><span style="color: #3b82f6;">Content</span><br>Actual content</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>box-sizing: border-box</h2>
+                <p style="font-size: 0.8em; color: #64748b;">The most important CSS rule you'll write</p>
+                <div class="comparison-box" style="font-size: 0.75em;">
+                    <div style="background: #fee2e2; padding: 0.8em; border-radius: 8px;">
+                        <h4 style="color: #dc2626; margin: 0 0 0.3em 0;">content-box (default)</h4>
+                        <p style="margin: 0;">width = content only</p>
+                        <p style="margin: 0.3em 0; font-size: 0.9em;"><code>width: 200px</code> + padding + border = <strong>larger!</strong></p>
+                    </div>
+                    <div style="background: #dcfce7; padding: 0.8em; border-radius: 8px;">
+                        <h4 style="color: #16a34a; margin: 0 0 0.3em 0;">border-box (recommended)</h4>
+                        <p style="margin: 0;">width = content + padding + border</p>
+                        <p style="margin: 0.3em 0; font-size: 0.9em;"><code>width: 200px</code> = <strong>exactly 200px</strong></p>
+                    </div>
+                </div>
+                <pre style="font-size: 0.5em; margin-top: 0.5em;"><code class="css">/* Apply to all elements - put this at the top of your CSS */
+*, *::before, *::after {
+    box-sizing: border-box;
+}</code></pre>
+            </section>
+
+            <!-- Units -->
+            <section>
+                <h2>CSS Units</h2>
+                <div style="font-size: 0.75em;">
+                    <table class="unit-table">
+                        <tr>
+                            <th>Unit</th>
+                            <th>Type</th>
+                            <th>Use Case</th>
+                        </tr>
+                        <tr>
+                            <td><code>px</code></td>
+                            <td>Absolute</td>
+                            <td>Borders, small fixed sizes</td>
+                        </tr>
+                        <tr>
+                            <td><code>%</code></td>
+                            <td>Relative to parent</td>
+                            <td>Widths, responsive layouts</td>
+                        </tr>
+                        <tr>
+                            <td><code>em</code></td>
+                            <td>Relative to parent font</td>
+                            <td>Spacing relative to text</td>
+                        </tr>
+                        <tr>
+                            <td><code>rem</code></td>
+                            <td>Relative to root font</td>
+                            <td>Font sizes, consistent spacing</td>
+                        </tr>
+                        <tr>
+                            <td><code>vw/vh</code></td>
+                            <td>Viewport %</td>
+                            <td>Full-screen sections</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="thinking-card" style="margin-top: 0.5em;">
+                    <p style="margin: 0; font-size: 0.8em;"><strong>Tip:</strong> Use <code>rem</code> for fonts, <code>px</code> for borders, <code>%</code> or <code>fr</code> for layouts</p>
+                </div>
+            </section>
+
+            <!-- Flexbox -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-arrows-alt-h" style="color: #2563eb;"></i> Flexbox</h2>
+                <p style="font-size: 0.85em;">One-dimensional layouts made easy</p>
+            </section>
+
+            <section>
+                <h2>Flexbox Basics</h2>
+                <pre style="font-size: 0.5em;"><code class="css">.container {
+    display: flex;
+    justify-content: space-between;  /* horizontal */
+    align-items: center;             /* vertical */
+    gap: 1rem;
+}</code></pre>
+                <div class="flex-demo" style="justify-content: space-between;">
+                    <div class="flex-item">1</div>
+                    <div class="flex-item">2</div>
+                    <div class="flex-item">3</div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5em; font-size: 0.7em; margin-top: 0.5em;">
+                    <div><code>flex-start</code><br>Start</div>
+                    <div><code>center</code><br>Center</div>
+                    <div><code>space-between</code><br>Spread out</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Flex Item Properties</h2>
+                <pre style="font-size: 0.5em;"><code class="css">.item {
+    flex-grow: 1;    /* Take available space */
+    flex-shrink: 0;  /* Don't shrink */
+    flex-basis: 200px; /* Starting size */
+}
+/* Shorthand */
+.item { flex: 1; }  /* grow:1, shrink:1, basis:0 */</code></pre>
+                <div class="flex-demo">
+                    <div class="flex-item" style="flex: 1;">flex: 1</div>
+                    <div class="flex-item" style="flex: 2;">flex: 2</div>
+                    <div class="flex-item" style="flex: 1;">flex: 1</div>
+                </div>
+                <p style="font-size: 0.75em; color: #64748b;">Middle item takes 2x space</p>
+            </section>
+
+            <!-- Grid -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-th" style="color: #7c3aed;"></i> CSS Grid</h2>
+                <p style="font-size: 0.85em;">Two-dimensional layouts with precision</p>
+            </section>
+
+            <section>
+                <h2>Grid Basics</h2>
+                <pre style="font-size: 0.5em;"><code class="css">.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  /* 3 equal columns */
+    grid-template-columns: repeat(3, 1fr); /* same thing */
+    gap: 1rem;
+}</code></pre>
+                <div class="grid-demo">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                    <div class="grid-item">4</div>
+                    <div class="grid-item">5</div>
+                    <div class="grid-item">6</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Grid: Spanning Cells</h2>
+                <pre style="font-size: 0.5em;"><code class="css">.wide { grid-column: span 2; }  /* Span 2 columns */
+.tall { grid-row: span 2; }     /* Span 2 rows */</code></pre>
+                <div class="grid-demo">
+                    <div class="grid-item span-2">Header (span 2)</div>
+                    <div class="grid-item">Nav</div>
+                    <div class="grid-item span-2">Main Content</div>
+                    <div class="grid-item">Side</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Flexbox vs Grid</h2>
+                <div class="comparison-box" style="font-size: 0.8em;">
+                    <div style="background: #dbeafe; padding: 0.8em; border-radius: 8px; text-align: left;">
+                        <h4 style="color: #2563eb; margin: 0 0 0.3em 0;"><i class="fas fa-arrows-alt-h"></i> Flexbox</h4>
+                        <ul style="margin: 0; font-size: 0.85em;">
+                            <li>One direction at a time</li>
+                            <li>Content-driven sizing</li>
+                            <li>Great for: navbars, cards, centering</li>
+                        </ul>
+                    </div>
+                    <div style="background: #ede9fe; padding: 0.8em; border-radius: 8px; text-align: left;">
+                        <h4 style="color: #7c3aed; margin: 0 0 0.3em 0;"><i class="fas fa-th"></i> Grid</h4>
+                        <ul style="margin: 0; font-size: 0.85em;">
+                            <li>Rows AND columns</li>
+                            <li>Layout-driven sizing</li>
+                            <li>Great for: page layouts, galleries</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 0.5em;">
+                    <p style="margin: 0; font-size: 0.8em;"><strong>Rule of thumb:</strong> Grid for page layout, Flexbox for components</p>
+                </div>
+            </section>
+
+            <!-- Responsive Design -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-mobile-alt" style="color: #2563eb;"></i> Responsive Design</h2>
+                <p style="font-size: 0.85em;">One website, every screen size</p>
+            </section>
+
+            <section>
+                <h2>Media Queries</h2>
+                <pre style="font-size: 0.5em;"><code class="css">/* Base styles (mobile first) */
+.container { padding: 1rem; }
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .container { padding: 2rem; }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}</code></pre>
+                <div class="responsive-demo">
+                    <div class="device">
+                        <div class="device-screen" style="width: 40px; height: 70px;">Mobile</div>
+                        <div class="device-label">&lt;768px</div>
+                    </div>
+                    <div class="device">
+                        <div class="device-screen" style="width: 80px; height: 60px;">Tablet</div>
+                        <div class="device-label">768-1024px</div>
+                    </div>
+                    <div class="device">
+                        <div class="device-screen" style="width: 120px; height: 70px;">Desktop</div>
+                        <div class="device-label">&gt;1024px</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Mobile-First Approach</h2>
+                <div class="comparison-box" style="font-size: 0.75em;">
+                    <div style="background: #fee2e2; padding: 0.8em; border-radius: 8px;">
+                        <h4 style="color: #dc2626; margin: 0 0 0.3em 0;"><i class="fas fa-times"></i> Desktop-First</h4>
+                        <pre style="font-size: 0.85em;"><code class="css">/* Desktop styles */
+.nav { display: flex; }
+
+/* Override for mobile */
+@media (max-width: 768px) {
+    .nav { display: block; }
+}</code></pre>
+                    </div>
+                    <div style="background: #dcfce7; padding: 0.8em; border-radius: 8px;">
+                        <h4 style="color: #16a34a; margin: 0 0 0.3em 0;"><i class="fas fa-check"></i> Mobile-First</h4>
+                        <pre style="font-size: 0.85em;"><code class="css">/* Mobile styles (default) */
+.nav { display: block; }
+
+/* Enhance for desktop */
+@media (min-width: 768px) {
+    .nav { display: flex; }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Animations -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-magic" style="color: #2563eb;"></i> Transitions & Animations</h2>
+                <p style="font-size: 0.85em;">Adding life to your interfaces</p>
+            </section>
+
+            <section>
+                <h2>CSS Transitions</h2>
+                <p style="font-size: 0.8em; color: #64748b;">Smooth changes between states</p>
+                <pre style="font-size: 0.5em;"><code class="css">.button {
+    background: #2563eb;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}</code></pre>
+                <div style="margin-top: 0.5em;">
+                    <span style="display: inline-block; background: #2563eb; color: white; padding: 0.6em 1.2em; border-radius: 8px; font-size: 0.85em; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">Hover Me</span>
+                </div>
+                <p style="font-size: 0.7em; color: #64748b; margin-top: 0.3em;"><code>transition: property duration timing-function</code></p>
+            </section>
+
+            <section>
+                <h2>CSS Animations</h2>
+                <p style="font-size: 0.8em; color: #64748b;">Multi-step animations with keyframes</p>
+                <pre style="font-size: 0.5em;"><code class="css">@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.animated {
+    animation: bounce 1s ease infinite;
+}</code></pre>
+                <div class="animation-demo" style="animation: none;" id="bounceBox"></div>
+                <p style="font-size: 0.7em; color: #64748b;"><code>animation: name duration timing iterations</code></p>
+            </section>
+
+            <!-- BEM -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-sitemap" style="color: #2563eb;"></i> BEM Methodology</h2>
+                <p style="font-size: 0.85em;">Organizing CSS at scale</p>
+            </section>
+
+            <section>
+                <h2>BEM: Block-Element-Modifier</h2>
+                <p style="font-size: 0.8em; color: #64748b;">A naming convention for maintainable CSS</p>
+                <div class="bem-example">
+                    <p><strong style="color: #2563eb;">Block</strong> — Standalone component: <code>.card</code></p>
+                    <p><strong style="color: #16a34a;">Element</strong> — Part of block: <code>.card__title</code></p>
+                    <p><strong style="color: #f59e0b;">Modifier</strong> — Variation: <code>.card--featured</code></p>
+                </div>
+                <pre style="font-size: 0.5em; margin-top: 0.5em;"><code class="css">/* BEM Example */
+.card { }
+.card__image { }
+.card__title { }
+.card__button { }
+.card--featured { border: 2px solid gold; }
+.card__button--disabled { opacity: 0.5; }</code></pre>
+            </section>
+
+            <section>
+                <h2>Why BEM?</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-eye" style="color: #2563eb;"></i>
+                        <h4>Self-Documenting</h4>
+                        <p>Class names explain structure</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt" style="color: #16a34a;"></i>
+                        <h4>No Conflicts</h4>
+                        <p>Unique, scoped names</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-puzzle-piece" style="color: #7c3aed;"></i>
+                        <h4>Reusable</h4>
+                        <p>Components work anywhere</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-users" style="color: #f59e0b;"></i>
+                        <h4>Team Friendly</h4>
+                        <p>Everyone follows same pattern</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CSS Limitations -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i> CSS Limitations</h2>
+                <p style="font-size: 0.85em;">Problems that made CSS hard to maintain at scale</p>
+            </section>
+
+            <section>
+                <h2>Traditional CSS Problems</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6em; font-size: 0.75em;">
+                    <div style="background: #fef2f2; padding: 0.6em; border-radius: 8px; border-left: 3px solid #dc2626;">
+                        <h4 style="color: #dc2626; margin: 0 0 0.3em 0; font-size: 0.95em;"><i class="fas fa-times-circle"></i> No Variables</h4>
+                        <p style="margin: 0;">Change brand color? Update 100+ places manually.</p>
+                    </div>
+                    <div style="background: #fef2f2; padding: 0.6em; border-radius: 8px; border-left: 3px solid #dc2626;">
+                        <h4 style="color: #dc2626; margin: 0 0 0.3em 0; font-size: 0.95em;"><i class="fas fa-times-circle"></i> No Nesting</h4>
+                        <p style="margin: 0;">Repeat parent selectors over and over.</p>
+                    </div>
+                    <div style="background: #fef2f2; padding: 0.6em; border-radius: 8px; border-left: 3px solid #dc2626;">
+                        <h4 style="color: #dc2626; margin: 0 0 0.3em 0; font-size: 0.95em;"><i class="fas fa-times-circle"></i> No Logic</h4>
+                        <p style="margin: 0;">No conditions, loops, or calculations.</p>
+                    </div>
+                    <div style="background: #fef2f2; padding: 0.6em; border-radius: 8px; border-left: 3px solid #dc2626;">
+                        <h4 style="color: #dc2626; margin: 0 0 0.3em 0; font-size: 0.95em;"><i class="fas fa-times-circle"></i> No Reusable Code</h4>
+                        <p style="margin: 0;">Copy-paste same patterns everywhere.</p>
+                    </div>
+                </div>
+                <pre style="font-size: 0.45em; margin-top: 0.5em;"><code class="css">/* Old CSS: Repetition everywhere */
+.btn-primary { background: #2563eb; color: white; padding: 10px 20px; }
+.btn-secondary { background: #64748b; color: white; padding: 10px 20px; }
+.header { background: #2563eb; }  /* Same color, no connection */</code></pre>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-magic" style="color: #16a34a;"></i> Modern CSS Solutions</h2>
+                <p style="font-size: 0.8em; color: #64748b;">CSS has evolved to address many limitations</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; font-size: 0.75em; margin-top: 0.5em;">
+                    <div style="background: #dcfce7; padding: 0.8em; border-radius: 8px;">
+                        <h4 style="color: #16a34a; margin: 0 0 0.3em 0;"><i class="fas fa-check-circle"></i> CSS Variables</h4>
+                        <pre style="font-size: 0.85em; margin: 0;"><code class="css">:root {
+  --primary: #2563eb;
+  --spacing: 1rem;
+}
+.btn { background: var(--primary); }</code></pre>
+                    </div>
+                    <div style="background: #dcfce7; padding: 0.8em; border-radius: 8px;">
+                        <h4 style="color: #16a34a; margin: 0 0 0.3em 0;"><i class="fas fa-check-circle"></i> calc() Function</h4>
+                        <pre style="font-size: 0.85em; margin: 0;"><code class="css">.sidebar {
+  width: calc(100% - 250px);
+  padding: calc(var(--spacing) * 2);
+}</code></pre>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 0.5em;">
+                    <p style="margin: 0; font-size: 0.75em;"><strong>CSS Variables</strong> are now supported in all modern browsers and can even be changed with JavaScript!</p>
+                </div>
+            </section>
+
+            <!-- Sass/SCSS -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fab fa-sass" style="color: #cf649a;"></i> Sass / SCSS</h2>
+                <p style="font-size: 0.85em;">CSS with superpowers — a preprocessor that compiles to CSS</p>
+            </section>
+
+            <section>
+                <h2>What is Sass?</h2>
+                <p style="font-size: 0.8em; color: #64748b;"><strong>Syntactically Awesome Style Sheets</strong> — extends CSS with programming features</p>
+                <div class="comparison-box" style="font-size: 0.7em; margin-top: 0.5em;">
+                    <div style="background: #fce7f3; padding: 0.8em; border-radius: 8px; text-align: left;">
+                        <h4 style="color: #be185d; margin: 0 0 0.3em 0;"><i class="fab fa-sass"></i> You Write (.scss)</h4>
+                        <pre style="font-size: 0.9em; margin: 0;"><code class="scss">$primary: #2563eb;
+
+.nav {
+  background: $primary;
+  a {
+    color: white;
+    &:hover { opacity: 0.8; }
+  }
+}</code></pre>
+                    </div>
+                    <div style="background: #dbeafe; padding: 0.8em; border-radius: 8px; text-align: left;">
+                        <h4 style="color: #2563eb; margin: 0 0 0.3em 0;"><i class="fab fa-css3-alt"></i> Compiles To (.css)</h4>
+                        <pre style="font-size: 0.9em; margin: 0;"><code class="css">.nav { background: #2563eb; }
+.nav a { color: white; }
+.nav a:hover { opacity: 0.8; }</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Key Sass Features</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr); gap: 0.5em;">
+                    <div class="feature-card" style="text-align: left; padding: 0.6em;">
+                        <h4 style="color: #be185d; margin: 0 0 0.3em 0; font-size: 0.85em;"><i class="fas fa-dollar-sign"></i> Variables</h4>
+                        <pre style="font-size: 0.7em; margin: 0;"><code class="scss">$font-size: 16px;
+$primary: #2563eb;</code></pre>
+                    </div>
+                    <div class="feature-card" style="text-align: left; padding: 0.6em;">
+                        <h4 style="color: #be185d; margin: 0 0 0.3em 0; font-size: 0.85em;"><i class="fas fa-indent"></i> Nesting</h4>
+                        <pre style="font-size: 0.7em; margin: 0;"><code class="scss">.card {
+  .title { font-size: 1.5em; }
+}</code></pre>
+                    </div>
+                    <div class="feature-card" style="text-align: left; padding: 0.6em;">
+                        <h4 style="color: #be185d; margin: 0 0 0.3em 0; font-size: 0.85em;"><i class="fas fa-blender"></i> Mixins</h4>
+                        <pre style="font-size: 0.7em; margin: 0;"><code class="scss">@mixin flex-center {
+  display: flex;
+  align-items: center;
+}</code></pre>
+                    </div>
+                    <div class="feature-card" style="text-align: left; padding: 0.6em;">
+                        <h4 style="color: #be185d; margin: 0 0 0.3em 0; font-size: 0.85em;"><i class="fas fa-file-import"></i> Partials</h4>
+                        <pre style="font-size: 0.7em; margin: 0;"><code class="scss">@import 'variables';
+@import 'buttons';</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>CSS vs Sass vs Modern CSS</h2>
+                <table style="font-size: 0.65em; width: 100%;">
+                    <tr>
+                        <th>Feature</th>
+                        <th>Old CSS</th>
+                        <th>Modern CSS</th>
+                        <th>Sass/SCSS</th>
+                    </tr>
+                    <tr>
+                        <td>Variables</td>
+                        <td style="color: #dc2626;"><i class="fas fa-times"></i></td>
+                        <td style="color: #16a34a;"><i class="fas fa-check"></i> var()</td>
+                        <td style="color: #16a34a;"><i class="fas fa-check"></i> $var</td>
+                    </tr>
+                    <tr>
+                        <td>Nesting</td>
+                        <td style="color: #dc2626;"><i class="fas fa-times"></i></td>
+                        <td style="color: #f59e0b;"><i class="fas fa-check"></i> New!</td>
+                        <td style="color: #16a34a;"><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Mixins</td>
+                        <td style="color: #dc2626;"><i class="fas fa-times"></i></td>
+                        <td style="color: #dc2626;"><i class="fas fa-times"></i></td>
+                        <td style="color: #16a34a;"><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Functions</td>
+                        <td style="color: #dc2626;"><i class="fas fa-times"></i></td>
+                        <td style="color: #f59e0b;">calc() only</td>
+                        <td style="color: #16a34a;"><i class="fas fa-check"></i> Full</td>
+                    </tr>
+                    <tr>
+                        <td>Needs Build</td>
+                        <td style="color: #16a34a;">No</td>
+                        <td style="color: #16a34a;">No</td>
+                        <td style="color: #f59e0b;">Yes</td>
+                    </tr>
+                </table>
+                <div class="thinking-card" style="margin-top: 0.5em;">
+                    <p style="margin: 0; font-size: 0.75em;"><strong>Recommendation:</strong> Start with CSS variables. Use Sass for larger projects with complex styling needs.</p>
+                </div>
+            </section>
+
+            <!-- Practical Exercise -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-laptop-code" style="color: #2563eb;"></i> Practical Exercise</h2>
+                <div style="margin: 1em auto; padding: 1em 1.5em; background: white; border-radius: 12px; border: 2px solid #e2e8f0; max-width: 600px;">
+                    <h3 style="margin: 0; color: #1e293b;">Build a Responsive Card Layout</h3>
+                </div>
+            </section>
+
+            <section>
+                <h2>Task Requirements</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; text-align: left; font-size: 0.8em;">
+                    <div>
+                        <h4 style="color: #2563eb;"><i class="fas fa-th-large"></i> Layout</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>3-column grid on desktop</li>
+                            <li>2-column on tablet</li>
+                            <li>1-column on mobile</li>
+                        </ul>
+                        <h4 style="color: #16a34a; margin-top: 0.8em;"><i class="fas fa-box"></i> Cards</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Image, title, description</li>
+                            <li>Hover effects</li>
+                            <li>BEM class names</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #7c3aed;"><i class="fas fa-paint-brush"></i> Styling</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Use CSS variables</li>
+                            <li>box-sizing: border-box</li>
+                            <li>Consistent spacing (rem)</li>
+                        </ul>
+                        <h4 style="color: #f59e0b; margin-top: 0.8em;"><i class="fas fa-magic"></i> Extras</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Smooth transitions</li>
+                            <li>Mobile-first approach</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2><i class="fas fa-clipboard-list" style="color: #2563eb;"></i> Summary</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-box" style="color: #f59e0b;"></i>
+                        <h4>Box Model</h4>
+                        <p>Spacing</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-arrows-alt-h" style="color: #16a34a;"></i>
+                        <h4>Flexbox</h4>
+                        <p>1D layouts</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-th" style="color: #7c3aed;"></i>
+                        <h4>Grid</h4>
+                        <p>2D layouts</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt" style="color: #0891b2;"></i>
+                        <h4>Responsive</h4>
+                        <p>All screens</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-magic" style="color: #2563eb;"></i>
+                        <h4>Animations</h4>
+                        <p>Transitions</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sitemap" style="color: #db2777;"></i>
+                        <h4>BEM</h4>
+                        <p>Naming</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sliders-h" style="color: #16a34a;"></i>
+                        <h4>CSS Variables</h4>
+                        <p>Reusable values</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-sass" style="color: #cf649a;"></i>
+                        <h4>Sass</h4>
+                        <p>CSS superpowers</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1em; padding: 0.8em; background: #eff6ff; border-radius: 10px; font-size: 0.85em;">
+                    <strong>Next Module:</strong> <i class="fab fa-js" style="color: #f7df1e;"></i> JavaScript — DOM, events, and interactivity
+                </p>
+            </section>
+
+            <!-- Questions -->
+            <section>
+                <h2><i class="fas fa-question-circle" style="color: #2563eb;"></i> Questions?</h2>
+                <p style="color: #64748b;">Module 3: CSS</p>
+                <div style="margin: 2em 0;">
+                    <i class="fas fa-comments" style="font-size: 4em; color: #e2e8f0;"></i>
+                </div>
+                <p style="color: #64748b; font-size: 0.9em;">Thank you!</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'slide',
+            plugins: [RevealHighlight]
+        });
+    </script>
+</body>
+</html>
