@@ -277,6 +277,34 @@
                 </p>
             </section>
 
+            <!-- What is HTML5 -->
+            <section>
+                <h2><i class="fab fa-html5" style="color: #E34F26;"></i> What is HTML5?</h2>
+                <p style="font-size: 0.85em; color: #64748b;">The latest major version of HTML (2014) — a living standard</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-top: 0.8em; font-size: 0.8em;">
+                    <div style="background: #fee2e2; border-radius: 10px; padding: 0.8em; text-align: left;">
+                        <h4 style="color: #991b1b; margin: 0 0 0.5em 0; font-size: 0.95em;"><i class="fas fa-history"></i> Old HTML (HTML4/XHTML)</h4>
+                        <ul style="margin: 0; font-size: 0.9em;">
+                            <li>Generic <code>&lt;div&gt;</code> for everything</li>
+                            <li>Plugins for video/audio (Flash)</li>
+                            <li>No offline storage</li>
+                            <li>Complex DOCTYPE</li>
+                            <li>Limited form inputs</li>
+                        </ul>
+                    </div>
+                    <div style="background: #dcfce7; border-radius: 10px; padding: 0.8em; text-align: left;">
+                        <h4 style="color: #166534; margin: 0 0 0.5em 0; font-size: 0.95em;"><i class="fas fa-rocket"></i> HTML5</h4>
+                        <ul style="margin: 0; font-size: 0.9em;">
+                            <li>Semantic elements (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>)</li>
+                            <li>Native <code>&lt;video&gt;</code> & <code>&lt;audio&gt;</code></li>
+                            <li>localStorage & sessionStorage</li>
+                            <li>Simple: <code>&lt;!DOCTYPE html&gt;</code></li>
+                            <li>date, email, range inputs</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
             <!-- Why HTML Matters -->
             <section>
                 <h2><i class="fas fa-lightbulb" style="color: #f59e0b;"></i> Why HTML Matters</h2>
@@ -436,10 +464,10 @@
 
             <section>
                 <h2><i class="fas fa-brain" style="color: #7c3aed;"></i> Thinking Exercise</h2>
-                <p>How would you structure this page?</p>
-                <div style="background: #f8fafc; border-radius: 12px; padding: 1.5em; text-align: left; font-size: 0.9em;">
-                    <p><strong>Blog Post Page:</strong></p>
-                    <ul>
+                <p style="font-size: 0.85em; margin-bottom: 0.3em;">How would you structure this page?</p>
+                <div style="background: #f8fafc; border-radius: 10px; padding: 0.8em 1em; text-align: left; font-size: 0.8em;">
+                    <p style="margin: 0 0 0.3em 0;"><strong>Blog Post Page:</strong></p>
+                    <ul style="margin: 0;">
                         <li>Site logo and main navigation</li>
                         <li>Blog post with title, date, author, content</li>
                         <li>Author bio sidebar</li>
@@ -447,8 +475,8 @@
                         <li>Copyright and social links</li>
                     </ul>
                 </div>
-                <div class="fragment thinking-card" style="margin-top: 1em;">
-                    <p><strong>Think:</strong> Which semantic element fits each part? Why?</p>
+                <div class="fragment thinking-card" style="margin-top: 0.5em; padding: 0.6em;">
+                    <p style="margin: 0; font-size: 0.85em;"><strong>Think:</strong> Which semantic element fits each part? Why?</p>
                 </div>
             </section>
 
@@ -638,14 +666,12 @@
 
             <section>
                 <h2>ARIA - Enhancing HTML</h2>
-                <p><strong>Accessible Rich Internet Applications</strong></p>
-                <pre><code class="html">&lt;!-- Role: what is this element? --&gt;
+                <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.5em;">Attributes that help assistive technologies (screen readers) understand your UI—doesn't change visual appearance</p>
+                <pre style="font-size: 0.5em;"><code class="html">&lt;!-- Role: what is this element? --&gt;
 &lt;div role="navigation"&gt;...&lt;/div&gt;
 
 &lt;!-- Label: what does it say? --&gt;
-&lt;button aria-label="Close menu"&gt;
-  &lt;i class="fa fa-times"&gt;&lt;/i&gt;
-&lt;/button&gt;
+&lt;button aria-label="Close menu"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/button&gt;
 
 &lt;!-- State: what's happening? --&gt;
 &lt;button aria-expanded="false"&gt;Menu&lt;/button&gt;
@@ -653,7 +679,7 @@
 &lt;!-- Description: more context --&gt;
 &lt;input aria-describedby="help-text"&gt;
 &lt;p id="help-text"&gt;Enter your email&lt;/p&gt;</code></pre>
-                <div class="fragment" style="margin-top: 1em; padding: 0.8em; background: #fef3c7; border-radius: 8px; font-size: 0.85em;">
+                <div class="fragment" style="margin-top: 0.5em; padding: 0.5em; background: #fef3c7; border-radius: 8px; font-size: 0.75em;">
                     <i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i> Use semantic HTML first—ARIA is for when HTML isn't enough
                 </div>
             </section>
