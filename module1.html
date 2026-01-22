@@ -516,6 +516,36 @@ Authorization: Bearer eyJhbGci...</code></pre>
             </section>
 
             <section>
+                <h2>GET vs POST: How Data is Sent</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; font-size: 0.85em;">
+                    <div style="background: #f0fdf4; border-radius: 10px; padding: 1em; text-align: left;">
+                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-download"></i> GET - Data in URL</h4>
+                        <pre style="font-size: 0.8em; margin: 0.5em 0; background: #1e293b; border-radius: 6px;"><code class="http" style="color: #e2e8f0;">GET /search?q=hello&page=1 HTTP/1.1
+Host: example.com</code></pre>
+                        <ul style="font-size: 0.85em; margin: 0.5em 0;">
+                            <li>Data visible in URL</li>
+                            <li>Can be bookmarked</li>
+                            <li>Limited length (~2048 chars)</li>
+                            <li>Use for: search, filters, navigation</li>
+                        </ul>
+                    </div>
+                    <div style="background: #eff6ff; border-radius: 10px; padding: 1em; text-align: left;">
+                        <h4 style="color: #2563eb; margin: 0 0 0.5em 0;"><i class="fas fa-upload"></i> POST - Data in Body</h4>
+                        <pre style="font-size: 0.8em; margin: 0.5em 0; background: #1e293b; border-radius: 6px;"><code class="http" style="color: #e2e8f0;">POST /login HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+
+username=ahmed&password=secret</code></pre>
+                        <ul style="font-size: 0.85em; margin: 0.5em 0;">
+                            <li>Data hidden in request body</li>
+                            <li>No size limit</li>
+                            <li>Use for: forms, passwords, file uploads</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
                 <h2>HTTP Status Codes</h2>
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5em;">
                     <div>

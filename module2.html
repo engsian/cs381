@@ -127,18 +127,18 @@
         }
         .limitation-card {
             background: #fef2f2;
-            border-left: 5px solid #dc2626;
-            padding: 1em;
-            border-radius: 0 12px 12px 0;
-            margin: 0.5em 0;
+            border-left: 4px solid #dc2626;
+            padding: 0.5em 0.8em;
+            border-radius: 0 8px 8px 0;
+            margin: 0.3em 0;
             text-align: left;
         }
         .solution-card {
             background: #f0fdf4;
-            border-left: 5px solid #16a34a;
-            padding: 1em;
-            border-radius: 0 12px 12px 0;
-            margin: 0.5em 0;
+            border-left: 4px solid #16a34a;
+            padding: 0.5em 0.8em;
+            border-radius: 0 8px 8px 0;
+            margin: 0.3em 0;
             text-align: left;
         }
         .form-anatomy {
@@ -660,25 +660,25 @@
 
             <section>
                 <h2>Quick Accessibility Wins</h2>
-                <div style="text-align: left; max-width: 700px; margin: 0 auto;">
-                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
-                        <span style="background: #2563eb; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">1</span>
+                <div style="text-align: left; max-width: 700px; margin: 0 auto; font-size: 0.9em;">
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.35em 0; padding: 0.4em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #2563eb; color: white; width: 1.6em; height: 1.6em; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85em;">1</span>
                         Add <code>alt</code> text to all images
                     </div>
-                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
-                        <span style="background: #7c3aed; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">2</span>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.35em 0; padding: 0.4em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #7c3aed; color: white; width: 1.6em; height: 1.6em; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85em;">2</span>
                         Use proper heading hierarchy (h1 → h2 → h3)
                     </div>
-                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
-                        <span style="background: #db2777; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">3</span>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.35em 0; padding: 0.4em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #db2777; color: white; width: 1.6em; height: 1.6em; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85em;">3</span>
                         Always associate <code>&lt;label&gt;</code> with inputs
                     </div>
-                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
-                        <span style="background: #f59e0b; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">4</span>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.35em 0; padding: 0.4em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #f59e0b; color: white; width: 1.6em; height: 1.6em; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85em;">4</span>
                         Ensure sufficient color contrast
                     </div>
-                    <div class="fragment" style="display: flex; align-items: center; gap: 1em; margin: 0.6em 0; padding: 0.6em; background: #f8fafc; border-radius: 8px;">
-                        <span style="background: #16a34a; color: white; width: 2em; height: 2em; display: flex; align-items: center; justify-content: center; border-radius: 50%;">5</span>
+                    <div class="fragment" style="display: flex; align-items: center; gap: 0.8em; margin: 0.35em 0; padding: 0.4em; background: #f8fafc; border-radius: 6px;">
+                        <span style="background: #16a34a; color: white; width: 1.6em; height: 1.6em; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85em;">5</span>
                         Make all functionality keyboard accessible
                     </div>
                 </div>
@@ -758,20 +758,20 @@ sessionStorage.setItem('cartItems', '5');</code></pre>
             <section>
                 <h2>The Problem with Plain HTML</h2>
                 <div class="limitation-card fragment">
-                    <h4 style="color: #dc2626; margin: 0 0 0.5em 0;"><i class="fas fa-times-circle"></i> Repetition</h4>
-                    <p style="margin: 0; font-size: 0.9em;">Same header/footer on 50 pages? Copy-paste nightmare.</p>
+                    <h4 style="color: #dc2626; margin: 0 0 0.3em 0; font-size: 0.9em;"><i class="fas fa-times-circle"></i> Repetition</h4>
+                    <p style="margin: 0; font-size: 0.75em;">Same header/footer on 50 pages? Copy-paste nightmare.</p>
                 </div>
                 <div class="limitation-card fragment">
-                    <h4 style="color: #dc2626; margin: 0 0 0.5em 0;"><i class="fas fa-times-circle"></i> No Variables</h4>
-                    <p style="margin: 0; font-size: 0.9em;">Can't say "Hello, {username}" - HTML is static text.</p>
+                    <h4 style="color: #dc2626; margin: 0 0 0.3em 0; font-size: 0.9em;"><i class="fas fa-times-circle"></i> No Variables</h4>
+                    <p style="margin: 0; font-size: 0.75em;">Can't say "Hello, {username}" - HTML is static text.</p>
                 </div>
                 <div class="limitation-card fragment">
-                    <h4 style="color: #dc2626; margin: 0 0 0.5em 0;"><i class="fas fa-times-circle"></i> No Logic</h4>
-                    <p style="margin: 0; font-size: 0.9em;">Can't show/hide content based on conditions.</p>
+                    <h4 style="color: #dc2626; margin: 0 0 0.3em 0; font-size: 0.9em;"><i class="fas fa-times-circle"></i> No Logic</h4>
+                    <p style="margin: 0; font-size: 0.75em;">Can't show/hide content based on conditions.</p>
                 </div>
                 <div class="limitation-card fragment">
-                    <h4 style="color: #dc2626; margin: 0 0 0.5em 0;"><i class="fas fa-times-circle"></i> No Loops</h4>
-                    <p style="margin: 0; font-size: 0.9em;">100 products? Write 100 &lt;div&gt;s manually.</p>
+                    <h4 style="color: #dc2626; margin: 0 0 0.3em 0; font-size: 0.9em;"><i class="fas fa-times-circle"></i> No Loops</h4>
+                    <p style="margin: 0; font-size: 0.75em;">100 products? Write 100 &lt;div&gt;s manually.</p>
                 </div>
             </section>
 
@@ -852,26 +852,26 @@ document.body.appendChild(clone);
 
             <section>
                 <h2>Why Templating Matters</h2>
-                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr); gap: 0.5em;">
                     <div class="solution-card">
-                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-check-circle"></i> DRY Principle</h4>
-                        <p style="margin: 0; font-size: 0.85em;"><strong>D</strong>on't <strong>R</strong>epeat <strong>Y</strong>ourself - write once, use everywhere</p>
+                        <h4 style="color: #16a34a; margin: 0 0 0.3em 0; font-size: 0.85em;"><i class="fas fa-check-circle"></i> DRY Principle</h4>
+                        <p style="margin: 0; font-size: 0.7em;"><strong>D</strong>on't <strong>R</strong>epeat <strong>Y</strong>ourself - write once, use everywhere</p>
                     </div>
                     <div class="solution-card">
-                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-check-circle"></i> Maintainability</h4>
-                        <p style="margin: 0; font-size: 0.85em;">One change updates all instances</p>
+                        <h4 style="color: #16a34a; margin: 0 0 0.3em 0; font-size: 0.85em;"><i class="fas fa-check-circle"></i> Maintainability</h4>
+                        <p style="margin: 0; font-size: 0.7em;">One change updates all instances</p>
                     </div>
                     <div class="solution-card">
-                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-check-circle"></i> Dynamic Content</h4>
-                        <p style="margin: 0; font-size: 0.85em;">Display data from databases/APIs</p>
+                        <h4 style="color: #16a34a; margin: 0 0 0.3em 0; font-size: 0.85em;"><i class="fas fa-check-circle"></i> Dynamic Content</h4>
+                        <p style="margin: 0; font-size: 0.7em;">Display data from databases/APIs</p>
                     </div>
                     <div class="solution-card">
-                        <h4 style="color: #16a34a; margin: 0 0 0.5em 0;"><i class="fas fa-check-circle"></i> Consistency</h4>
-                        <p style="margin: 0; font-size: 0.85em;">Guaranteed uniform structure</p>
+                        <h4 style="color: #16a34a; margin: 0 0 0.3em 0; font-size: 0.85em;"><i class="fas fa-check-circle"></i> Consistency</h4>
+                        <p style="margin: 0; font-size: 0.7em;">Guaranteed uniform structure</p>
                     </div>
                 </div>
-                <div class="fragment thinking-card" style="margin-top: 1em;">
-                    <p><strong>Coming in Module 5:</strong> PHP templating for server-side dynamic pages</p>
+                <div class="fragment thinking-card" style="margin-top: 0.5em; padding: 0.8em;">
+                    <p style="margin: 0; font-size: 0.85em;"><strong>Coming in Module 5:</strong> PHP templating for server-side dynamic pages</p>
                 </div>
             </section>
 

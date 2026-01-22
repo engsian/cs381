@@ -102,6 +102,32 @@
     border: none;
 }
 
+/* Fix highlight.js colors for dark backgrounds */
+.reveal pre code .hljs-string,
+.hljs-string {
+    color: #a5d6ff !important;
+}
+
+.reveal pre code .hljs-keyword,
+.hljs-keyword {
+    color: #ff7b72 !important;
+}
+
+.reveal pre code .hljs-attribute,
+.hljs-attribute {
+    color: #7ee787 !important;
+}
+
+.reveal pre code .hljs-meta,
+.hljs-meta {
+    color: #d2a8ff !important;
+}
+
+.reveal pre code .hljs-punctuation,
+.hljs-punctuation {
+    color: #e2e8f0 !important;
+}
+
 /* Highlighted/emphasized text */
 .reveal strong, .reveal b {
     color: var(--primary);
