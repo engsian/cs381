@@ -119,77 +119,6 @@
             font-size: 1.8rem;
         }
 
-        /* Progress Section */
-        .progress-section {
-            background: white;
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .progress-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .progress-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .progress-info h3 {
-            font-size: 1rem;
-            color: var(--text);
-        }
-
-        .progress-bar {
-            width: 200px;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 43%;
-            height: 100%;
-            background: linear-gradient(90deg, #2563eb, #7c3aed);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-        }
-
-        .progress-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .progress-stats {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
         /* Main Content */
         .container {
             max-width: 1200px;
@@ -430,11 +359,6 @@
                 font-size: 2rem;
             }
 
-            .progress-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
             .modules {
                 grid-template-columns: 1fr;
             }
@@ -486,29 +410,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Progress Section -->
-    <section class="progress-section">
-        <div class="progress-container">
-            <div class="progress-info">
-                <h3><i class="fas fa-chart-line" style="color: var(--primary); margin-right: 0.5rem;"></i> Course Progress</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-                <span class="progress-text">3 of 7 modules</span>
-            </div>
-            <div class="progress-stats">
-                <div class="stat">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Available</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">Coming Soon</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Main Content -->
     <main class="container">
@@ -581,7 +482,7 @@
                 </div>
             </a>
 
-            <div class="module-card disabled">
+            <a href="module4.html" class="module-card">
                 <div class="module-header">
                     <div class="module-icon">
                         <i class="fab fa-js"></i>
@@ -598,11 +499,11 @@
                         <span class="topic-tag">Events</span>
                         <span class="topic-tag">ES6+</span>
                     </div>
-                    <span class="badge coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                    <span class="badge"><i class="fas fa-check-circle"></i> Available</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="module-card disabled">
+            <a href="module5.html" class="module-card">
                 <div class="module-header">
                     <div class="module-icon">
                         <i class="fab fa-php"></i>
@@ -619,11 +520,11 @@
                         <span class="topic-tag">Sessions</span>
                         <span class="topic-tag">Forms</span>
                     </div>
-                    <span class="badge coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                    <span class="badge"><i class="fas fa-check-circle"></i> Available</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="module-card disabled">
+            <a href="module6.html" class="module-card">
                 <div class="module-header">
                     <div class="module-icon">
                         <i class="fas fa-database"></i>
@@ -640,11 +541,11 @@
                         <span class="topic-tag">PDO</span>
                         <span class="topic-tag">SQL</span>
                     </div>
-                    <span class="badge coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                    <span class="badge"><i class="fas fa-check-circle"></i> Available</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="module-card disabled">
+            <a href="module7.html" class="module-card">
                 <div class="module-header">
                     <div class="module-icon">
                         <i class="fas fa-shield-alt"></i>
@@ -661,9 +562,9 @@
                         <span class="topic-tag">OWASP</span>
                         <span class="topic-tag">Security</span>
                     </div>
-                    <span class="badge coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                    <span class="badge"><i class="fas fa-check-circle"></i> Available</span>
                 </div>
-            </div>
+            </a>
         </section>
 
         <div class="keyboard-hint">
@@ -680,7 +581,6 @@
             <a href="https://revealjs.com" target="_blank"><i class="fas fa-presentation"></i> Built with reveal.js</a>
         </div>
         <p>Yanbu Industrial College - Royal Commission Yanbu Colleges and Institutes</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">Second Semester 2024-2025</p>
     </footer>
 </body>
 </html>

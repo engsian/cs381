@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6: MySQL Database and PHP Integration - CS381</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css">
+
+    <!-- Highlight.js for code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Theme Override -->
+    <link rel="stylesheet" href="css/theme.css">
+
+    <style>
+        .home-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        .home-nav a {
+            background: #f8fafc;
+            color: #64748b;
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .home-nav a:hover {
+            background: #f59e0b;
+            color: white;
+            border-color: #f59e0b;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6em;
+            margin: 0.5em 0;
+        }
+        .feature-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: center;
+        }
+        .feature-card i {
+            font-size: 1.5em;
+            color: #f59e0b;
+            margin-bottom: 0.3em;
+            display: block;
+        }
+        .feature-card h4 {
+            margin: 0.3em 0;
+            font-size: 0.8em;
+        }
+        .feature-card p {
+            font-size: 0.65em;
+            color: #64748b;
+            margin: 0;
+        }
+        .thinking-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 0.8em;
+            border-radius: 0 10px 10px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .thinking-card p {
+            margin: 0;
+            font-size: 0.85em;
+        }
+        .console-output {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 0.8em;
+            border-radius: 8px;
+            font-family: monospace;
+            text-align: left;
+            font-size: 0.75em;
+            margin: 0.5em 0;
+        }
+        .warning-card {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 0.8em;
+            border-radius: 0 10px 10px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .warning-card p {
+            margin: 0;
+            font-size: 0.85em;
+        }
+        .success-card {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 0.8em;
+            border-radius: 0 10px 10px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .success-card p {
+            margin: 0;
+            font-size: 0.85em;
+        }
+        .sql-keyword {
+            color: #2563eb;
+            font-weight: bold;
+        }
+        .table-diagram {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.7em;
+        }
+        .table-diagram th {
+            background: #f59e0b;
+            color: white;
+            padding: 0.5em;
+        }
+        .table-diagram td {
+            padding: 0.4em 0.6em;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .crud-box {
+            display: inline-block;
+            padding: 0.3em 0.8em;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .crud-c { background: #dcfce7; color: #166534; }
+        .crud-r { background: #dbeafe; color: #1e40af; }
+        .crud-u { background: #fef3c7; color: #92400e; }
+        .crud-d { background: #fef2f2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <!-- Home Navigation -->
+    <div class="home-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title Slide -->
+            <section data-background-color="#f8fafc">
+                <h1 style="color: #f59e0b;">Module 6</h1>
+                <h2>MySQL Database & PHP Integration</h2>
+                <p style="color: #64748b;">Building Data-Driven Web Applications</p>
+                <p style="font-size: 0.5em; margin-top: 2em; color: #94a3b8;">CS381 - Web Application Development</p>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section>
+                <h2>Learning Objectives</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-database"></i>
+                        <h4>Database Concepts</h4>
+                        <p>Tables, columns, rows, keys</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-code"></i>
+                        <h4>SQL Fundamentals</h4>
+                        <p>SELECT, INSERT, UPDATE, DELETE</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-plug"></i>
+                        <h4>PHP + MySQL</h4>
+                        <p>PDO connection and queries</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Prepared Statements</h4>
+                        <p>Secure database operations</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sync-alt"></i>
+                        <h4>CRUD Operations</h4>
+                        <p>Create, Read, Update, Delete</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-project-diagram"></i>
+                        <h4>Complete Application</h4>
+                        <p>Build a full CRUD system</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Introduction to Databases -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-database" style="color: #f59e0b;"></i> Introduction to Databases</h2>
+                <p style="font-size: 0.85em;">Why we need databases</p>
+            </section>
+
+            <section>
+                <h2>Why Use a Database?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em;">
+                    <div style="background: #fef2f2; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #dc2626;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #dc2626;"><i class="fas fa-file"></i> Without Database</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Data stored in files (txt, JSON)</li>
+                            <li>Hard to search and filter</li>
+                            <li>No relationships between data</li>
+                            <li>Difficult to handle concurrent users</li>
+                            <li>No data integrity protection</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #22c55e;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;"><i class="fas fa-database"></i> With Database</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Structured data storage</li>
+                            <li>Fast queries with SQL</li>
+                            <li>Define relationships between tables</li>
+                            <li>Handle thousands of concurrent users</li>
+                            <li>Data validation and constraints</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.75em;"><strong>Real world:</strong> Imagine storing 1 million user records in a text file vs. a database. Which would be faster to search?</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>What is MySQL?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em; margin-bottom: 1rem;">
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-info-circle"></i> About MySQL</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Open-source relational database</li>
+                            <li>Developed by Oracle Corporation</li>
+                            <li>Most popular database for web</li>
+                            <li>Uses SQL (Structured Query Language)</li>
+                            <li>Cross-platform (Windows, Linux, Mac)</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-building"></i> Who Uses MySQL?</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Facebook</li>
+                            <li>Twitter / X</li>
+                            <li>YouTube</li>
+                            <li>WordPress (powers 40%+ of web)</li>
+                            <li>Netflix</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thinking-card">
+                    <p style="font-size: 0.75em;"><strong>Fun fact:</strong> MySQL is named after co-founder Michael Widenius's daughter, My. MariaDB (a fork) is named after his other daughter!</p>
+                </div>
+            </section>
+
+            <!-- Working with MySQL -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-terminal" style="color: #f59e0b;"></i> Working with MySQL</h2>
+                <p style="font-size: 0.85em;">CLI and GUI tools</p>
+            </section>
+
+            <section>
+                <h2>MySQL Command Line (CLI)</h2>
+                <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.75rem;">Direct access to MySQL via terminal</p>
+                <pre style="font-size: 0.45em;"><code class="bash"># Connect to MySQL (Laragon default: no password)
+mysql -u root -p
+
+# Connect with password inline (not recommended for security)
+mysql -u root -pYourPassword
+
+# Connect to specific database
+mysql -u root -p mydatabase
+
+# Execute SQL file
+mysql -u root -p mydatabase < script.sql</code></pre>
+                <pre style="font-size: 0.45em;"><code class="sql">-- Once connected, common commands:
+SHOW DATABASES;              -- List all databases
+USE database_name;           -- Select a database
+SHOW TABLES;                 -- List tables in current database
+DESCRIBE table_name;         -- Show table structure
+EXIT;                        -- Quit MySQL CLI</code></pre>
+            </section>
+
+            <section>
+                <h2>MySQL CLI - Database Operations</h2>
+                <pre style="font-size: 0.48em;"><code class="sql">-- Create a new database
+CREATE DATABASE cs381_db;
+
+-- Create database with character set (recommended)
+CREATE DATABASE cs381_db
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+-- Delete a database (CAREFUL!)
+DROP DATABASE cs381_db;
+
+-- Show current database
+SELECT DATABASE();
+
+-- Show all users
+SELECT user, host FROM mysql.user;
+
+-- Create a new user
+CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'password123';
+
+-- Grant privileges
+GRANT ALL PRIVILEGES ON cs381_db.* TO 'myuser'@'localhost';
+FLUSH PRIVILEGES;</code></pre>
+            </section>
+
+            <section>
+                <h2>Accessing MySQL CLI in Laragon</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em; margin-bottom: 1rem;">
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-mouse-pointer"></i> Method 1: Menu</h4>
+                        <ol style="margin: 0; line-height: 1.8;">
+                            <li>Right-click Laragon tray icon</li>
+                            <li>Select <strong>MySQL</strong></li>
+                            <li>Click <strong>MySQL prompt</strong></li>
+                        </ol>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-terminal"></i> Method 2: Terminal</h4>
+                        <ol style="margin: 0; line-height: 1.8;">
+                            <li>Right-click Laragon tray icon</li>
+                            <li>Select <strong>Terminal</strong></li>
+                            <li>Type: <code>mysql -u root</code></li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="thinking-card">
+                    <p style="font-size: 0.75em;"><strong>Laragon default:</strong> Username is <code>root</code> with no password. Just press Enter when prompted for password.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>phpMyAdmin - GUI Tool</h2>
+                <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.75rem;">Web-based MySQL administration tool</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em;">
+                    <div style="background: #dcfce7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #22c55e;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;"><i class="fas fa-check-circle"></i> Advantages</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Visual interface - no SQL needed</li>
+                            <li>Easy table creation with forms</li>
+                            <li>Browse/edit data in tables</li>
+                            <li>Import/export databases</li>
+                            <li>Run SQL queries with results</li>
+                        </ul>
+                    </div>
+                    <div style="background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #92400e;"><i class="fas fa-info-circle"></i> Best For</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Learning SQL visually</li>
+                            <li>Quick database setup</li>
+                            <li>Debugging data issues</li>
+                            <li>Importing sample data</li>
+                            <li>Exporting backups</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Accessing phpMyAdmin</h2>
+                <div style="font-size: 0.65em; margin-bottom: 1rem;">
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #f59e0b;"><i class="fas fa-globe"></i> In Laragon</h4>
+                        <p style="margin: 0;">Right-click tray → <strong>MySQL</strong> → <strong>phpMyAdmin</strong><br>
+                        Or visit: <code>http://localhost/phpmyadmin</code></p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #f59e0b;"><i class="fas fa-sign-in-alt"></i> Login Credentials</h4>
+                        <p style="margin: 0;">Username: <code>root</code> &nbsp;|&nbsp; Password: <em>(leave empty)</em></p>
+                    </div>
+                </div>
+                <div style="background: #1e293b; color: #e2e8f0; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.7em;">
+                    <i class="fas fa-lightbulb" style="color: #fbbf24;"></i>
+                    <strong>Tip:</strong> phpMyAdmin shows the SQL it generates — great for learning!
+                </div>
+            </section>
+
+            <section>
+                <h2>phpMyAdmin - Key Features</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; font-size: 0.55em;">
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-database" style="font-size: 1.5em; color: #f59e0b; display: block; margin-bottom: 0.3rem;"></i>
+                        <strong>Databases</strong><br>
+                        <span style="color: #64748b;">Create, drop, select</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-table" style="font-size: 1.5em; color: #f59e0b; display: block; margin-bottom: 0.3rem;"></i>
+                        <strong>Tables</strong><br>
+                        <span style="color: #64748b;">Create, modify structure</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-search" style="font-size: 1.5em; color: #f59e0b; display: block; margin-bottom: 0.3rem;"></i>
+                        <strong>Browse</strong><br>
+                        <span style="color: #64748b;">View and edit rows</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-code" style="font-size: 1.5em; color: #f59e0b; display: block; margin-bottom: 0.3rem;"></i>
+                        <strong>SQL Tab</strong><br>
+                        <span style="color: #64748b;">Run custom queries</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-file-export" style="font-size: 1.5em; color: #f59e0b; display: block; margin-bottom: 0.3rem;"></i>
+                        <strong>Export</strong><br>
+                        <span style="color: #64748b;">Backup to SQL file</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-file-import" style="font-size: 1.5em; color: #f59e0b; display: block; margin-bottom: 0.3rem;"></i>
+                        <strong>Import</strong><br>
+                        <span style="color: #64748b;">Load SQL files</span>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 0.75rem;">
+                    <p style="font-size: 0.7em;"><strong>Workflow tip:</strong> Design tables in phpMyAdmin, then copy the generated SQL to your project's setup script!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>CLI vs phpMyAdmin</h2>
+                <div style="font-size: 0.6em;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #f8fafc;">
+                                <th style="padding: 0.5rem; border: 1px solid #e2e8f0;">Task</th>
+                                <th style="padding: 0.5rem; border: 1px solid #e2e8f0;"><i class="fas fa-terminal"></i> CLI</th>
+                                <th style="padding: 0.5rem; border: 1px solid #e2e8f0;"><i class="fas fa-window-maximize"></i> phpMyAdmin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Quick query</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0; color: #22c55e;">Faster</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Good</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Design tables</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Manual SQL</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0; color: #22c55e;">Visual forms</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Browse data</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Text output</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0; color: #22c55e;">Table view</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Import/Export</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0; color: #22c55e;">Large files</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Easy but limited</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Automation</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0; color: #22c55e;">Scriptable</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Manual only</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Learning SQL</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Write it yourself</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0; color: #22c55e;">Shows generated SQL</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="thinking-card" style="margin-top: 0.75rem;">
+                    <p style="font-size: 0.7em;"><strong>Recommendation:</strong> Use phpMyAdmin for learning and quick tasks. Learn CLI for scripting and production servers.</p>
+                </div>
+            </section>
+
+            <!-- Database Structure -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-table" style="color: #f59e0b;"></i> Database Structure</h2>
+                <p style="font-size: 0.85em;">Tables, columns, and rows</p>
+            </section>
+
+            <section>
+                <h2>Database Components</h2>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.55em; margin-bottom: 1rem;">
+                    <div style="background: #dbeafe; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-server" style="font-size: 1.5em; color: #2563eb;"></i><br>
+                        <strong>Database</strong><br>
+                        Container for tables
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #fef3c7; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-table" style="font-size: 1.5em; color: #f59e0b;"></i><br>
+                        <strong>Table</strong><br>
+                        Collection of data
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #dcfce7; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-columns" style="font-size: 1.5em; color: #22c55e;"></i><br>
+                        <strong>Column</strong><br>
+                        Field / attribute
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #f3e8ff; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-grip-lines" style="font-size: 1.5em; color: #8b5cf6;"></i><br>
+                        <strong>Row</strong><br>
+                        Record / entry
+                    </div>
+                </div>
+                <table class="table-diagram" style="width: 100%; margin-top: 0.5rem;">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>created_at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Ahmed Ali</td>
+                            <td>ahmed@example.com</td>
+                            <td>2024-01-15</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Sara Khan</td>
+                            <td>sara@example.com</td>
+                            <td>2024-01-16</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Omar Hassan</td>
+                            <td>omar@example.com</td>
+                            <td>2024-01-17</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Primary Keys & Data Types</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em;">
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-key"></i> Primary Key</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Uniquely identifies each row</li>
+                            <li>Cannot be NULL</li>
+                            <li>Cannot have duplicates</li>
+                            <li>Usually auto-incremented (id)</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-list"></i> Common Data Types</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li><code>INT</code> - Integer numbers</li>
+                            <li><code>VARCHAR(n)</code> - Variable text</li>
+                            <li><code>TEXT</code> - Long text</li>
+                            <li><code>DATE</code> / <code>DATETIME</code></li>
+                            <li><code>DECIMAL(p,s)</code> - Precise numbers</li>
+                        </ul>
+                    </div>
+                </div>
+                <pre style="font-size: 0.45em; margin-top: 1rem;"><code class="sql">CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    balance DECIMAL(10, 2) DEFAULT 0.00,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+            </section>
+
+            <!-- SQL Fundamentals -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-code" style="color: #f59e0b;"></i> SQL Fundamentals</h2>
+                <p style="font-size: 0.85em;">Structured Query Language</p>
+            </section>
+
+            <section>
+                <h2>What is SQL?</h2>
+                <p style="font-size: 0.8em; color: #64748b; margin-bottom: 1rem;"><strong>S</strong>tructured <strong>Q</strong>uery <strong>L</strong>anguage — the standard language for databases</p>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; font-size: 0.6em; margin-bottom: 1rem;">
+                    <div class="crud-box crud-c"><i class="fas fa-plus"></i> CREATE</div>
+                    <div class="crud-box crud-r"><i class="fas fa-search"></i> READ</div>
+                    <div class="crud-box crud-u"><i class="fas fa-edit"></i> UPDATE</div>
+                    <div class="crud-box crud-d"><i class="fas fa-trash"></i> DELETE</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.55em;">
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code class="sql-keyword">SELECT</code> - Read data
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code class="sql-keyword">INSERT</code> - Add new records
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code class="sql-keyword">UPDATE</code> - Modify records
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code class="sql-keyword">DELETE</code> - Remove records
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code class="sql-keyword">CREATE TABLE</code> - Make new table
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code class="sql-keyword">DROP TABLE</code> - Delete table
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 0.75rem;">
+                    <p style="font-size: 0.7em;"><strong>Note:</strong> SQL keywords are case-insensitive (<code>SELECT</code> = <code>select</code>), but UPPERCASE is the convention.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>SELECT - Reading Data</h2>
+                <pre style="font-size: 0.48em;"><code class="sql">-- Select all columns from a table
+SELECT * FROM users;
+
+-- Select specific columns
+SELECT name, email FROM users;
+
+-- Filter with WHERE clause
+SELECT * FROM users WHERE id = 1;
+SELECT * FROM users WHERE name = 'Ahmed';
+
+-- Multiple conditions
+SELECT * FROM users WHERE age >= 18 AND status = 'active';
+SELECT * FROM users WHERE country = 'SA' OR country = 'AE';
+
+-- Pattern matching with LIKE
+SELECT * FROM users WHERE email LIKE '%@gmail.com';
+SELECT * FROM users WHERE name LIKE 'A%';  -- Starts with A
+
+-- Sorting results
+SELECT * FROM users ORDER BY name ASC;      -- A to Z
+SELECT * FROM users ORDER BY created_at DESC;  -- Newest first
+
+-- Limit results
+SELECT * FROM users LIMIT 10;              -- First 10
+SELECT * FROM users LIMIT 10 OFFSET 20;    -- Skip 20, get 10</code></pre>
+            </section>
+
+            <section>
+                <h2>INSERT - Adding Data</h2>
+                <pre style="font-size: 0.5em;"><code class="sql">-- Insert a single record
+INSERT INTO users (name, email)
+VALUES ('Ahmed Ali', 'ahmed@example.com');
+
+-- Insert with all columns specified
+INSERT INTO users (name, email, age, status)
+VALUES ('Sara Khan', 'sara@example.com', 25, 'active');
+
+-- Insert multiple records at once
+INSERT INTO users (name, email) VALUES
+    ('Omar Hassan', 'omar@example.com'),
+    ('Fatima Ali', 'fatima@example.com'),
+    ('Khalid Ahmed', 'khalid@example.com');</code></pre>
+                <div class="thinking-card">
+                    <p style="font-size: 0.75em;"><strong>Note:</strong> You don't need to specify <code>id</code> if it's AUTO_INCREMENT — MySQL generates it automatically!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>UPDATE - Modifying Data</h2>
+                <pre style="font-size: 0.5em;"><code class="sql">-- Update a specific record
+UPDATE users SET email = 'new@example.com' WHERE id = 1;
+
+-- Update multiple columns
+UPDATE users
+SET name = 'Ahmed Mohammed', age = 26
+WHERE id = 1;
+
+-- Update multiple records
+UPDATE users SET status = 'inactive' WHERE last_login < '2024-01-01';
+
+-- Increment a value
+UPDATE products SET stock = stock - 1 WHERE id = 5;</code></pre>
+                <div class="warning-card">
+                    <p style="font-size: 0.75em;"><strong><i class="fas fa-exclamation-triangle"></i> Warning:</strong> Always use <code>WHERE</code> clause! Without it, ALL rows will be updated!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>DELETE - Removing Data</h2>
+                <pre style="font-size: 0.5em;"><code class="sql">-- Delete a specific record
+DELETE FROM users WHERE id = 1;
+
+-- Delete with condition
+DELETE FROM users WHERE status = 'inactive';
+
+-- Delete old records
+DELETE FROM logs WHERE created_at < '2023-01-01';
+
+-- Delete ALL records (be careful!)
+DELETE FROM users;  -- Removes all data, keeps table structure
+
+-- Drop entire table (removes table completely)
+DROP TABLE users;</code></pre>
+                <div class="warning-card">
+                    <p style="font-size: 0.75em;"><strong><i class="fas fa-exclamation-triangle"></i> Danger:</strong> <code>DELETE</code> without <code>WHERE</code> removes ALL data! Always double-check before running.</p>
+                </div>
+            </section>
+
+            <!-- PHP + MySQL Connection -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-plug" style="color: #f59e0b;"></i> Connecting PHP to MySQL</h2>
+                <p style="font-size: 0.85em;">PDO - PHP Data Objects</p>
+            </section>
+
+            <section>
+                <h2>MySQLi vs PDO</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em;">
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #64748b;"><i class="fas fa-database"></i> MySQLi</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>MySQL only</li>
+                            <li>Procedural & OOP styles</li>
+                            <li>Good for MySQL-specific features</li>
+                        </ul>
+                    </div>
+                    <div style="background: #dcfce7; padding: 1rem; border-radius: 0.5rem; border: 2px solid #22c55e;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;"><i class="fas fa-star"></i> PDO (Recommended)</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Works with 12+ databases</li>
+                            <li>Consistent API</li>
+                            <li>Named placeholders</li>
+                            <li>Better error handling</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.75em;"><strong>We'll use PDO</strong> — it's more flexible and follows modern PHP best practices. If you ever switch to PostgreSQL or SQLite, your code works with minimal changes!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>PDO Connection</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+// Database configuration
+$host = 'localhost';
+$dbname = 'cs381_db';
+$username = 'root';
+$password = '';  // Empty for Laragon default
+
+// Create PDO connection
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+        $username,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,  // Throw exceptions
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,  // Return arrays
+            PDO::ATTR_EMULATE_PREPARES => false  // Real prepared statements
+        ]
+    );
+    echo "Connected successfully!";
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Reusable Database Class</h2>
+                <pre style="font-size: 0.45em;"><code class="php">&lt;?php
+// db.php - Include this file in your pages
+
+$host = 'localhost';
+$dbname = 'cs381_db';
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+        $username,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false
+        ]
+    );
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
+// Usage in other files:
+// require_once 'db.php';
+// Now $pdo is available!
+?&gt;</code></pre>
+                <div class="thinking-card">
+                    <p style="font-size: 0.75em;"><strong>Best practice:</strong> Keep database credentials in a separate file and use <code>require_once</code> to include it.</p>
+                </div>
+            </section>
+
+            <!-- CRUD with PDO -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-sync-alt" style="color: #f59e0b;"></i> CRUD Operations with PDO</h2>
+                <p style="font-size: 0.85em;">Create, Read, Update, Delete</p>
+            </section>
+
+            <section>
+                <h2>CREATE - Insert Data</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+require_once 'db.php';
+
+// Method 1: Direct query (NOT recommended for user input!)
+$pdo->exec("INSERT INTO users (name, email) VALUES ('Test', 'test@example.com')");
+
+// Method 2: Prepared statement (SAFE!)
+$stmt = $pdo->prepare("INSERT INTO users (name, email) VALUES (:name, :email)");
+$stmt->execute([
+    ':name' => 'Ahmed Ali',
+    ':email' => 'ahmed@example.com'
+]);
+
+// Get the ID of the inserted record
+$newId = $pdo->lastInsertId();
+echo "New user created with ID: $newId";
+
+// Insert with form data
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $stmt = $pdo->prepare("INSERT INTO users (name, email) VALUES (:name, :email)");
+    $stmt->execute([
+        ':name' => $_POST['name'],
+        ':email' => $_POST['email']
+    ]);
+}
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>READ - Fetch Data</h2>
+                <pre style="font-size: 0.45em;"><code class="php">&lt;?php
+require_once 'db.php';
+
+// Fetch all records
+$stmt = $pdo->query("SELECT * FROM users");
+$users = $stmt->fetchAll();
+
+foreach ($users as $user) {
+    echo $user['name'] . " - " . $user['email'] . "&lt;br&gt;";
+}
+
+// Fetch single record by ID
+$id = 1;
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
+$stmt->execute([':id' => $id]);
+$user = $stmt->fetch();  // Returns one row or false
+
+if ($user) {
+    echo "Found: " . $user['name'];
+} else {
+    echo "User not found";
+}
+
+// Fetch with conditions
+$stmt = $pdo->prepare("SELECT * FROM users WHERE status = :status ORDER BY name");
+$stmt->execute([':status' => 'active']);
+$activeUsers = $stmt->fetchAll();
+
+// Count records
+$count = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
+echo "Total users: $count";
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>UPDATE - Modify Data</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+require_once 'db.php';
+
+// Update a record
+$stmt = $pdo->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
+$stmt->execute([
+    ':name' => 'Ahmed Mohammed',
+    ':email' => 'ahmed.new@example.com',
+    ':id' => 1
+]);
+
+// Check if update was successful
+if ($stmt->rowCount() > 0) {
+    echo "User updated successfully!";
+} else {
+    echo "No changes made or user not found.";
+}
+
+// Update from form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $stmt = $pdo->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
+    $stmt->execute([
+        ':name' => $_POST['name'],
+        ':email' => $_POST['email'],
+        ':id' => $_POST['id']
+    ]);
+    header("Location: users.php?success=updated");
+    exit();
+}
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>DELETE - Remove Data</h2>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+require_once 'db.php';
+
+// Delete a record
+$stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
+$stmt->execute([':id' => 5]);
+
+if ($stmt->rowCount() > 0) {
+    echo "User deleted successfully!";
+} else {
+    echo "User not found.";
+}
+
+// Delete with confirmation (typical workflow)
+if (isset($_GET['delete']) && isset($_GET['id'])) {
+    $id = (int) $_GET['id'];  // Cast to integer for safety
+
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+
+    header("Location: users.php?success=deleted");
+    exit();
+}
+?&gt;</code></pre>
+                <div class="warning-card">
+                    <p style="font-size: 0.75em;"><strong>Best practice:</strong> Always confirm before deleting! Use a modal or confirmation page.</p>
+                </div>
+            </section>
+
+            <!-- Prepared Statements -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-shield-alt" style="color: #f59e0b;"></i> Prepared Statements</h2>
+                <p style="font-size: 0.85em;">Security against SQL Injection</p>
+            </section>
+
+            <section>
+                <h2>SQL Injection Attack</h2>
+                <div style="font-size: 0.6em; margin-bottom: 1rem;">
+                    <p>What if a malicious user enters this as their username?</p>
+                </div>
+                <pre style="font-size: 0.5em;"><code class="php">// DANGEROUS - Never do this!
+$username = $_POST['username'];  // User enters: ' OR '1'='1
+$sql = "SELECT * FROM users WHERE username = '$username'";
+
+// This becomes:
+// SELECT * FROM users WHERE username = '' OR '1'='1'
+// Returns ALL users! Attacker bypasses login!</code></pre>
+                <div class="warning-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.75em;"><strong><i class="fas fa-skull-crossbones"></i> SQL Injection</strong> is one of the most common and dangerous web vulnerabilities. It can expose, modify, or delete your entire database!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Prepared Statements = Safe</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+// SAFE - Always use prepared statements!
+$username = $_POST['username'];  // Even if user enters malicious input
+
+// The placeholder :username is treated as DATA, not SQL code
+$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+$stmt->execute([':username' => $username]);
+
+// The malicious input becomes a literal string search
+// It searches for a user literally named: ' OR '1'='1
+// Which doesn't exist - attack fails!
+?&gt;</code></pre>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em; margin-top: 1rem;">
+                    <div class="warning-card">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #dc2626;"><i class="fas fa-times"></i> Vulnerable</h4>
+                        <code>$sql = "... WHERE id = $id";</code>
+                    </div>
+                    <div class="success-card">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #22c55e;"><i class="fas fa-check"></i> Protected</h4>
+                        <code>$stmt->execute([':id' => $id]);</code>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>How Prepared Statements Work</h2>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.6em;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="background: #dbeafe; padding: 0.5rem 1rem; border-radius: 0.5rem; min-width: 80px; text-align: center;">
+                            <strong>Step 1</strong>
+                        </div>
+                        <div style="flex: 1; background: #f8fafc; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+                            <strong>Prepare:</strong> SQL template sent to database with placeholders
+                            <code style="display: block; margin-top: 0.3rem;">SELECT * FROM users WHERE id = :id</code>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="background: #fef3c7; padding: 0.5rem 1rem; border-radius: 0.5rem; min-width: 80px; text-align: center;">
+                            <strong>Step 2</strong>
+                        </div>
+                        <div style="flex: 1; background: #f8fafc; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+                            <strong>Compile:</strong> Database parses and compiles the query structure
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="background: #dcfce7; padding: 0.5rem 1rem; border-radius: 0.5rem; min-width: 80px; text-align: center;">
+                            <strong>Step 3</strong>
+                        </div>
+                        <div style="flex: 1; background: #f8fafc; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+                            <strong>Execute:</strong> Values sent separately and treated as DATA only
+                            <code style="display: block; margin-top: 0.3rem;">:id => "1 OR 1=1" (treated as literal string)</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.7em;"><strong>Key insight:</strong> The SQL structure is fixed before data is added. User input can never change the query logic!</p>
+                </div>
+            </section>
+
+            <!-- Complete CRUD Example -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-project-diagram" style="color: #f59e0b;"></i> Complete CRUD Example</h2>
+                <p style="font-size: 0.85em;">Building a User Management System</p>
+            </section>
+
+            <section>
+                <h2>Project Structure</h2>
+                <pre style="font-size: 0.55em; background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 8px;"><code class="nohighlight">user-management/
+├── db.php           # Database connection
+├── index.php        # List all users (READ)
+├── create.php       # Add new user form (CREATE)
+├── edit.php         # Edit user form (UPDATE)
+├── delete.php       # Delete user (DELETE)
+└── style.css        # Styling (optional)</code></pre>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; font-size: 0.6em; margin-top: 1rem;">
+                    <div style="background: #dcfce7; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>index.php</strong><br>
+                        <span style="color: #166534;">READ</span>
+                    </div>
+                    <div style="background: #dbeafe; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>create.php</strong><br>
+                        <span style="color: #1e40af;">CREATE</span>
+                    </div>
+                    <div style="background: #fef3c7; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>edit.php</strong><br>
+                        <span style="color: #92400e;">UPDATE</span>
+                    </div>
+                    <div style="background: #fef2f2; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>delete.php</strong><br>
+                        <span style="color: #991b1b;">DELETE</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>db.php - Database Connection</h2>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+// db.php - Database configuration and connection
+
+$host = 'localhost';
+$dbname = 'user_management';
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+        $username,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false
+        ]
+    );
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>index.php - List Users</h2>
+                <pre style="font-size: 0.42em;"><code class="php">&lt;?php
+require_once 'db.php';
+$users = $pdo->query("SELECT * FROM users ORDER BY id DESC")->fetchAll();
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;User Management&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Users&lt;/h1&gt;
+    &lt;a href="create.php"&gt;+ Add New User&lt;/a&gt;
+
+    &lt;table border="1"&gt;
+        &lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Actions&lt;/th&gt;&lt;/tr&gt;
+        &lt;?php foreach ($users as $user): ?&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;?= $user['id'] ?&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;?= htmlspecialchars($user['name']) ?&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;?= htmlspecialchars($user['email']) ?&gt;&lt;/td&gt;
+            &lt;td&gt;
+                &lt;a href="edit.php?id=&lt;?= $user['id'] ?&gt;"&gt;Edit&lt;/a&gt;
+                &lt;a href="delete.php?id=&lt;?= $user['id'] ?&gt;"
+                   onclick="return confirm('Delete this user?')"&gt;Delete&lt;/a&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;?php endforeach; ?&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>create.php - Add User</h2>
+                <pre style="font-size: 0.42em;"><code class="php">&lt;?php
+require_once 'db.php';
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+
+    if (empty($name) || empty($email)) {
+        $error = 'All fields are required';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Invalid email format';
+    } else {
+        $stmt = $pdo->prepare("INSERT INTO users (name, email) VALUES (:name, :email)");
+        $stmt->execute([':name' => $name, ':email' => $email]);
+        header("Location: index.php");
+        exit();
+    }
+}
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h1&gt;Add New User&lt;/h1&gt;
+    &lt;?php if ($error): ?&gt;&lt;p style="color:red"&gt;&lt;?= $error ?&gt;&lt;/p&gt;&lt;?php endif; ?&gt;
+    &lt;form method="POST"&gt;
+        &lt;label&gt;Name: &lt;input type="text" name="name" required&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;label&gt;Email: &lt;input type="email" name="email" required&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;button type="submit"&gt;Create User&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;a href="index.php"&gt;Back to list&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>edit.php - Update User</h2>
+                <pre style="font-size: 0.4em;"><code class="php">&lt;?php
+require_once 'db.php';
+$error = '';
+
+// Get user data
+$id = $_GET['id'] ?? 0;
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
+$stmt->execute([':id' => $id]);
+$user = $stmt->fetch();
+
+if (!$user) { die("User not found"); }
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+
+    if (empty($name) || empty($email)) {
+        $error = 'All fields are required';
+    } else {
+        $stmt = $pdo->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
+        $stmt->execute([':name' => $name, ':email' => $email, ':id' => $id]);
+        header("Location: index.php");
+        exit();
+    }
+}
+?&gt;
+&lt;h1&gt;Edit User&lt;/h1&gt;
+&lt;?php if ($error): ?&gt;&lt;p style="color:red"&gt;&lt;?= $error ?&gt;&lt;/p&gt;&lt;?php endif; ?&gt;
+&lt;form method="POST"&gt;
+    &lt;label&gt;Name: &lt;input type="text" name="name" value="&lt;?= htmlspecialchars($user['name']) ?&gt;" required&gt;&lt;/label&gt;&lt;br&gt;
+    &lt;label&gt;Email: &lt;input type="email" name="email" value="&lt;?= htmlspecialchars($user['email']) ?&gt;" required&gt;&lt;/label&gt;&lt;br&gt;
+    &lt;button type="submit"&gt;Update User&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>delete.php - Remove User</h2>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+require_once 'db.php';
+
+$id = $_GET['id'] ?? 0;
+
+if ($id) {
+    // Verify user exists before deleting
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+
+    if ($stmt->fetch()) {
+        // User exists, proceed with deletion
+        $stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+    }
+}
+
+// Redirect back to list
+header("Location: index.php");
+exit();
+?&gt;</code></pre>
+                <div class="thinking-card">
+                    <p style="font-size: 0.75em;"><strong>Enhancement:</strong> For production, use POST requests for delete operations and add CSRF token protection!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Database Setup SQL</h2>
+                <pre style="font-size: 0.48em;"><code class="sql">-- Run this in phpMyAdmin or MySQL command line
+
+-- Create database
+CREATE DATABASE IF NOT EXISTS user_management;
+USE user_management;
+
+-- Create users table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Insert sample data
+INSERT INTO users (name, email) VALUES
+    ('Ahmed Ali', 'ahmed@example.com'),
+    ('Sara Khan', 'sara@example.com'),
+    ('Omar Hassan', 'omar@example.com');</code></pre>
+            </section>
+
+            <!-- Summary -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-check-circle" style="color: #f59e0b;"></i> Module Summary</h2>
+            </section>
+
+            <section>
+                <h2>What We Covered</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.6em;">
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-database"></i> Database Concepts</h4>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>Why databases matter</li>
+                            <li>Tables, columns, rows</li>
+                            <li>Primary keys, data types</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-code"></i> SQL Fundamentals</h4>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>SELECT, INSERT, UPDATE, DELETE</li>
+                            <li>WHERE, ORDER BY, LIMIT</li>
+                            <li>CREATE TABLE</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-plug"></i> PHP + MySQL</h4>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>PDO connection</li>
+                            <li>Executing queries</li>
+                            <li>Fetching results</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #f59e0b;"><i class="fas fa-shield-alt"></i> Security</h4>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>SQL injection attacks</li>
+                            <li>Prepared statements</li>
+                            <li>Parameter binding</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Key Takeaways</h2>
+                <div style="font-size: 0.7em; text-align: left; max-width: 700px; margin: 0 auto;">
+                    <div style="display: flex; align-items: start; gap: 1rem; margin-bottom: 0.75rem;">
+                        <i class="fas fa-check-circle" style="color: #22c55e; margin-top: 0.2rem;"></i>
+                        <div><strong>Always use PDO</strong> with prepared statements for database operations</div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 1rem; margin-bottom: 0.75rem;">
+                        <i class="fas fa-check-circle" style="color: #22c55e; margin-top: 0.2rem;"></i>
+                        <div><strong>Never trust user input</strong> — use placeholders, never concatenate</div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 1rem; margin-bottom: 0.75rem;">
+                        <i class="fas fa-check-circle" style="color: #22c55e; margin-top: 0.2rem;"></i>
+                        <div><strong>Use htmlspecialchars()</strong> when displaying data to prevent XSS</div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 1rem; margin-bottom: 0.75rem;">
+                        <i class="fas fa-check-circle" style="color: #22c55e; margin-top: 0.2rem;"></i>
+                        <div><strong>Handle errors gracefully</strong> with try-catch blocks</div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 1rem;">
+                        <i class="fas fa-check-circle" style="color: #22c55e; margin-top: 0.2rem;"></i>
+                        <div><strong>Keep database credentials</strong> in a separate, secure file</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Next Module Preview</h2>
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                    <h3 style="margin: 0 0 0.5rem 0;"><i class="fas fa-shield-alt" style="color: #dc2626;"></i> Module 7: Authentication & Security</h3>
+                    <p style="margin: 0; font-size: 0.8em;">Password hashing, user authentication, authorization, OWASP Top 10, and protecting your web applications.</p>
+                </div>
+                <div class="thinking-card">
+                    <p style="font-size: 0.8em;"><strong>Coming up:</strong> Learn how to build secure login systems and protect your applications from common attacks!</p>
+                </div>
+            </section>
+
+            <!-- End Slide -->
+            <section data-background-color="#f59e0b">
+                <h2 style="color: white;">Questions?</h2>
+                <p style="color: rgba(255,255,255,0.8);">Module 6: MySQL Database & PHP Integration</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.6em; margin-top: 2em;">CS381 - Web Application Development<br>Yanbu Industrial College</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            plugins: [ RevealHighlight ]
+        });
+    </script>
+</body>
+</html>

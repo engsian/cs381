@@ -13,10 +13,10 @@ This repository contains browser-based presentation slides built with [reveal.js
 | 01 | Foundations and Modern Web Development | Available |
 | 02 | HTML5 | Available |
 | 03 | CSS | Available |
-| 04 | JavaScript Fundamentals | Coming Soon |
-| 05 | PHP Fundamentals | Coming Soon |
-| 06 | MySQL Database and PHP Integration | Coming Soon |
-| 07 | Authentication, Authorization & Security | Coming Soon |
+| 04 | JavaScript Fundamentals | Available |
+| 05 | PHP Fundamentals | Available |
+| 06 | MySQL Database and PHP Integration | Available |
+| 07 | Authentication, Authorization & Security | Available |
 
 ## Technologies Covered
 

@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: JavaScript Fundamentals - CS381</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css">
+
+    <!-- Highlight.js for code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Theme Override -->
+    <link rel="stylesheet" href="css/theme.css">
+
+    <style>
+        .home-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        .home-nav a {
+            background: #f8fafc;
+            color: #64748b;
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .home-nav a:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6em;
+            margin: 0.5em 0;
+        }
+        .feature-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: center;
+        }
+        .feature-card i {
+            font-size: 1.5em;
+            color: #eab308;
+            margin-bottom: 0.3em;
+            display: block;
+        }
+        .feature-card h4 {
+            margin: 0.3em 0;
+            font-size: 0.8em;
+        }
+        .feature-card p {
+            font-size: 0.65em;
+            color: #64748b;
+            margin: 0;
+        }
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1em;
+            margin: 0.5em 0;
+        }
+        .code-comparison {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: left;
+        }
+        .code-comparison h4 {
+            margin: 0 0 0.5em 0;
+            font-size: 0.85em;
+        }
+        .thinking-card {
+            background: linear-gradient(135deg, #fef9c3 0%, #fef3c7 100%);
+            border-left: 4px solid #eab308;
+            padding: 0.8em;
+            border-radius: 0 10px 10px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .thinking-card p {
+            margin: 0;
+            font-size: 0.85em;
+        }
+        .data-type-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5em;
+            margin: 0.5em 0;
+            font-size: 0.8em;
+        }
+        .data-type {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 0.6em;
+            text-align: center;
+        }
+        .data-type code {
+            display: block;
+            margin-top: 0.3em;
+            font-size: 0.85em;
+        }
+        .dom-tree {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1em;
+            font-family: monospace;
+            font-size: 0.7em;
+            text-align: left;
+        }
+        .dom-tree .element {
+            color: #2563eb;
+        }
+        .dom-tree .indent {
+            margin-left: 1.5em;
+        }
+        .event-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            margin: 1em 0;
+            font-size: 0.8em;
+        }
+        .event-box {
+            background: #fef3c7;
+            border: 2px solid #eab308;
+            border-radius: 8px;
+            padding: 0.6em 1em;
+            text-align: center;
+        }
+        .event-arrow {
+            color: #64748b;
+            font-size: 1.2em;
+        }
+        .es6-feature {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 0.6em;
+            margin: 0.3em 0;
+            text-align: left;
+        }
+        .es6-feature h4 {
+            color: #eab308;
+            margin: 0 0 0.3em 0;
+            font-size: 0.85em;
+        }
+        .async-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            max-width: 600px;
+            margin: 0.5em auto;
+        }
+        .async-step {
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            background: #f8fafc;
+            padding: 0.5em 0.8em;
+            border-radius: 8px;
+            font-size: 0.8em;
+        }
+        .async-step .num {
+            background: #eab308;
+            color: white;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        .console-output {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 0.8em;
+            font-family: monospace;
+            font-size: 0.75em;
+            text-align: left;
+            margin: 0.5em 0;
+        }
+        .console-output .log {
+            color: #94a3b8;
+        }
+        .console-output .string {
+            color: #a5d6ff;
+        }
+        .console-output .number {
+            color: #79c0ff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="home-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </nav>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1 style="font-size: 2.8em;">CS381</h1>
+                <h2 style="border: none; color: #64748b; font-weight: 400;">Web Application Development</h2>
+                <div style="margin: 2em 0; padding: 1.5em; background: #f8fafc; border-radius: 12px; border-left: 5px solid #eab308;">
+                    <h3 style="margin: 0; color: #1e293b;"><i class="fab fa-js" style="color: #f7df1e;"></i> Module 4: JavaScript Fundamentals</h3>
+                </div>
+                <p style="color: #64748b; margin-top: 2em;">
+                    <strong style="color: #1e293b;">Muhammad Rafiq</strong><br>
+                    <small>Computer Science and Engineering Department, Yanbu Industrial College</small>
+                </p>
+            </section>
+
+            <!-- What is JavaScript -->
+            <section>
+                <h2><i class="fab fa-js" style="color: #f7df1e;"></i> What is JavaScript?</h2>
+                <p style="font-size: 0.85em; color: #64748b;">The programming language of the web</p>
+                <div class="feature-grid" style="margin-top: 0.8em;">
+                    <div class="feature-card">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <h4>Interactivity</h4>
+                        <p>Respond to user actions</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sync-alt"></i>
+                        <h4>Dynamic Content</h4>
+                        <p>Update without reload</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Validation</h4>
+                        <p>Check forms instantly</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-server"></i>
+                        <h4>Backend</h4>
+                        <p>Node.js servers</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Mobile Apps</h4>
+                        <p>React Native</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-desktop"></i>
+                        <h4>Desktop Apps</h4>
+                        <p>Electron</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section>
+                <h2><i class="fas fa-bullseye" style="color: #eab308;"></i> Learning Objectives</h2>
+                <div class="feature-grid">
+                    <div class="feature-card fragment">
+                        <i class="fas fa-code"></i>
+                        <h4>Syntax & Types</h4>
+                        <p>Variables, operators</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-sitemap"></i>
+                        <h4>DOM</h4>
+                        <p>Manipulate HTML</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Events</h4>
+                        <p>User interactions</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-cube"></i>
+                        <h4>Arrays & Objects</h4>
+                        <p>Data structures</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-clock"></i>
+                        <h4>Async JS</h4>
+                        <p>Promises, fetch</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-rocket"></i>
+                        <h4>ES6+</h4>
+                        <p>Modern features</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Variables Section -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-box" style="color: #eab308;"></i> Variables & Data Types</h2>
+                <p style="font-size: 0.85em;">Storing and working with data</p>
+            </section>
+
+            <section>
+                <h2>Declaring Variables</h2>
+                <div class="comparison-box" style="font-size: 0.75em;">
+                    <div class="code-comparison" style="border-left: 3px solid #dc2626;">
+                        <h4 style="color: #dc2626;"><i class="fas fa-times-circle"></i> var (old way)</h4>
+                        <pre style="margin: 0;"><code class="javascript">var name = "Ahmed";
+var name = "Ali"; // No error!
+// Function scoped, hoisted</code></pre>
+                    </div>
+                    <div class="code-comparison" style="border-left: 3px solid #16a34a;">
+                        <h4 style="color: #16a34a;"><i class="fas fa-check-circle"></i> let & const (modern)</h4>
+                        <pre style="margin: 0;"><code class="javascript">let age = 25;      // Can change
+const PI = 3.14;   // Cannot change
+// Block scoped, not hoisted</code></pre>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 0.5em;">
+                    <p><strong>Rule:</strong> Use <code>const</code> by default. Use <code>let</code> only if value changes. Never use <code>var</code>.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Data Types</h2>
+                <div class="data-type-grid">
+                    <div class="data-type">
+                        <i class="fas fa-font" style="color: #2563eb;"></i><br>String
+                        <code>"Hello"</code>
+                    </div>
+                    <div class="data-type">
+                        <i class="fas fa-hashtag" style="color: #16a34a;"></i><br>Number
+                        <code>42, 3.14</code>
+                    </div>
+                    <div class="data-type">
+                        <i class="fas fa-toggle-on" style="color: #7c3aed;"></i><br>Boolean
+                        <code>true/false</code>
+                    </div>
+                    <div class="data-type">
+                        <i class="fas fa-ban" style="color: #dc2626;"></i><br>Null
+                        <code>null</code>
+                    </div>
+                    <div class="data-type">
+                        <i class="fas fa-question" style="color: #f59e0b;"></i><br>Undefined
+                        <code>undefined</code>
+                    </div>
+                    <div class="data-type">
+                        <i class="fas fa-cube" style="color: #0891b2;"></i><br>Object
+                        <code>{key: val}</code>
+                    </div>
+                    <div class="data-type">
+                        <i class="fas fa-list" style="color: #db2777;"></i><br>Array
+                        <code>[1, 2, 3]</code>
+                    </div>
+                    <div class="data-type">
+                        <i class="fas fa-cog" style="color: #64748b;"></i><br>Function
+                        <code>() => {}</code>
+                    </div>
+                </div>
+                <pre style="font-size: 0.45em; margin-top: 0.5em;"><code class="javascript">typeof "Hello"  // "string"    typeof 42       // "number"
+typeof true     // "boolean"   typeof {}       // "object"</code></pre>
+            </section>
+
+            <!-- Functions Section -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-cog" style="color: #eab308;"></i> Functions</h2>
+                <p style="font-size: 0.85em;">Reusable blocks of code</p>
+            </section>
+
+            <section>
+                <h2>Function Syntax</h2>
+                <div style="font-size: 0.75em;">
+                    <div class="es6-feature">
+                        <h4><i class="fas fa-code"></i> Function Declaration</h4>
+                        <pre style="margin: 0; font-size: 0.9em;"><code class="javascript">function greet(name) {
+    return "Hello, " + name;
+}</code></pre>
+                    </div>
+                    <div class="es6-feature">
+                        <h4><i class="fas fa-code"></i> Function Expression</h4>
+                        <pre style="margin: 0; font-size: 0.9em;"><code class="javascript">const greet = function(name) {
+    return "Hello, " + name;
+};</code></pre>
+                    </div>
+                    <div class="es6-feature" style="border-left: 3px solid #16a34a;">
+                        <h4 style="color: #16a34a;"><i class="fas fa-arrow-right"></i> Arrow Function (ES6)</h4>
+                        <pre style="margin: 0; font-size: 0.9em;"><code class="javascript">const greet = (name) => "Hello, " + name;
+const square = x => x * x;  // Single param, no parens</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DOM Section -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-sitemap" style="color: #eab308;"></i> The DOM</h2>
+                <p style="font-size: 0.85em;">Document Object Model — JavaScript's interface to HTML</p>
+            </section>
+
+            <section>
+                <h2>What is the DOM?</h2>
+                <div class="comparison-box">
+                    <div class="dom-tree">
+                        <span class="element">&lt;html&gt;</span><br>
+                        <div class="indent">
+                            <span class="element">&lt;head&gt;</span><br>
+                            <div class="indent"><span class="element">&lt;title&gt;</span>Page<span class="element">&lt;/title&gt;</span></div>
+                            <span class="element">&lt;/head&gt;</span><br>
+                            <span class="element">&lt;body&gt;</span><br>
+                            <div class="indent">
+                                <span class="element">&lt;h1&gt;</span>Hello<span class="element">&lt;/h1&gt;</span><br>
+                                <span class="element">&lt;p&gt;</span>Text<span class="element">&lt;/p&gt;</span>
+                            </div>
+                            <span class="element">&lt;/body&gt;</span>
+                        </div>
+                        <span class="element">&lt;/html&gt;</span>
+                    </div>
+                    <div style="text-align: left; font-size: 0.8em;">
+                        <p><strong>DOM is:</strong></p>
+                        <ul>
+                            <li>A tree of objects</li>
+                            <li>Each HTML element = node</li>
+                            <li>JavaScript can read/write nodes</li>
+                            <li>Changes update the page instantly</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Selecting Elements</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">// By ID (returns one element)
+const header = document.getElementById('header');
+
+// By class (returns collection)
+const items = document.getElementsByClassName('item');
+
+// Modern way - CSS selectors (recommended)
+const header = document.querySelector('#header');      // First match
+const items = document.querySelectorAll('.item');      // All matches
+const btn = document.querySelector('button.primary');  // Complex selector</code></pre>
+                <div class="thinking-card">
+                    <p><strong>Best practice:</strong> Use <code>querySelector</code> / <code>querySelectorAll</code> — same syntax as CSS!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Modifying Elements</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">const el = document.querySelector('#box');
+
+// Content
+el.textContent = 'New text';         // Text only
+el.innerHTML = '&lt;strong&gt;Bold&lt;/strong&gt;'; // HTML (careful - XSS risk)
+
+// Attributes
+el.setAttribute('class', 'active');
+el.id = 'newId';
+
+// Styles
+el.style.color = 'blue';
+el.style.backgroundColor = '#f00';   // camelCase!
+
+// Classes (best for styling)
+el.classList.add('active');
+el.classList.remove('hidden');
+el.classList.toggle('open');</code></pre>
+            </section>
+
+            <section>
+                <h2>Creating & Removing Elements</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">// Create new element
+const div = document.createElement('div');
+div.textContent = 'New item';
+div.classList.add('card');
+
+// Add to page
+document.body.appendChild(div);           // At end
+parent.insertBefore(div, reference);      // Before element
+
+// Remove element
+element.remove();                         // Modern way
+parent.removeChild(element);              // Old way</code></pre>
+            </section>
+
+            <!-- Events Section -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-bolt" style="color: #eab308;"></i> Events</h2>
+                <p style="font-size: 0.85em;">Responding to user interactions</p>
+            </section>
+
+            <section>
+                <h2>Event Flow</h2>
+                <div class="event-flow">
+                    <div class="event-box">
+                        <i class="fas fa-mouse-pointer"></i><br>
+                        User Action
+                    </div>
+                    <i class="fas fa-arrow-right event-arrow"></i>
+                    <div class="event-box">
+                        <i class="fas fa-broadcast-tower"></i><br>
+                        Event Fires
+                    </div>
+                    <i class="fas fa-arrow-right event-arrow"></i>
+                    <div class="event-box">
+                        <i class="fas fa-cog"></i><br>
+                        Handler Runs
+                    </div>
+                    <i class="fas fa-arrow-right event-arrow"></i>
+                    <div class="event-box">
+                        <i class="fas fa-sync"></i><br>
+                        Page Updates
+                    </div>
+                </div>
+                <div class="feature-grid" style="grid-template-columns: repeat(4, 1fr); font-size: 0.7em; margin-top: 0.5em;">
+                    <div class="feature-card">
+                        <code>click</code>
+                        <p>Mouse click</p>
+                    </div>
+                    <div class="feature-card">
+                        <code>submit</code>
+                        <p>Form submit</p>
+                    </div>
+                    <div class="feature-card">
+                        <code>keydown</code>
+                        <p>Key pressed</p>
+                    </div>
+                    <div class="feature-card">
+                        <code>input</code>
+                        <p>Value changed</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Adding Event Listeners</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">const btn = document.querySelector('#btn');
+
+// Modern way (recommended)
+btn.addEventListener('click', function(event) {
+    console.log('Clicked!');
+    console.log(event.target);  // The clicked element
+});
+
+// With arrow function
+btn.addEventListener('click', (e) => {
+    e.preventDefault();  // Stop default action (e.g., form submit)
+    // Do something
+});
+
+// Remove listener
+const handler = () => console.log('Hi');
+btn.addEventListener('click', handler);
+btn.removeEventListener('click', handler);</code></pre>
+            </section>
+
+            <section>
+                <h2>Event Delegation</h2>
+                <p style="font-size: 0.8em; color: #64748b;">Handle many elements with one listener</p>
+                <pre style="font-size: 0.5em;"><code class="javascript">// Instead of adding listener to each button...
+const list = document.querySelector('#item-list');
+
+list.addEventListener('click', (e) => {
+    // Check what was actually clicked
+    if (e.target.matches('.delete-btn')) {
+        e.target.closest('.item').remove();
+    }
+    if (e.target.matches('.edit-btn')) {
+        // Handle edit
+    }
+});</code></pre>
+                <div class="thinking-card">
+                    <p><strong>Why?</strong> Works for dynamically added elements. Better performance with many items.</p>
+                </div>
+            </section>
+
+            <!-- Arrays & Objects -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-layer-group" style="color: #eab308;"></i> Arrays & Objects</h2>
+                <p style="font-size: 0.85em;">Working with collections of data</p>
+            </section>
+
+            <section>
+                <h2>Arrays</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">const fruits = ['apple', 'banana', 'orange'];
+
+// Access
+fruits[0];           // 'apple'
+fruits.length;       // 3
+
+// Modify
+fruits.push('mango');      // Add to end
+fruits.pop();              // Remove from end
+fruits.unshift('grape');   // Add to start
+fruits.shift();            // Remove from start
+
+// Find
+fruits.includes('apple');  // true
+fruits.indexOf('banana');  // 1
+fruits.find(f => f.startsWith('a'));  // 'apple'</code></pre>
+            </section>
+
+            <section>
+                <h2>Array Methods (Powerful!)</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">const numbers = [1, 2, 3, 4, 5];
+
+// map - transform each item
+const doubled = numbers.map(n => n * 2);  // [2, 4, 6, 8, 10]
+
+// filter - keep items that pass test
+const evens = numbers.filter(n => n % 2 === 0);  // [2, 4]
+
+// reduce - combine into single value
+const sum = numbers.reduce((acc, n) => acc + n, 0);  // 15
+
+// forEach - loop (no return)
+numbers.forEach(n => console.log(n));
+
+// Chaining
+const result = numbers
+    .filter(n => n > 2)
+    .map(n => n * 10);  // [30, 40, 50]</code></pre>
+            </section>
+
+            <section>
+                <h2>Objects</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">const user = {
+    name: 'Ahmed',
+    age: 25,
+    email: 'ahmed@example.com',
+    isActive: true,
+    greet() {
+        return `Hello, I'm ${this.name}`;
+    }
+};
+
+// Access
+user.name;              // 'Ahmed'
+user['age'];            // 25 (bracket notation for dynamic keys)
+
+// Modify
+user.age = 26;
+user.phone = '123456';  // Add new property
+
+// Methods
+user.greet();           // "Hello, I'm Ahmed"
+
+// Destructuring (ES6)
+const { name, age } = user;</code></pre>
+            </section>
+
+            <!-- ES6+ Features -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-rocket" style="color: #eab308;"></i> ES6+ Features</h2>
+                <p style="font-size: 0.85em;">Modern JavaScript (2015+)</p>
+            </section>
+
+            <section>
+                <h2>Template Literals</h2>
+                <div class="comparison-box" style="font-size: 0.75em;">
+                    <div class="code-comparison" style="border-left: 3px solid #dc2626;">
+                        <h4 style="color: #dc2626;">Old way</h4>
+                        <pre style="margin: 0;"><code class="javascript">const msg = 'Hello, ' + name +
+    '! You are ' + age +
+    ' years old.';</code></pre>
+                    </div>
+                    <div class="code-comparison" style="border-left: 3px solid #16a34a;">
+                        <h4 style="color: #16a34a;">Template literals</h4>
+                        <pre style="margin: 0;"><code class="javascript">const msg = `Hello, ${name}!
+You are ${age} years old.
+${age >= 18 ? 'Adult' : 'Minor'}`;</code></pre>
+                    </div>
+                </div>
+                <p style="font-size: 0.8em; color: #64748b; margin-top: 0.5em;">Use backticks (`) for multi-line strings and <code>${expression}</code> for interpolation</p>
+            </section>
+
+            <section>
+                <h2>Destructuring & Spread</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">// Array destructuring
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+// first=1, second=2, rest=[3,4,5]
+
+// Object destructuring
+const { name, age, city = 'Unknown' } = user;
+
+// Spread operator - expand arrays/objects
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5];  // [1, 2, 3, 4, 5]
+
+const user2 = { ...user, age: 30 };  // Clone and modify
+
+// Function parameters
+function sum(...numbers) {
+    return numbers.reduce((a, b) => a + b, 0);
+}
+sum(1, 2, 3, 4);  // 10</code></pre>
+            </section>
+
+            <!-- Async JavaScript -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-clock" style="color: #eab308;"></i> Async JavaScript</h2>
+                <p style="font-size: 0.85em;">Handling operations that take time</p>
+            </section>
+
+            <section>
+                <h2>The Problem: Blocking Code</h2>
+                <div class="async-flow">
+                    <div class="async-step">
+                        <span class="num">1</span>
+                        <span>Request data from server</span>
+                    </div>
+                    <div class="async-step" style="background: #fef2f2;">
+                        <span class="num" style="background: #dc2626;">2</span>
+                        <span style="color: #dc2626;"><strong>Wait 2 seconds...</strong> (page frozen!)</span>
+                    </div>
+                    <div class="async-step">
+                        <span class="num">3</span>
+                        <span>Display data</span>
+                    </div>
+                </div>
+                <div class="thinking-card">
+                    <p><strong>Solution:</strong> Async code runs in background. Page stays responsive. Code continues when data arrives.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Traditional Solution: Threads</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; font-size: 0.65em;">
+                    <div style="background: #fef2f2; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #dc2626;">
+                        <h4 style="color: #dc2626; margin: 0 0 0.5rem 0;"><i class="fas fa-server"></i> Multi-Threading (Java, C++)</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Spawn separate threads for tasks</li>
+                            <li>Shared memory between threads</li>
+                            <li>Complex: locks, mutexes, semaphores</li>
+                            <li>Risk: race conditions, deadlocks</li>
+                            <li>Hard to debug and maintain</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #22c55e;">
+                        <h4 style="color: #22c55e; margin: 0 0 0.5rem 0;"><i class="fab fa-js"></i> JavaScript Event Loop</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Single-threaded with event queue</li>
+                            <li>Non-blocking I/O operations</li>
+                            <li>No shared state problems</li>
+                            <li>Callbacks, Promises, async/await</li>
+                            <li>Easier to reason about</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.75em;"><strong>JavaScript's approach:</strong> Instead of managing threads, you write code that says "when this completes, do that" — the runtime handles the complexity!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Evolution of Async JavaScript</h2>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.6em; margin-bottom: 1rem;">
+                    <div style="background: #fef3c7; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Callbacks</strong><br>
+                        <span style="font-size: 0.9em; color: #92400e;">Nested, hard to read</span>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #dbeafe; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Promises</strong><br>
+                        <span style="font-size: 0.9em; color: #1e40af;">Chainable, cleaner</span>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #dcfce7; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>async/await</strong><br>
+                        <span style="font-size: 0.9em; color: #166534;">Reads like sync!</span>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.55em;">
+                    <div>
+                        <p style="margin: 0 0 0.3rem 0; color: #dc2626; font-weight: bold;"><i class="fas fa-times-circle"></i> Callback Hell</p>
+                        <pre style="font-size: 0.85em; margin: 0;"><code class="javascript">getUser(id, function(user) {
+    getOrders(user, function(orders) {
+        getDetails(orders[0], function(details) {
+            // 3 levels deep!
+        });
+    });
+});</code></pre>
+                        <ul style="font-size: 0.8em; margin: 0.5rem 0 0 0; color: #64748b;">
+                            <li>Each async call nests inside previous</li>
+                            <li>Forms "pyramid of doom"</li>
+                            <li>Error handling is messy</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p style="margin: 0 0 0.3rem 0; color: #22c55e; font-weight: bold;"><i class="fas fa-check-circle"></i> async/await</p>
+                        <pre style="font-size: 0.85em; margin: 0;"><code class="javascript">const user = await getUser(id);
+const orders = await getOrders(user);
+const details = await getDetails(orders[0]);
+// Flat and readable!</code></pre>
+                        <ul style="font-size: 0.8em; margin: 0.5rem 0 0 0; color: #64748b;">
+                            <li><code>await</code> pauses until complete</li>
+                            <li>Code runs top-to-bottom</li>
+                            <li>Use try/catch for errors</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Promises</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">// A Promise represents a future value
+const promise = new Promise((resolve, reject) => {
+    // Async operation
+    setTimeout(() => {
+        resolve('Success!');  // or reject('Error!')
+    }, 1000);
+});
+
+// Using a promise
+promise
+    .then(result => {
+        console.log(result);  // 'Success!'
+    })
+    .catch(error => {
+        console.error(error);
+    })
+    .finally(() => {
+        console.log('Done');  // Always runs
+    });</code></pre>
+            </section>
+
+            <section>
+                <h2>async/await (Modern Way)</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">// async function returns a Promise
+async function fetchUser() {
+    try {
+        const response = await fetch('/api/user');
+        const user = await response.json();
+        return user;
+    } catch (error) {
+        console.error('Failed:', error);
+    }
+}
+
+// Using it
+const user = await fetchUser();
+console.log(user.name);
+
+// Or with .then()
+fetchUser().then(user => console.log(user.name));</code></pre>
+                <div class="thinking-card">
+                    <p><strong>await</strong> pauses until Promise resolves. Code reads like synchronous but runs async!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Fetch API</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">// GET request
+const response = await fetch('https://api.example.com/users');
+const users = await response.json();
+
+// POST request
+const response = await fetch('https://api.example.com/users', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        name: 'Ahmed',
+        email: 'ahmed@example.com'
+    })
+});
+
+// Check status
+if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+}</code></pre>
+            </section>
+
+            <!-- JSON -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-code" style="color: #eab308;"></i> JSON</h2>
+                <p style="font-size: 0.85em;">The universal language of data exchange</p>
+            </section>
+
+            <section>
+                <h2>What is JSON?</h2>
+                <p style="font-size: 0.8em; color: #64748b; margin-bottom: 1rem;"><strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.65em;">
+                    <div style="background: #eff6ff; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;"><i class="fas fa-question-circle"></i> What is it?</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Lightweight text-based data format</li>
+                            <li>Human-readable and writable</li>
+                            <li>Language-independent</li>
+                            <li>Based on JavaScript object syntax</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;"><i class="fas fa-check-circle"></i> Why use it?</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Standard for web APIs</li>
+                            <li>Easy to parse and generate</li>
+                            <li>Supported by all languages</li>
+                            <li>Smaller than XML</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.75em;"><strong>Key insight:</strong> JSON is how frontend and backend communicate. When you fetch data from an API, it's almost always JSON!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>JSON Syntax Rules</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em;">
+                    <div>
+                        <pre style="font-size: 0.9em;"><code class="json">{
+    "name": "Ahmed",
+    "age": 25,
+    "isStudent": true,
+    "courses": ["CS381", "CS201"],
+    "address": {
+        "city": "Yanbu",
+        "country": "Saudi Arabia"
+    },
+    "graduated": null
+}</code></pre>
+                    </div>
+                    <div style="text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Strict Rules</h4>
+                        <ul style="margin: 0; line-height: 1.8;">
+                            <li>Keys <strong>must</strong> be in "double quotes"</li>
+                            <li>Strings <strong>must</strong> use "double quotes"</li>
+                            <li>No trailing commas allowed</li>
+                            <li>No comments allowed</li>
+                            <li>No undefined values</li>
+                            <li>No functions or methods</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>JSON Data Types</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; font-size: 0.6em;">
+                    <div style="background: #dbeafe; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>String</strong><br>
+                        <code>"Hello"</code>
+                    </div>
+                    <div style="background: #dcfce7; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Number</strong><br>
+                        <code>42, 3.14, -10</code>
+                    </div>
+                    <div style="background: #fef3c7; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Boolean</strong><br>
+                        <code>true, false</code>
+                    </div>
+                    <div style="background: #fce7f3; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>null</strong><br>
+                        <code>null</code>
+                    </div>
+                    <div style="background: #e0e7ff; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Array</strong><br>
+                        <code>[1, 2, 3]</code>
+                    </div>
+                    <div style="background: #f3e8ff; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Object</strong><br>
+                        <code>{"key": "value"}</code>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; padding: 0.75rem; background: #fef2f2; border-radius: 0.5rem; font-size: 0.65em; border-left: 4px solid #dc2626;">
+                    <strong style="color: #dc2626;">Not allowed in JSON:</strong>
+                    <code>undefined</code>, functions, <code>Date</code> objects, <code>NaN</code>, <code>Infinity</code>, single quotes, comments
+                </div>
+            </section>
+
+            <section>
+                <h2>JSON.stringify()</h2>
+                <p style="font-size: 0.75em; color: #64748b;">Convert JavaScript object → JSON string</p>
+                <pre style="font-size: 0.48em;"><code class="javascript">const user = { name: 'Ahmed', age: 25, active: true };
+
+// Basic stringify
+JSON.stringify(user);
+// '{"name":"Ahmed","age":25,"active":true}'
+
+// Pretty print with 2-space indentation
+JSON.stringify(user, null, 2);
+// {
+//   "name": "Ahmed",
+//   "age": 25,
+//   "active": true
+// }
+
+// Select specific properties only
+JSON.stringify(user, ['name', 'age']);
+// '{"name":"Ahmed","age":25}'</code></pre>
+                <div class="thinking-card">
+                    <p style="font-size: 0.7em;"><strong>Use cases:</strong> Sending data to server, storing in localStorage, debugging (pretty print)</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>JSON.parse()</h2>
+                <p style="font-size: 0.75em; color: #64748b;">Convert JSON string → JavaScript object</p>
+                <pre style="font-size: 0.48em;"><code class="javascript">const jsonString = '{"name":"Ahmed","age":25,"active":true}';
+
+// Basic parse
+const user = JSON.parse(jsonString);
+console.log(user.name);  // 'Ahmed'
+console.log(user.age);   // 25
+
+// IMPORTANT: Always handle parse errors!
+try {
+    const data = JSON.parse(invalidJson);
+} catch (error) {
+    console.error('Invalid JSON:', error.message);
+}
+
+// Common mistake - parsing already-parsed object
+const obj = { name: 'Test' };
+JSON.parse(obj);  // ERROR! Already an object, not a string</code></pre>
+            </section>
+
+            <section>
+                <h2>Working with Nested JSON</h2>
+                <pre style="font-size: 0.45em;"><code class="javascript">// API response with nested data
+const response = {
+    "status": "success",
+    "data": {
+        "user": {
+            "id": 123,
+            "name": "Ahmed",
+            "courses": [
+                { "code": "CS381", "grade": "A" },
+                { "code": "CS201", "grade": "B+" }
+            ]
+        }
+    }
+};
+
+// Accessing nested data
+const userName = response.data.user.name;           // 'Ahmed'
+const firstCourse = response.data.user.courses[0];  // { code: 'CS381', grade: 'A' }
+const courseCode = response.data.user.courses[0].code;  // 'CS381'
+
+// Safe access with optional chaining (?.)
+const grade = response.data?.user?.courses?.[0]?.grade;  // 'A'
+const missing = response.data?.user?.address?.city;      // undefined (not error)</code></pre>
+            </section>
+
+            <section>
+                <h2>JSON with Fetch API</h2>
+                <pre style="font-size: 0.45em;"><code class="javascript">// GET - Receiving JSON from API
+const response = await fetch('https://api.example.com/users');
+const users = await response.json();  // Parse JSON response
+console.log(users[0].name);
+
+// POST - Sending JSON to API
+const newUser = { name: 'Ahmed', email: 'ahmed@example.com' };
+
+const response = await fetch('https://api.example.com/users', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'  // Tell server we're sending JSON
+    },
+    body: JSON.stringify(newUser)  // Convert object to JSON string
+});
+
+const created = await response.json();  // Parse JSON response
+console.log('Created user ID:', created.id);</code></pre>
+                <div class="thinking-card">
+                    <p style="font-size: 0.7em;"><strong>Remember:</strong> <code>response.json()</code> parses the response. <code>JSON.stringify()</code> prepares data to send.</p>
+                </div>
+            </section>
+
+            <!-- Web Storage -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-database" style="color: #eab308;"></i> Web Storage</h2>
+                <p style="font-size: 0.85em;">Storing data in the browser</p>
+            </section>
+
+            <section>
+                <h2>localStorage & sessionStorage</h2>
+                <pre style="font-size: 0.5em;"><code class="javascript">// localStorage - persists after browser close
+localStorage.setItem('theme', 'dark');
+const theme = localStorage.getItem('theme');  // 'dark'
+localStorage.removeItem('theme');
+localStorage.clear();  // Remove all
+
+// Storing objects (must stringify)
+const user = { name: 'Ahmed', age: 25 };
+localStorage.setItem('user', JSON.stringify(user));
+const stored = JSON.parse(localStorage.getItem('user'));
+
+// sessionStorage - cleared when tab closes
+sessionStorage.setItem('temp', 'data');</code></pre>
+                <div class="thinking-card">
+                    <p><strong>Use cases:</strong> Theme preferences, form drafts, shopping cart, auth tokens</p>
+                </div>
+            </section>
+
+            <!-- Practical Exercise -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-laptop-code" style="color: #eab308;"></i> Practical Exercise</h2>
+                <div style="margin: 1em auto; padding: 1em 1.5em; background: white; border-radius: 12px; border: 2px solid #e2e8f0; max-width: 600px;">
+                    <h3 style="margin: 0; color: #1e293b;">Build an Interactive Todo List</h3>
+                </div>
+            </section>
+
+            <section>
+                <h2>Task Requirements</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; text-align: left; font-size: 0.75em;">
+                    <div>
+                        <h4 style="color: #eab308;"><i class="fas fa-plus"></i> Features</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Add new todos</li>
+                            <li>Mark as complete</li>
+                            <li>Delete todos</li>
+                            <li>Filter (all/active/done)</li>
+                        </ul>
+                        <h4 style="color: #16a34a; margin-top: 0.8em;"><i class="fas fa-code"></i> Concepts</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>DOM manipulation</li>
+                            <li>Event listeners</li>
+                            <li>Array methods</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #2563eb;"><i class="fas fa-database"></i> Storage</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Save to localStorage</li>
+                            <li>Load on page refresh</li>
+                            <li>JSON stringify/parse</li>
+                        </ul>
+                        <h4 style="color: #7c3aed; margin-top: 0.8em;"><i class="fas fa-star"></i> Bonus</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>Edit existing todos</li>
+                            <li>Drag to reorder</li>
+                            <li>Due dates</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2><i class="fas fa-clipboard-list" style="color: #eab308;"></i> Summary</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="feature-card">
+                        <i class="fas fa-box"></i>
+                        <h4>Variables</h4>
+                        <p>let, const</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sitemap"></i>
+                        <h4>DOM</h4>
+                        <p>Select, modify</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Events</h4>
+                        <p>Click, submit</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-list"></i>
+                        <h4>Arrays</h4>
+                        <p>map, filter</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cube"></i>
+                        <h4>Objects</h4>
+                        <p>Properties</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-rocket"></i>
+                        <h4>ES6+</h4>
+                        <p>Arrow, spread</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Async</h4>
+                        <p>await, fetch</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-database"></i>
+                        <h4>Storage</h4>
+                        <p>localStorage</p>
+                    </div>
+                </div>
+                <p style="margin-top: 0.8em; padding: 0.6em; background: #eff6ff; border-radius: 10px; font-size: 0.8em;">
+                    <strong>Next Module:</strong> <i class="fab fa-php" style="color: #777BB3;"></i> PHP Fundamentals — server-side programming
+                </p>
+            </section>
+
+            <!-- Questions -->
+            <section>
+                <h2><i class="fas fa-question-circle" style="color: #eab308;"></i> Questions?</h2>
+                <p style="color: #64748b;">Module 4: JavaScript Fundamentals</p>
+                <div style="margin: 2em 0;">
+                    <i class="fas fa-comments" style="font-size: 4em; color: #e2e8f0;"></i>
+                </div>
+                <p style="color: #64748b; font-size: 0.9em;">Thank you!</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'slide',
+            plugins: [RevealHighlight]
+        });
+    </script>
+</body>
+</html>

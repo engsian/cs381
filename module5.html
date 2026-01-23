@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5: PHP Fundamentals - CS381</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css">
+
+    <!-- Highlight.js for code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Theme Override -->
+    <link rel="stylesheet" href="css/theme.css">
+
+    <style>
+        .home-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        .home-nav a {
+            background: #f8fafc;
+            color: #64748b;
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .home-nav a:hover {
+            background: #8b5cf6;
+            color: white;
+            border-color: #8b5cf6;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6em;
+            margin: 0.5em 0;
+        }
+        .feature-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 0.8em;
+            text-align: center;
+        }
+        .feature-card i {
+            font-size: 1.5em;
+            color: #8b5cf6;
+            margin-bottom: 0.3em;
+            display: block;
+        }
+        .feature-card h4 {
+            margin: 0.3em 0;
+            font-size: 0.8em;
+        }
+        .feature-card p {
+            font-size: 0.65em;
+            color: #64748b;
+            margin: 0;
+        }
+        .thinking-card {
+            background: linear-gradient(135deg, #f3e8ff 0%, #ede9fe 100%);
+            border-left: 4px solid #8b5cf6;
+            padding: 0.8em;
+            border-radius: 0 10px 10px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .thinking-card p {
+            margin: 0;
+            font-size: 0.85em;
+        }
+        .console-output {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 0.8em;
+            border-radius: 8px;
+            font-family: monospace;
+            text-align: left;
+            font-size: 0.75em;
+            margin: 0.5em 0;
+        }
+        .console-output .string { color: #a5d6ff; }
+        .console-output .number { color: #79c0ff; }
+        .console-output .log { color: #7ee787; }
+        .warning-card {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 0.8em;
+            border-radius: 0 10px 10px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .warning-card p {
+            margin: 0;
+            font-size: 0.85em;
+        }
+        .success-card {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 0.8em;
+            border-radius: 0 10px 10px 0;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .success-card p {
+            margin: 0;
+            font-size: 0.85em;
+        }
+        .php-tag {
+            color: #8b5cf6;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Navigation -->
+    <div class="home-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title Slide -->
+            <section data-background-color="#f8fafc">
+                <h1 style="color: #8b5cf6;">Module 5</h1>
+                <h2>PHP Fundamentals</h2>
+                <p style="color: #64748b;">Server-Side Scripting for Dynamic Web Applications</p>
+                <p style="font-size: 0.5em; margin-top: 2em; color: #94a3b8;">CS381 - Web Application Development</p>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section>
+                <h2>Learning Objectives</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fab fa-php"></i>
+                        <h4>PHP Basics</h4>
+                        <p>Syntax, variables, data types, operators</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-code-branch"></i>
+                        <h4>Control Flow</h4>
+                        <p>Conditions, loops, functions, arrays</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>Form Handling</h4>
+                        <p>GET, POST, validation, security</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-user-shield"></i>
+                        <h4>Sessions</h4>
+                        <p>State management across pages</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cookie"></i>
+                        <h4>Cookies</h4>
+                        <p>Persistent client-side data</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-folder-open"></i>
+                        <h4>File Handling</h4>
+                        <p>Read, write, upload files</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What is PHP -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fab fa-php" style="color: #8b5cf6;"></i> Introduction to PHP</h2>
+                <p style="font-size: 0.85em;">The backbone of dynamic websites</p>
+            </section>
+
+            <section>
+                <h2>What is PHP?</h2>
+                <p style="font-size: 0.8em; color: #64748b; margin-bottom: 1rem;"><strong>P</strong>HP: <strong>H</strong>ypertext <strong>P</strong>reprocessor (recursive acronym)</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.65em;">
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;"><i class="fas fa-info-circle"></i> Key Facts</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Created by Rasmus Lerdorf (1994)</li>
+                            <li>Server-side scripting language</li>
+                            <li>Open-source and free</li>
+                            <li>Powers 77%+ of websites</li>
+                            <li>WordPress, Facebook, Wikipedia</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;"><i class="fas fa-check-circle"></i> What PHP Can Do</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Generate dynamic page content</li>
+                            <li>Process form data</li>
+                            <li>Work with databases</li>
+                            <li>Handle sessions & cookies</li>
+                            <li>Read/write files on server</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Client-Side vs Server-Side</h2>
+                <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.5rem; align-items: center; font-size: 0.6em;">
+                    <div style="background: #dbeafe; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;"><i class="fas fa-laptop"></i> Client-Side</h4>
+                        <p style="margin: 0;"><strong>JavaScript</strong></p>
+                        <ul style="margin: 0.5rem 0 0 0; font-size: 0.95em;">
+                            <li>Runs in browser</li>
+                            <li>User can see code</li>
+                            <li>Interactive UI</li>
+                            <li>Form validation</li>
+                        </ul>
+                    </div>
+                    <div style="text-align: center;">
+                        <i class="fas fa-exchange-alt" style="font-size: 2em; color: #64748b;"></i>
+                        <p style="font-size: 0.8em; color: #64748b; margin: 0.5rem 0;">HTTP</p>
+                    </div>
+                    <div style="background: #f3e8ff; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;"><i class="fas fa-server"></i> Server-Side</h4>
+                        <p style="margin: 0;"><strong>PHP</strong></p>
+                        <ul style="margin: 0.5rem 0 0 0; font-size: 0.95em;">
+                            <li>Runs on server</li>
+                            <li>Code hidden from user</li>
+                            <li>Database access</li>
+                            <li>File operations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.75em;"><strong>Key insight:</strong> PHP generates HTML on the server. The browser only sees the HTML output, never the PHP code!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>How PHP Works</h2>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.3rem; font-size: 0.55em; margin-bottom: 1rem;">
+                    <div style="background: #dbeafe; padding: 0.6rem 0.8rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-user" style="font-size: 1.5em; color: #2563eb;"></i><br>
+                        <strong>User</strong><br>
+                        Requests page
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #f3e8ff; padding: 0.6rem 0.8rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-server" style="font-size: 1.5em; color: #8b5cf6;"></i><br>
+                        <strong>Server</strong><br>
+                        Runs PHP code
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #dcfce7; padding: 0.6rem 0.8rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-cog" style="font-size: 1.5em; color: #22c55e;"></i><br>
+                        <strong>PHP Engine</strong><br>
+                        Generates HTML
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #fef3c7; padding: 0.6rem 0.8rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-file-code" style="font-size: 1.5em; color: #eab308;"></i><br>
+                        <strong>HTML</strong><br>
+                        Sent to browser
+                    </div>
+                </div>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;!-- User never sees this PHP code --&gt;
+&lt;?php
+    $name = "Ahmed";
+    $time = date("H:i");
+?&gt;
+
+&lt;!-- User only sees the generated HTML --&gt;
+&lt;h1&gt;Welcome, &lt;?php echo $name; ?&gt;&lt;/h1&gt;
+&lt;p&gt;Current time: &lt;?php echo $time; ?&gt;&lt;/p&gt;</code></pre>
+            </section>
+
+            <!-- PHP Syntax -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-code" style="color: #8b5cf6;"></i> PHP Syntax</h2>
+                <p style="font-size: 0.85em;">Writing your first PHP code</p>
+            </section>
+
+            <section>
+                <h2>Basic PHP Syntax</h2>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;My First PHP Page&lt;/h1&gt;
+
+&lt;?php
+    // PHP code goes between these tags
+    echo "Hello, World!";
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.65em; margin-top: 1rem;">
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <strong><code class="php-tag">&lt;?php</code></strong> - Opening tag<br>
+                        <strong><code class="php-tag">?&gt;</code></strong> - Closing tag (optional at end of file)
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <strong><code>echo</code></strong> - Output text<br>
+                        <strong><code>;</code></strong> - Statement terminator (required)
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Comments in PHP</h2>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+// This is a single-line comment
+
+# This is also a single-line comment (shell-style)
+
+/*
+    This is a multi-line comment
+    It can span multiple lines
+*/
+
+$price = 100;  // Inline comment after code
+
+/**
+ * Documentation comment (PHPDoc)
+ * Used for generating documentation
+ * @param string $name The user's name
+ * @return string Greeting message
+ */
+function greet($name) {
+    return "Hello, $name!";
+}
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>echo vs print</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em;">
+                    <div>
+                        <h4 style="color: #8b5cf6;"><code>echo</code></h4>
+                        <pre style="font-size: 0.9em;"><code class="php">// No return value
+// Slightly faster
+// Can output multiple values
+
+echo "Hello";
+echo "Hello", " ", "World";
+echo("Using parentheses");</code></pre>
+                    </div>
+                    <div>
+                        <h4 style="color: #8b5cf6;"><code>print</code></h4>
+                        <pre style="font-size: 0.9em;"><code class="php">// Returns 1 (can use in expressions)
+// Only one argument
+
+print "Hello";
+print("Using parentheses");
+
+// Can use in expressions
+$x = print "Hello"; // $x = 1</code></pre>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.75em;"><strong>Recommendation:</strong> Use <code>echo</code> — it's more common and slightly faster. Use <code>print</code> only when you need the return value.</p>
+                </div>
+            </section>
+
+            <!-- Variables -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-box" style="color: #8b5cf6;"></i> Variables & Data Types</h2>
+                <p style="font-size: 0.85em;">Storing and working with data</p>
+            </section>
+
+            <section>
+                <h2>PHP Variables</h2>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+// Variables start with $ sign
+$name = "Ahmed";        // String
+$age = 25;              // Integer
+$price = 19.99;         // Float
+$isStudent = true;      // Boolean
+$courses = ["CS381", "CS201"];  // Array
+
+// Variable naming rules
+$myVar = "valid";       // Letters, numbers, underscore
+$_private = "valid";    // Can start with underscore
+$var2 = "valid";        // Can contain numbers
+
+// INVALID:
+// $2var = "invalid";   // Cannot start with number
+// $my-var = "invalid"; // No hyphens
+// $my var = "invalid"; // No spaces
+
+// Case-sensitive!
+$color = "red";
+$Color = "blue";        // Different variable!
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>PHP Data Types</h2>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; font-size: 0.55em;">
+                    <div style="background: #dbeafe; padding: 0.6rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>String</strong><br>
+                        <code>"Hello"</code><br>
+                        <code>'World'</code>
+                    </div>
+                    <div style="background: #dcfce7; padding: 0.6rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Integer</strong><br>
+                        <code>42</code><br>
+                        <code>-100</code>
+                    </div>
+                    <div style="background: #fef3c7; padding: 0.6rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Float</strong><br>
+                        <code>3.14</code><br>
+                        <code>2.5e3</code>
+                    </div>
+                    <div style="background: #fce7f3; padding: 0.6rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Boolean</strong><br>
+                        <code>true</code><br>
+                        <code>false</code>
+                    </div>
+                    <div style="background: #e0e7ff; padding: 0.6rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Array</strong><br>
+                        <code>[1, 2, 3]</code>
+                    </div>
+                    <div style="background: #f3e8ff; padding: 0.6rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Object</strong><br>
+                        <code>new Class()</code>
+                    </div>
+                    <div style="background: #f1f5f9; padding: 0.6rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>NULL</strong><br>
+                        <code>null</code>
+                    </div>
+                    <div style="background: #fef2f2; padding: 0.6rem; border-radius: 0.5rem; text-align: center;">
+                        <strong>Resource</strong><br>
+                        <code>file handle</code>
+                    </div>
+                </div>
+                <pre style="font-size: 0.45em; margin-top: 0.75rem;"><code class="php">// PHP is loosely typed - type determined automatically
+$x = 5;          // Integer
+$x = "Hello";    // Now it's a String (no error!)
+
+// Check type with gettype() or var_dump()
+var_dump($x);    // string(5) "Hello"</code></pre>
+            </section>
+
+            <section>
+                <h2>String Operations</h2>
+                <pre style="font-size: 0.48em;"><code class="php">$firstName = "Ahmed";
+$lastName = "Ali";
+
+// Concatenation with . operator
+$fullName = $firstName . " " . $lastName;  // "Ahmed Ali"
+
+// Double quotes: variable interpolation
+echo "Hello, $firstName!";          // "Hello, Ahmed!"
+echo "Name: {$firstName}son";       // "Name: Ahmedson" (use {} for clarity)
+
+// Single quotes: literal string (no interpolation)
+echo 'Hello, $firstName!';          // "Hello, $firstName!" (literal)
+
+// Useful string functions
+strlen($fullName);         // 9 (length)
+strtoupper($firstName);    // "AHMED"
+strtolower($firstName);    // "ahmed"
+str_replace("Ali", "Khan", $fullName);  // "Ahmed Khan"
+substr($firstName, 0, 3);  // "Ahm" (substring)
+trim("  hello  ");         // "hello" (remove whitespace)</code></pre>
+            </section>
+
+            <!-- Operators -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-calculator" style="color: #8b5cf6;"></i> Operators</h2>
+                <p style="font-size: 0.85em;">Performing operations on data</p>
+            </section>
+
+            <section>
+                <h2>PHP Operators</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.55em;">
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;">Arithmetic</h4>
+                        <code>+ - * / % **</code><br>
+                        <span style="color: #64748b;">Add, subtract, multiply, divide, modulus, power</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;">Assignment</h4>
+                        <code>= += -= *= /= .=</code><br>
+                        <span style="color: #64748b;">Assign, add-assign, concat-assign</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;">Comparison</h4>
+                        <code>== === != !== &lt; &gt; &lt;= &gt;=</code><br>
+                        <span style="color: #64748b;">Equal, identical, not equal, less/greater</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;">Logical</h4>
+                        <code>&& || ! and or</code><br>
+                        <span style="color: #64748b;">AND, OR, NOT</span>
+                    </div>
+                </div>
+                <pre style="font-size: 0.45em; margin-top: 0.75rem;"><code class="php">// IMPORTANT: == vs ===
+$a = 5;
+$b = "5";
+
+$a == $b;   // true  (values equal, type ignored)
+$a === $b;  // false (values equal, but types different!)
+
+// Spaceship operator (PHP 7+)
+1 <=> 2;    // -1 (left is less)
+2 <=> 2;    //  0 (equal)
+3 <=> 2;    //  1 (left is greater)</code></pre>
+            </section>
+
+            <!-- Control Structures -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-code-branch" style="color: #8b5cf6;"></i> Control Structures</h2>
+                <p style="font-size: 0.85em;">Making decisions and repeating code</p>
+            </section>
+
+            <section>
+                <h2>if / else / elseif</h2>
+                <pre style="font-size: 0.5em;"><code class="php">$grade = 85;
+
+if ($grade >= 90) {
+    echo "A - Excellent!";
+} elseif ($grade >= 80) {
+    echo "B - Good!";
+} elseif ($grade >= 70) {
+    echo "C - Average";
+} else {
+    echo "Need improvement";
+}
+
+// Ternary operator (shorthand)
+$status = ($grade >= 60) ? "Pass" : "Fail";
+
+// Null coalescing operator (PHP 7+)
+$username = $_GET['user'] ?? 'Guest';  // If null, use 'Guest'</code></pre>
+            </section>
+
+            <section>
+                <h2>switch Statement</h2>
+                <pre style="font-size: 0.5em;"><code class="php">$day = "Monday";
+
+switch ($day) {
+    case "Monday":
+        echo "Start of work week";
+        break;
+    case "Friday":
+        echo "TGIF!";
+        break;
+    case "Saturday":
+    case "Sunday":
+        echo "Weekend!";
+        break;
+    default:
+        echo "Regular day";
+}
+
+// PHP 8: match expression (stricter, returns value)
+$result = match($day) {
+    "Monday" => "Start of work week",
+    "Friday" => "TGIF!",
+    "Saturday", "Sunday" => "Weekend!",
+    default => "Regular day"
+};</code></pre>
+            </section>
+
+            <section>
+                <h2>Loops</h2>
+                <pre style="font-size: 0.45em;"><code class="php">// while loop
+$i = 0;
+while ($i < 5) {
+    echo $i;
+    $i++;
+}
+
+// do-while loop (runs at least once)
+$i = 0;
+do {
+    echo $i;
+    $i++;
+} while ($i < 5);
+
+// for loop
+for ($i = 0; $i < 5; $i++) {
+    echo $i;
+}
+
+// foreach loop (for arrays)
+$colors = ["red", "green", "blue"];
+foreach ($colors as $color) {
+    echo $color;
+}
+
+// foreach with key => value
+$person = ["name" => "Ahmed", "age" => 25];
+foreach ($person as $key => $value) {
+    echo "$key: $value";
+}</code></pre>
+            </section>
+
+            <!-- Arrays -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-layer-group" style="color: #8b5cf6;"></i> Arrays</h2>
+                <p style="font-size: 0.85em;">Storing multiple values</p>
+            </section>
+
+            <section>
+                <h2>Types of Arrays</h2>
+                <pre style="font-size: 0.48em;"><code class="php">// 1. Indexed Array (numeric keys)
+$fruits = ["Apple", "Banana", "Orange"];
+// or: $fruits = array("Apple", "Banana", "Orange");
+
+echo $fruits[0];  // "Apple"
+echo $fruits[1];  // "Banana"
+
+// 2. Associative Array (named keys)
+$student = [
+    "name" => "Ahmed",
+    "age" => 25,
+    "course" => "CS381"
+];
+
+echo $student["name"];  // "Ahmed"
+
+// 3. Multidimensional Array (arrays inside arrays)
+$students = [
+    ["name" => "Ahmed", "grade" => 90],
+    ["name" => "Sara", "grade" => 85],
+    ["name" => "Omar", "grade" => 88]
+];
+
+echo $students[0]["name"];  // "Ahmed"
+echo $students[1]["grade"]; // 85</code></pre>
+            </section>
+
+            <section>
+                <h2>Array Functions</h2>
+                <pre style="font-size: 0.45em;"><code class="php">$numbers = [3, 1, 4, 1, 5, 9];
+
+// Basic functions
+count($numbers);              // 6 (length)
+array_push($numbers, 2);      // Add to end
+array_pop($numbers);          // Remove from end
+array_unshift($numbers, 0);   // Add to beginning
+array_shift($numbers);        // Remove from beginning
+
+// Searching
+in_array(4, $numbers);        // true (value exists?)
+array_search(4, $numbers);    // 2 (find index)
+
+// Sorting
+sort($numbers);               // [1, 1, 3, 4, 5, 9] (ascending)
+rsort($numbers);              // Descending
+asort($assoc);                // Sort associative by value
+ksort($assoc);                // Sort associative by key
+
+// Transforming
+array_merge($arr1, $arr2);    // Combine arrays
+array_slice($numbers, 1, 3);  // Extract portion
+array_filter($numbers, fn($n) => $n > 3);  // Filter
+array_map(fn($n) => $n * 2, $numbers);     // Transform each</code></pre>
+            </section>
+
+            <!-- Objects (Brief Introduction) -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-cube" style="color: #8b5cf6;"></i> Objects</h2>
+                <p style="font-size: 0.85em;">Grouping data and behavior together</p>
+            </section>
+
+            <section>
+                <h2>What are Objects?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em; margin-bottom: 1rem;">
+                    <div style="background: #dbeafe; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;"><i class="fas fa-layer-group"></i> Array</h4>
+                        <p style="margin: 0;">Collection of values accessed by index or key</p>
+                        <pre style="font-size: 0.85em; margin: 0.5rem 0 0 0;"><code class="php">$user = [
+    "name" => "Ahmed",
+    "age" => 25
+];</code></pre>
+                    </div>
+                    <div style="background: #f3e8ff; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;"><i class="fas fa-cube"></i> Object</h4>
+                        <p style="margin: 0;">Data + functions (methods) bundled together</p>
+                        <pre style="font-size: 0.85em; margin: 0.5rem 0 0 0;"><code class="php">$user = new User();
+$user->name = "Ahmed";
+$user->greet();</code></pre>
+                    </div>
+                </div>
+                <div class="thinking-card">
+                    <p style="font-size: 0.75em;"><strong>Key difference:</strong> Objects can have <em>methods</em> (functions) that operate on their data. Arrays only store data.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Creating a Simple Class</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+// Define a class (blueprint for objects)
+class User {
+    // Properties (data)
+    public $name;
+    public $email;
+
+    // Constructor (runs when object is created)
+    public function __construct($name, $email) {
+        $this->name = $name;
+        $this->email = $email;
+    }
+
+    // Method (function inside class)
+    public function greet() {
+        return "Hello, I'm " . $this->name;
+    }
+}
+
+// Create an object (instance of the class)
+$user1 = new User("Ahmed", "ahmed@example.com");
+$user2 = new User("Sara", "sara@example.com");
+
+echo $user1->greet();  // "Hello, I'm Ahmed"
+echo $user2->name;     // "Sara"
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Why Use Objects?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.6em;">
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #8b5cf6;"><i class="fas fa-box"></i> Encapsulation</h4>
+                        <p style="margin: 0; color: #64748b;">Bundle related data and functions together</p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #8b5cf6;"><i class="fas fa-copy"></i> Reusability</h4>
+                        <p style="margin: 0; color: #64748b;">Create multiple instances from one class</p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #8b5cf6;"><i class="fas fa-sitemap"></i> Organization</h4>
+                        <p style="margin: 0; color: #64748b;">Structure code in a logical, maintainable way</p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #8b5cf6;"><i class="fas fa-shield-alt"></i> Data Protection</h4>
+                        <p style="margin: 0; color: #64748b;">Control access with public/private/protected</p>
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 1rem;">
+                    <p style="font-size: 0.75em;"><strong>Note:</strong> Full Object-Oriented Programming (OOP) — inheritance, interfaces, traits — is covered in a dedicated course. This is just an introduction!</p>
+                </div>
+            </section>
+
+            <!-- Functions -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-cube" style="color: #8b5cf6;"></i> Functions</h2>
+                <p style="font-size: 0.85em;">Reusable blocks of code</p>
+            </section>
+
+            <section>
+                <h2>Defining Functions</h2>
+                <pre style="font-size: 0.48em;"><code class="php">// Basic function
+function greet() {
+    echo "Hello, World!";
+}
+greet();  // "Hello, World!"
+
+// Function with parameters
+function greetUser($name) {
+    echo "Hello, $name!";
+}
+greetUser("Ahmed");  // "Hello, Ahmed!"
+
+// Default parameter values
+function greetWithDefault($name = "Guest") {
+    echo "Hello, $name!";
+}
+greetWithDefault();         // "Hello, Guest!"
+greetWithDefault("Sara");   // "Hello, Sara!"
+
+// Returning values
+function add($a, $b) {
+    return $a + $b;
+}
+$sum = add(5, 3);  // 8</code></pre>
+            </section>
+
+            <section>
+                <h2>Type Declarations (PHP 7+)</h2>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+// Parameter type declarations
+function multiply(int $a, int $b): int {
+    return $a * $b;
+}
+
+multiply(5, 3);      // 15
+multiply("5", "3");  // 15 (coerced to int)
+
+// Strict mode (at top of file)
+declare(strict_types=1);
+multiply("5", "3");  // TypeError!
+
+// Nullable types
+function findUser(int $id): ?array {
+    // Returns array or null
+    return $id > 0 ? ["id" => $id] : null;
+}
+
+// Union types (PHP 8+)
+function format(int|float $number): string {
+    return number_format($number, 2);
+}
+?&gt;</code></pre>
+            </section>
+
+            <!-- Superglobals -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-globe" style="color: #8b5cf6;"></i> Superglobals</h2>
+                <p style="font-size: 0.85em;">Built-in variables available everywhere</p>
+            </section>
+
+            <section>
+                <h2>PHP Superglobals</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.55em;">
+                    <div style="background: #dbeafe; padding: 0.6rem; border-radius: 0.5rem;">
+                        <strong><code>$_GET</code></strong><br>
+                        URL query parameters
+                    </div>
+                    <div style="background: #dcfce7; padding: 0.6rem; border-radius: 0.5rem;">
+                        <strong><code>$_POST</code></strong><br>
+                        Form data (POST method)
+                    </div>
+                    <div style="background: #fef3c7; padding: 0.6rem; border-radius: 0.5rem;">
+                        <strong><code>$_REQUEST</code></strong><br>
+                        GET + POST + COOKIE data
+                    </div>
+                    <div style="background: #fce7f3; padding: 0.6rem; border-radius: 0.5rem;">
+                        <strong><code>$_SESSION</code></strong><br>
+                        Session variables
+                    </div>
+                    <div style="background: #e0e7ff; padding: 0.6rem; border-radius: 0.5rem;">
+                        <strong><code>$_COOKIE</code></strong><br>
+                        Cookie values
+                    </div>
+                    <div style="background: #f3e8ff; padding: 0.6rem; border-radius: 0.5rem;">
+                        <strong><code>$_FILES</code></strong><br>
+                        Uploaded file info
+                    </div>
+                    <div style="background: #f1f5f9; padding: 0.6rem; border-radius: 0.5rem;">
+                        <strong><code>$_SERVER</code></strong><br>
+                        Server/request info
+                    </div>
+                    <div style="background: #fef2f2; padding: 0.6rem; border-radius: 0.5rem;">
+                        <strong><code>$_ENV</code></strong><br>
+                        Environment variables
+                    </div>
+                </div>
+                <pre style="font-size: 0.45em; margin-top: 0.75rem;"><code class="php">// Common $_SERVER values
+$_SERVER["PHP_SELF"];       // Current script path
+$_SERVER["REQUEST_METHOD"]; // GET, POST, etc.
+$_SERVER["HTTP_HOST"];      // Domain name
+$_SERVER["REMOTE_ADDR"];    // Visitor's IP address</code></pre>
+            </section>
+
+            <!-- Form Handling -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-file-alt" style="color: #8b5cf6;"></i> Form Handling</h2>
+                <p style="font-size: 0.85em;">Processing user input</p>
+            </section>
+
+            <section>
+                <h2>HTML Form Basics</h2>
+                <pre style="font-size: 0.5em;"><code class="html">&lt;!-- HTML form --&gt;
+&lt;form action="process.php" method="POST"&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" id="name" name="name"&gt;
+
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email"&gt;
+
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em; margin-top: 1rem;">
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <strong>action</strong> - Where to send data<br>
+                        <span style="color: #64748b;">PHP file that processes the form</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <strong>method</strong> - How to send data<br>
+                        <span style="color: #64748b;">GET (URL) or POST (hidden)</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>GET vs POST</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.55em;">
+                    <div style="background: #dbeafe; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #2563eb;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">GET Method</h4>
+                        <pre style="font-size: 0.85em; margin: 0.5rem 0;"><code class="nohighlight">page.php?name=Ahmed&age=25</code></pre>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>Data visible in URL</li>
+                            <li>Can be bookmarked</li>
+                            <li>Limited to ~2000 characters</li>
+                            <li>Use for: search, filters</li>
+                        </ul>
+                        <p style="color: #dc2626; margin: 0.5rem 0 0 0;"><strong>Never for sensitive data!</strong></p>
+                    </div>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #22c55e;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;">POST Method</h4>
+                        <pre style="font-size: 0.85em; margin: 0.5rem 0;"><code class="nohighlight">Data sent in request body</code></pre>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>Data hidden from URL</li>
+                            <li>Cannot be bookmarked</li>
+                            <li>No size limitation</li>
+                            <li>Use for: login, forms</li>
+                        </ul>
+                        <p style="color: #22c55e; margin: 0.5rem 0 0 0;"><strong>Preferred for most forms</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Processing Form Data</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+// process.php - Receives form data
+
+// Check if form was submitted via POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Access form fields using $_POST['name']
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+
+    echo "Hello, $name!";
+    echo "Your email is: $email";
+}
+
+// For GET requests, use $_GET
+// Example URL: search.php?query=PHP
+if (isset($_GET["query"])) {
+    $searchTerm = $_GET["query"];
+    echo "You searched for: $searchTerm";
+}
+?&gt;</code></pre>
+                <div class="thinking-card">
+                    <p style="font-size: 0.75em;"><strong>Always check:</strong> Use <code>isset()</code> to verify a variable exists before using it, or use null coalescing: <code>$name = $_POST["name"] ?? "";</code></p>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-shield-alt" style="color: #dc2626;"></i> Form Security</h2>
+                <p style="font-size: 0.75em; color: #dc2626; margin-bottom: 1rem;"><strong>NEVER trust user input!</strong></p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.55em;">
+                    <div class="warning-card">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #dc2626;"><i class="fas fa-bug"></i> XSS Attack</h4>
+                        <p style="margin: 0;">User enters: <code>&lt;script&gt;alert('hacked')&lt;/script&gt;</code></p>
+                        <p style="margin: 0.5rem 0 0 0;">If displayed without sanitizing, malicious script runs!</p>
+                    </div>
+                    <div class="success-card">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;"><i class="fas fa-shield-alt"></i> Protection</h4>
+                        <p style="margin: 0;">Use <code>htmlspecialchars()</code> to convert special characters to HTML entities.</p>
+                        <p style="margin: 0.5rem 0 0 0;"><code>&lt;</code> becomes <code>&amp;lt;</code></p>
+                    </div>
+                </div>
+                <pre style="font-size: 0.48em; margin-top: 1rem;"><code class="php">// DANGEROUS - Never do this!
+echo $_POST["name"];  // Could contain malicious code
+
+// SAFE - Always sanitize output
+echo htmlspecialchars($_POST["name"], ENT_QUOTES, 'UTF-8');</code></pre>
+            </section>
+
+            <section>
+                <h2>The test_input() Function</h2>
+                <p style="font-size: 0.75em; color: #64748b;">A reusable function to sanitize all user input</p>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+function test_input($data) {
+    $data = trim($data);           // Remove whitespace
+    $data = stripslashes($data);   // Remove backslashes
+    $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');  // Convert special chars
+    return $data;
+}
+
+// Usage
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = test_input($_POST["name"]);
+    $email = test_input($_POST["email"]);
+    $comment = test_input($_POST["comment"]);
+
+    // Now safe to use these variables
+    echo "Name: $name";
+}
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Form Validation</h2>
+                <pre style="font-size: 0.45em;"><code class="php">&lt;?php
+$errors = [];
+$name = $email = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate Name (required, letters only)
+    if (empty($_POST["name"])) {
+        $errors[] = "Name is required";
+    } else {
+        $name = test_input($_POST["name"]);
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+            $errors[] = "Name can only contain letters and spaces";
+        }
+    }
+
+    // Validate Email (required, valid format)
+    if (empty($_POST["email"])) {
+        $errors[] = "Email is required";
+    } else {
+        $email = test_input($_POST["email"]);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Invalid email format";
+        }
+    }
+
+    // If no errors, process the form
+    if (empty($errors)) {
+        echo "Form submitted successfully!";
+    }
+}
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Displaying Errors</h2>
+                <pre style="font-size: 0.45em;"><code class="php">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;?php if (!empty($errors)): ?&gt;
+    &lt;div class="error-box"&gt;
+        &lt;ul&gt;
+        &lt;?php foreach ($errors as $error): ?&gt;
+            &lt;li&gt;&lt;?php echo $error; ?&gt;&lt;/li&gt;
+        &lt;?php endforeach; ?&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;?php endif; ?&gt;
+
+&lt;form method="POST" action="&lt;?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?&gt;"&gt;
+    &lt;label&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name" value="&lt;?php echo $name; ?&gt;"&gt;
+
+    &lt;label&gt;Email:&lt;/label&gt;
+    &lt;input type="email" name="email" value="&lt;?php echo $email; ?&gt;"&gt;
+
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <div class="thinking-card">
+                    <p style="font-size: 0.7em;"><strong>Best practice:</strong> Use <code>htmlspecialchars($_SERVER['PHP_SELF'])</code> to prevent XSS attacks in the action attribute!</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Complete Form Example</h2>
+                <pre style="font-size: 0.4em;"><code class="php">&lt;?php
+$name = $email = $message = "";
+$errors = [];
+$success = false;
+
+function test_input($data) {
+    return htmlspecialchars(stripslashes(trim($data)), ENT_QUOTES, 'UTF-8');
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate name
+    if (empty($_POST["name"])) {
+        $errors["name"] = "Name is required";
+    } else {
+        $name = test_input($_POST["name"]);
+    }
+
+    // Validate email
+    if (empty($_POST["email"])) {
+        $errors["email"] = "Email is required";
+    } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $errors["email"] = "Invalid email format";
+    } else {
+        $email = test_input($_POST["email"]);
+    }
+
+    // Optional message
+    $message = test_input($_POST["message"] ?? "");
+
+    // Process if no errors
+    if (empty($errors)) {
+        // Save to database, send email, etc.
+        $success = true;
+    }
+}
+?&gt;</code></pre>
+            </section>
+
+            <!-- Sessions -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-user-shield" style="color: #8b5cf6;"></i> Sessions</h2>
+                <p style="font-size: 0.85em;">Maintaining state across pages</p>
+            </section>
+
+            <section>
+                <h2>What are Sessions?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em; margin-bottom: 1rem;">
+                    <div style="background: #fef2f2; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #dc2626;"><i class="fas fa-times-circle"></i> The Problem</h4>
+                        <p style="margin: 0;">HTTP is <strong>stateless</strong> — each request is independent. Server doesn't remember previous requests.</p>
+                    </div>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;"><i class="fas fa-check-circle"></i> The Solution</h4>
+                        <p style="margin: 0;"><strong>Sessions</strong> store user data on the server, accessible across multiple pages.</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.3rem; font-size: 0.5em;">
+                    <div style="background: #dbeafe; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-user"></i><br>User visits
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #f3e8ff; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-key"></i><br>Server creates<br>session ID
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #fef3c7; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-cookie"></i><br>ID stored in<br>browser cookie
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: #64748b;"></i>
+                    <div style="background: #dcfce7; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <i class="fas fa-database"></i><br>Data stored<br>on server
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Using Sessions</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+// MUST be called before any HTML output!
+session_start();
+
+// Set session variables
+$_SESSION["username"] = "Ahmed";
+$_SESSION["user_id"] = 123;
+$_SESSION["logged_in"] = true;
+
+// Access session variables (on any page)
+echo "Welcome, " . $_SESSION["username"];
+
+// Check if session variable exists
+if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true) {
+    echo "You are logged in!";
+} else {
+    echo "Please log in.";
+}
+
+// Remove a specific session variable
+unset($_SESSION["user_id"]);
+
+// Destroy entire session (logout)
+session_unset();      // Clear all session variables
+session_destroy();    // Destroy the session
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Session Example: Login System</h2>
+                <pre style="font-size: 0.42em;"><code class="php">&lt;?php // login.php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // In real app: check against database with password_verify()
+    if ($username === "admin" && $password === "secret123") {
+        $_SESSION["logged_in"] = true;
+        $_SESSION["username"] = $username;
+        header("Location: dashboard.php");  // Redirect
+        exit();
+    } else {
+        $error = "Invalid credentials";
+    }
+}
+?&gt;
+
+&lt;?php // dashboard.php (protected page)
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
+    header("Location: login.php");
+    exit();
+}
+
+echo "Welcome to your dashboard, " . $_SESSION["username"];
+?&gt;
+
+&lt;?php // logout.php
+session_start();
+session_unset();
+session_destroy();
+header("Location: login.php");
+exit();
+?&gt;</code></pre>
+            </section>
+
+            <!-- Cookies -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-cookie" style="color: #8b5cf6;"></i> Cookies</h2>
+                <p style="font-size: 0.85em;">Storing data in the browser</p>
+            </section>
+
+            <section>
+                <h2>Sessions vs Cookies</h2>
+                <div style="font-size: 0.6em;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #f8fafc;">
+                                <th style="padding: 0.5rem; border: 1px solid #e2e8f0;">Aspect</th>
+                                <th style="padding: 0.5rem; border: 1px solid #e2e8f0;"><i class="fas fa-server"></i> Sessions</th>
+                                <th style="padding: 0.5rem; border: 1px solid #e2e8f0;"><i class="fas fa-cookie"></i> Cookies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Storage</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Server</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Browser</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Lifespan</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Until browser closes</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Custom expiration</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Security</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">More secure</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Less secure</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Size limit</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">No practical limit</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">~4KB per cookie</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Best for</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Sensitive data (login)</td>
+                                <td style="padding: 0.5rem; border: 1px solid #e2e8f0;">Preferences (theme)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Using Cookies</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+// setcookie() MUST be called before any HTML output!
+
+// Set a cookie (expires in 30 days)
+setcookie("username", "Ahmed", time() + (86400 * 30), "/");
+//         name       value    expiration (seconds)    path
+
+// Set a secure cookie (HTTPS only, HTTP only)
+setcookie("session_token", "abc123", [
+    "expires" => time() + 3600,
+    "path" => "/",
+    "secure" => true,      // HTTPS only
+    "httponly" => true,    // Not accessible via JavaScript
+    "samesite" => "Strict" // Prevent CSRF
+]);
+
+// Read a cookie
+if (isset($_COOKIE["username"])) {
+    echo "Welcome back, " . $_COOKIE["username"];
+}
+
+// Delete a cookie (set expiration in the past)
+setcookie("username", "", time() - 3600, "/");
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Cookie Example: Remember Theme</h2>
+                <pre style="font-size: 0.45em;"><code class="php">&lt;?php
+// Set theme from form submission
+if (isset($_POST["theme"])) {
+    $theme = $_POST["theme"];
+    setcookie("theme", $theme, time() + (86400 * 365), "/");  // 1 year
+}
+
+// Get current theme (default to 'light')
+$currentTheme = $_COOKIE["theme"] ?? "light";
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        .light { background: white; color: black; }
+        .dark { background: #1e293b; color: white; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body class="&lt;?php echo $currentTheme; ?&gt;"&gt;
+    &lt;h1&gt;Theme Preference&lt;/h1&gt;
+    &lt;form method="POST"&gt;
+        &lt;select name="theme"&gt;
+            &lt;option value="light" &lt;?php if($currentTheme == "light") echo "selected"; ?&gt;&gt;Light&lt;/option&gt;
+            &lt;option value="dark" &lt;?php if($currentTheme == "dark") echo "selected"; ?&gt;&gt;Dark&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;button type="submit"&gt;Save&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+
+            <!-- File Handling -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-folder-open" style="color: #8b5cf6;"></i> File Handling</h2>
+                <p style="font-size: 0.85em;">Reading and writing files</p>
+            </section>
+
+            <section>
+                <h2>Reading Files</h2>
+                <pre style="font-size: 0.48em;"><code class="php">&lt;?php
+// Read entire file into a string
+$content = file_get_contents("data.txt");
+echo $content;
+
+// Read file into an array (one line per element)
+$lines = file("data.txt", FILE_IGNORE_NEW_LINES);
+foreach ($lines as $line) {
+    echo $line . "&lt;br&gt;";
+}
+
+// Read file line by line (memory efficient for large files)
+$handle = fopen("data.txt", "r");
+if ($handle) {
+    while (($line = fgets($handle)) !== false) {
+        echo $line;
+    }
+    fclose($handle);
+}
+
+// Check if file exists
+if (file_exists("data.txt")) {
+    echo "File exists!";
+}
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Writing Files</h2>
+                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+// Write to file (creates or overwrites)
+file_put_contents("output.txt", "Hello, World!");
+
+// Append to file
+file_put_contents("log.txt", "New entry\n", FILE_APPEND);
+
+// Using fopen/fwrite for more control
+$handle = fopen("data.txt", "w");  // w = write (overwrite)
+fwrite($handle, "Line 1\n");
+fwrite($handle, "Line 2\n");
+fclose($handle);
+
+// File modes:
+// "r"  - Read only
+// "w"  - Write only (creates/overwrites)
+// "a"  - Append (creates if not exists)
+// "r+" - Read and write
+// "w+" - Read and write (overwrites)
+?&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>File Upload</h2>
+                <pre style="font-size: 0.42em;"><code class="html">&lt;!-- HTML form for file upload --&gt;
+&lt;form action="upload.php" method="POST" enctype="multipart/form-data"&gt;
+    &lt;input type="file" name="uploaded_file"&gt;
+    &lt;button type="submit"&gt;Upload&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <pre style="font-size: 0.42em;"><code class="php">&lt;?php // upload.php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $file = $_FILES["uploaded_file"];
+
+    // File information
+    $fileName = $file["name"];       // Original filename
+    $fileTmp = $file["tmp_name"];    // Temporary path
+    $fileSize = $file["size"];       // Size in bytes
+    $fileError = $file["error"];     // Error code
+
+    // Validate and move file
+    $allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
+    $maxSize = 5 * 1024 * 1024;  // 5MB
+
+    if ($fileError === 0 && in_array($file["type"], $allowedTypes) && $fileSize <= $maxSize) {
+        $destination = "uploads/" . basename($fileName);
+        if (move_uploaded_file($fileTmp, $destination)) {
+            echo "File uploaded successfully!";
+        }
+    } else {
+        echo "Upload failed. Check file type and size.";
+    }
+}
+?&gt;</code></pre>
+            </section>
+
+            <!-- Summary -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-check-circle" style="color: #8b5cf6;"></i> Module Summary</h2>
+            </section>
+
+            <section>
+                <h2>What We Covered</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.6em;">
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;"><i class="fas fa-code"></i> PHP Basics</h4>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>Syntax, variables, data types</li>
+                            <li>Operators and expressions</li>
+                            <li>Control structures</li>
+                            <li>Functions and arrays</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;"><i class="fas fa-file-alt"></i> Forms</h4>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>GET vs POST methods</li>
+                            <li>Form validation</li>
+                            <li>Security (XSS prevention)</li>
+                            <li>The test_input() function</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;"><i class="fas fa-user-shield"></i> State Management</h4>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>Sessions (server-side)</li>
+                            <li>Cookies (client-side)</li>
+                            <li>Login/logout flow</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem; text-align: left;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;"><i class="fas fa-folder-open"></i> Files</h4>
+                        <ul style="margin: 0; line-height: 1.5;">
+                            <li>Reading files</li>
+                            <li>Writing files</li>
+                            <li>File uploads</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Next Module Preview</h2>
+                <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                    <h3 style="margin: 0 0 0.5rem 0;"><i class="fas fa-database" style="color: #d97706;"></i> Module 6: MySQL & PHP Integration</h3>
+                    <p style="margin: 0; font-size: 0.8em;">Database design, SQL CRUD operations, PDO, prepared statements, and building complete data-driven applications.</p>
+                </div>
+                <div class="thinking-card">
+                    <p style="font-size: 0.8em;"><strong>Coming up:</strong> Combine PHP with MySQL to build real web applications that store and retrieve data!</p>
+                </div>
+            </section>
+
+            <!-- End Slide -->
+            <section data-background-color="#8b5cf6">
+                <h2 style="color: white;">Questions?</h2>
+                <p style="color: rgba(255,255,255,0.8);">Module 5: PHP Fundamentals</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.6em; margin-top: 2em;">CS381 - Web Application Development<br>Yanbu Industrial College</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            plugins: [ RevealHighlight ]
+        });
+    </script>
+</body>
+</html>

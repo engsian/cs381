@@ -128,6 +128,11 @@
     color: #e2e8f0 !important;
 }
 
+.reveal pre code .hljs-variable,
+.hljs-variable {
+    color: #79c0ff !important;
+}
+
 /* Highlighted/emphasized text */
 .reveal strong, .reveal b {
     color: var(--primary);
