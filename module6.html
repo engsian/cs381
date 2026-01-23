@@ -771,35 +771,25 @@ try {
 
             <section>
                 <h2>Reusable Database Class</h2>
-                <pre style="font-size: 0.45em;"><code class="php">&lt;?php
-// db.php - Include this file in your pages
-
+                <pre style="font-size: 0.42em;"><code class="php">&lt;?php // db.php - Include this file in your pages
 $host = 'localhost';
 $dbname = 'cs381_db';
 $username = 'root';
 $password = '';
 
 try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
-        $username,
-        $password,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false
-        ]
-    );
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false
+    ]);
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
-
-// Usage in other files:
-// require_once 'db.php';
-// Now $pdo is available!
+// Usage: require_once 'db.php'; — Now $pdo is available!
 ?&gt;</code></pre>
                 <div class="thinking-card">
-                    <p style="font-size: 0.75em;"><strong>Best practice:</strong> Keep database credentials in a separate file and use <code>require_once</code> to include it.</p>
+                    <p style="font-size: 0.7em;"><strong>Best practice:</strong> Keep database credentials in a separate file and use <code>require_once</code> to include it.</p>
                 </div>
             </section>
 
@@ -911,7 +901,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <section>
                 <h2>DELETE - Remove Data</h2>
-                <pre style="font-size: 0.5em;"><code class="php">&lt;?php
+                <pre style="font-size: 0.45em;"><code class="php">&lt;?php
 require_once 'db.php';
 
 // Delete a record
@@ -927,16 +917,14 @@ if ($stmt->rowCount() > 0) {
 // Delete with confirmation (typical workflow)
 if (isset($_GET['delete']) && isset($_GET['id'])) {
     $id = (int) $_GET['id'];  // Cast to integer for safety
-
     $stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
     $stmt->execute([':id' => $id]);
-
     header("Location: users.php?success=deleted");
     exit();
 }
 ?&gt;</code></pre>
                 <div class="warning-card">
-                    <p style="font-size: 0.75em;"><strong>Best practice:</strong> Always confirm before deleting! Use a modal or confirmation page.</p>
+                    <p style="font-size: 0.7em;"><strong>Best practice:</strong> Always confirm before deleting! Use a modal or confirmation page.</p>
                 </div>
             </section>
 
