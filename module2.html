@@ -775,6 +775,142 @@ sessionStorage.setItem('cartItems', '5');</code></pre>
                 </div>
             </section>
 
+            <!-- HTML5 Geolocation -->
+            <section>
+                <h2><i class="fas fa-map-marker-alt" style="color: #ef4444;"></i> HTML5 Geolocation</h2>
+                <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.5em;">Get the user's geographic location</p>
+                <pre style="font-size: 0.48em;"><code class="javascript">// Check if geolocation is supported
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        // Success callback
+        function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            console.log(`Location: ${lat}, ${lon}`);
+        },
+        // Error callback
+        function(error) {
+            console.log('Error: ' + error.message);
+        }
+    );
+} else {
+    console.log('Geolocation not supported');
+}</code></pre>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em; margin-top: 0.75rem;">
+                    <div style="background: #f0fdf4; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #22c55e;"><i class="fas fa-check-circle"></i> Use Cases</h4>
+                        <p style="margin: 0;">Maps, local search, weather apps, delivery tracking, location-based services</p>
+                    </div>
+                    <div style="background: #fef3c7; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #92400e;"><i class="fas fa-lock"></i> Privacy</h4>
+                        <p style="margin: 0;">Browser asks for permission. User must explicitly allow access to location.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HTML5 Canvas -->
+            <section>
+                <h2><i class="fas fa-paint-brush" style="color: #8b5cf6;"></i> HTML5 Canvas</h2>
+                <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.5em;">Draw graphics on the fly using JavaScript</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; font-size: 0.6em;">
+                    <div>
+                        <pre style="font-size: 0.9em; margin: 0;"><code class="html">&lt;!-- HTML --&gt;
+&lt;canvas id="myCanvas" width="300" height="150"&gt;
+&lt;/canvas&gt;
+
+&lt;script&gt;
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+
+// Draw a rectangle
+ctx.fillStyle = '#2563eb';
+ctx.fillRect(10, 10, 100, 80);
+
+// Draw a circle
+ctx.beginPath();
+ctx.arc(200, 75, 50, 0, 2 * Math.PI);
+ctx.fillStyle = '#dc2626';
+ctx.fill();
+&lt;/script&gt;</code></pre>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #8b5cf6;"><i class="fas fa-star"></i> Use Cases</h4>
+                        <ul style="margin: 0; line-height: 1.6;">
+                            <li>Games and animations</li>
+                            <li>Data visualization / Charts</li>
+                            <li>Image editing</li>
+                            <li>Real-time graphics</li>
+                            <li>Drawing applications</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HTML5 Video -->
+            <section>
+                <h2><i class="fas fa-video" style="color: #dc2626;"></i> HTML5 Video</h2>
+                <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.5em;">Native video playback — no plugins needed!</p>
+                <pre style="font-size: 0.5em;"><code class="html">&lt;video width="640" height="360" controls autoplay muted loop poster="thumbnail.jpg"&gt;
+    &lt;source src="movie.mp4" type="video/mp4"&gt;
+    &lt;source src="movie.webm" type="video/webm"&gt;
+    Your browser does not support the video tag.
+&lt;/video&gt;</code></pre>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; font-size: 0.55em; margin-top: 0.75rem;">
+                    <div style="background: #f8fafc; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <code>controls</code><br>
+                        <span style="color: #64748b;">Show play/pause buttons</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <code>autoplay</code><br>
+                        <span style="color: #64748b;">Start automatically</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <code>muted</code><br>
+                        <span style="color: #64748b;">Start without sound</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <code>loop</code><br>
+                        <span style="color: #64748b;">Repeat when finished</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <code>poster</code><br>
+                        <span style="color: #64748b;">Thumbnail image</span>
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.5rem; border-radius: 0.5rem; text-align: center;">
+                        <code>&lt;source&gt;</code><br>
+                        <span style="color: #64748b;">Multiple formats</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HTML5 Audio -->
+            <section>
+                <h2><i class="fas fa-music" style="color: #22c55e;"></i> HTML5 Audio</h2>
+                <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.5em;">Embed audio files directly in your page</p>
+                <pre style="font-size: 0.5em;"><code class="html">&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    &lt;source src="audio.ogg" type="audio/ogg"&gt;
+    Your browser does not support the audio element.
+&lt;/audio&gt;
+
+&lt;!-- Background music (autoplay requires muted on most browsers) --&gt;
+&lt;audio id="bgMusic" autoplay muted loop&gt;
+    &lt;source src="background.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;</code></pre>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.6em; margin-top: 0.75rem;">
+                    <div style="background: #f0fdf4; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #22c55e;"><i class="fas fa-file-audio"></i> Supported Formats</h4>
+                        <p style="margin: 0;"><strong>MP3</strong> — Universal support<br>
+                        <strong>OGG</strong> — Open format<br>
+                        <strong>WAV</strong> — Uncompressed</p>
+                    </div>
+                    <div style="background: #fef3c7; padding: 0.75rem; border-radius: 0.5rem;">
+                        <h4 style="margin: 0 0 0.3rem 0; color: #92400e;"><i class="fas fa-exclamation-triangle"></i> Note</h4>
+                        <p style="margin: 0;">Most browsers block autoplay with sound. Use <code>muted</code> for autoplay, or wait for user interaction.</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Section: HTML Templating -->
             <section data-background-color="#f8fafc">
                 <h2><i class="fas fa-copy" style="color: #2563eb;"></i> HTML Templating</h2>
