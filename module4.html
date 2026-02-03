@@ -273,7 +273,7 @@
             <!-- Learning Objectives -->
             <section>
                 <h2><i class="fas fa-bullseye" style="color: #eab308;"></i> Learning Objectives</h2>
-                <div class="feature-grid">
+                <div class="feature-grid" style="grid-template-columns: repeat(4, 1fr);">
                     <div class="feature-card fragment">
                         <i class="fas fa-code"></i>
                         <h4>Syntax & Types</h4>
@@ -295,14 +295,24 @@
                         <p>Data structures</p>
                     </div>
                     <div class="feature-card fragment">
-                        <i class="fas fa-clock"></i>
-                        <h4>Async JS</h4>
-                        <p>Promises, fetch</p>
+                        <i class="fas fa-search"></i>
+                        <h4>Regular Expressions</h4>
+                        <p>Pattern matching</p>
                     </div>
                     <div class="feature-card fragment">
                         <i class="fas fa-rocket"></i>
                         <h4>ES6+</h4>
                         <p>Modern features</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-clock"></i>
+                        <h4>Async JS</h4>
+                        <p>Promises, fetch</p>
+                    </div>
+                    <div class="feature-card fragment">
+                        <i class="fas fa-database"></i>
+                        <h4>Web Storage</h4>
+                        <p>localStorage</p>
                     </div>
                 </div>
             </section>
@@ -658,6 +668,204 @@ user.greet();           // "Hello, I'm Ahmed"
 
 // Destructuring (ES6)
 const { name, age } = user;</code></pre>
+            </section>
+
+            <!-- Regular Expressions -->
+            <section data-background-color="#f8fafc">
+                <h2><i class="fas fa-search" style="color: #eab308;"></i> Regular Expressions</h2>
+                <p style="font-size: 0.85em;">Powerful pattern matching for strings</p>
+            </section>
+
+            <section>
+                <h2>What are Regular Expressions?</h2>
+                <p style="font-size: 0.8em; color: #64748b; margin-bottom: 1rem;">Patterns used to match character combinations in strings</p>
+                <div class="feature-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 1rem;">
+                    <div class="feature-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Validation</h4>
+                        <p>Email, phone</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-search"></i>
+                        <h4>Search</h4>
+                        <p>Find patterns</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4>Replace</h4>
+                        <p>Find & replace</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cut"></i>
+                        <h4>Extract</h4>
+                        <p>Pull out data</p>
+                    </div>
+                </div>
+                <pre style="font-size: 0.5em;"><code class="javascript">// Two ways to create a regex
+const regex1 = /pattern/flags;           // Literal (preferred)
+const regex2 = new RegExp('pattern', 'flags');  // Constructor</code></pre>
+            </section>
+
+            <section>
+                <h2>Basic Regex Patterns</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.6em;">
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/abc/</code> — Exact match "abc"
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/./</code> — Any single character
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/\d/</code> — Any digit (0-9)
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/\w/</code> — Word char (a-z, A-Z, 0-9, _)
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/\s/</code> — Whitespace
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/[abc]/</code> — a, b, or c
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/[^abc]/</code> — NOT a, b, or c
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/[a-z]/</code> — Range a to z
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/^start/</code> — Starts with "start"
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">/end$/</code> — Ends with "end"
+                    </div>
+                </div>
+                <div class="thinking-card" style="margin-top: 0.75rem;">
+                    <p style="font-size: 0.75em;"><strong>Tip:</strong> Use uppercase for negation: <code>\D</code> = non-digit, <code>\W</code> = non-word, <code>\S</code> = non-whitespace</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Quantifiers</h2>
+                <p style="font-size: 0.75em; color: #64748b; margin-bottom: 0.75rem;">How many times a pattern should match</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.6em; margin-bottom: 1rem;">
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">*</code> — Zero or more
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">+</code> — One or more
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">?</code> — Zero or one (optional)
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">{n}</code> — Exactly n times
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">{n,}</code> — n or more times
+                    </div>
+                    <div style="background: #f8fafc; padding: 0.6rem; border-radius: 0.5rem;">
+                        <code style="color: #2563eb;">{n,m}</code> — Between n and m times
+                    </div>
+                </div>
+                <pre style="font-size: 0.5em;"><code class="javascript">/a+/       // One or more 'a'  → matches "aaa"
+/colou?r/  // 'u' is optional → matches "color" or "colour"
+/\d{3}/    // Exactly 3 digits → matches "123"
+/\d{2,4}/  // 2 to 4 digits   → matches "12", "123", "1234"</code></pre>
+            </section>
+
+            <section>
+                <h2>Regex Flags</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; font-size: 0.6em; margin-bottom: 1rem;">
+                    <div style="background: #dcfce7; padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #22c55e;">
+                        <code style="font-size: 1.2em;">g</code><br>
+                        <strong>Global</strong><br>
+                        Find all matches
+                    </div>
+                    <div style="background: #dbeafe; padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #2563eb;">
+                        <code style="font-size: 1.2em;">i</code><br>
+                        <strong>Case Insensitive</strong><br>
+                        Ignore case
+                    </div>
+                    <div style="background: #fef3c7; padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #eab308;">
+                        <code style="font-size: 1.2em;">m</code><br>
+                        <strong>Multiline</strong><br>
+                        ^ and $ per line
+                    </div>
+                </div>
+                <pre style="font-size: 0.5em;"><code class="javascript">/hello/i.test('Hello');  // true (case insensitive)
+
+'cat bat rat'.match(/at/g);  // ['at', 'at', 'at'] (all matches)
+
+/hello/gi  // Combine flags: global + case insensitive</code></pre>
+            </section>
+
+            <section>
+                <h2>Regex Methods</h2>
+                <pre style="font-size: 0.48em;"><code class="javascript">const str = 'Hello World 123';
+const regex = /\d+/;
+
+// test() - Returns true/false
+regex.test(str);                // true
+
+// match() - Returns array of matches
+str.match(/\d+/);               // ['123']
+str.match(/\d/g);               // ['1', '2', '3']
+
+// replace() - Replace matches
+str.replace(/World/, 'JS');     // 'Hello JS 123'
+str.replace(/o/g, '0');         // 'Hell0 W0rld 123'
+
+// search() - Returns index of first match
+str.search(/World/);            // 6
+
+// split() - Split string by pattern
+'a,b;c|d'.split(/[,;|]/);      // ['a', 'b', 'c', 'd']</code></pre>
+            </section>
+
+            <section>
+                <h2>Practical Examples</h2>
+                <pre style="font-size: 0.45em;"><code class="javascript">// Email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+emailRegex.test('user@example.com');  // true
+
+// Phone number (Saudi format: 05xxxxxxxx)
+const phoneRegex = /^05\d{8}$/;
+phoneRegex.test('0512345678');  // true
+
+// Password (min 8 chars, 1 uppercase, 1 lowercase, 1 number)
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+passwordRegex.test('Password1');  // true
+
+// Extract hashtags from text
+const text = 'Learning #JavaScript and #WebDev today!';
+const hashtags = text.match(/#\w+/g);  // ['#JavaScript', '#WebDev']
+
+// Remove extra whitespace
+'  too   many   spaces  '.replace(/\s+/g, ' ').trim();  // 'too many spaces'</code></pre>
+            </section>
+
+            <section>
+                <h2>Groups and Capturing</h2>
+                <pre style="font-size: 0.48em;"><code class="javascript">// Capturing groups with ()
+const dateRegex = /(\d{4})-(\d{2})-(\d{2})/;
+const match = '2024-01-15'.match(dateRegex);
+// match[0] = '2024-01-15' (full match)
+// match[1] = '2024' (year)
+// match[2] = '01' (month)
+// match[3] = '15' (day)
+
+// Named groups (?<name>...)
+const namedRegex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+const result = '2024-01-15'.match(namedRegex);
+console.log(result.groups.year);   // '2024'
+console.log(result.groups.month);  // '01'
+
+// Replace with captured groups
+'John Smith'.replace(/(\w+) (\w+)/, '$2, $1');  // 'Smith, John'</code></pre>
+                <div class="thinking-card">
+                    <p style="font-size: 0.7em;"><strong>Use groups</strong> to extract specific parts of a match or rearrange text!</p>
+                </div>
             </section>
 
             <!-- ES6+ Features -->
@@ -1179,6 +1387,11 @@ sessionStorage.setItem('temp', 'data');</code></pre>
                         <p>Properties</p>
                     </div>
                     <div class="feature-card">
+                        <i class="fas fa-search"></i>
+                        <h4>Regex</h4>
+                        <p>Patterns</p>
+                    </div>
+                    <div class="feature-card">
                         <i class="fas fa-rocket"></i>
                         <h4>ES6+</h4>
                         <p>Arrow, spread</p>
@@ -1187,11 +1400,6 @@ sessionStorage.setItem('temp', 'data');</code></pre>
                         <i class="fas fa-clock"></i>
                         <h4>Async</h4>
                         <p>await, fetch</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-database"></i>
-                        <h4>Storage</h4>
-                        <p>localStorage</p>
                     </div>
                 </div>
                 <p style="margin-top: 0.8em; padding: 0.6em; background: #eff6ff; border-radius: 10px; font-size: 0.8em;">
